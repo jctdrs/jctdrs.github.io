@@ -2,8 +2,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  #background: url("img/new-glarus-dark-brewing-room-with-pipes.jpg");
-  #background-color: #111;
   background-attachment: fixed;
   background-position: center;
   font-family: monospace;
