@@ -1,35 +1,58 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="content-type"; content="text/html charset=UTF-8"> 
-    <link rel="stylesheet" href="../style.css">
-    <br>
     <title> differr: error propagation through automatic differentiation </title>
-    </head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width"> 
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async 
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link rel="stylesheet" href="../style.css">
     <body style="max-width: 500px; margin: auto; color: rgb(0,0,0);
 	         background-color: rgb(255,235,225); font-size: 12px">
-      <b>differr: error propagation through automatic differentiation</b><br><br>
+      <br>
+      <b>differr: error propagation through automatic differentiation</b><br>
+      <i>How to propagate uncertainties through a chain of non-linear 
+      operations ?</i><br><br>
+      
       <div>
-      Which is about once we have some estimate of the uncertainties, how to
-      propaagte them through complex data processing and modeling.  This will
-      be illustrated by an astrophysical application. The fact that in many
-      situations we need to peropagate uncertainties through complex nonlinear
-      operations. the casee of interest in whenm we need top analyze
-      multi-wavelenght images of the same physcial space through complex
-      background subtraction, then degrading all images to a common resolution
-      by convolving with a kernel and then project all images to a common grid
-      so degrade them. These different steps will change the noise level also
-      its distribution and its correlation. 
+        Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with mean 
+        \(\boldsymbol{\mu_{x}}\) and covariance matrix \(\boldsymbol{\Sigma_{x}}
+        \) and let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) be a 
+        nonlinear function. Up to first-order approximation, \(\boldsymbol{y}=
+        f(\boldsymbol{x}) \approx f(\boldsymbol{\mu_{x}}) + J(\boldsymbol{x-
+        \mu_{x}})\), where \(J \in \mathbb{R}^{m \times n}\) is the Jacobian 
+        matrix \(\partial f/\partial \boldsymbol{x}\) evaluated at 
+        \(\boldsymbol{\mu_{x}}\). This approximation is reasonably accepted and
+        the random vector \(\boldsymbol{y} \in \mathbb{R}^{m}\) has mean 
+        \(\boldsymbol{\mu_{y}} \approx f(\boldsymbol{\mu_{x}})\) and covariance
+        \(\Sigma_{y} \approx J \Sigma_{x} J^{T}\).<br><br>
+        For example, if \(\boldsymbol{x}\) is composed of two random vectors
+        \(\boldsymbol{a}\) and \(\boldsymbol{b}\) such that \(\boldsymbol{x}=(
+        \boldsymbol{a}^{T}, \boldsymbol{b}^{T})^{T}\), then <br>
+        <p style="text-align:center">    
+            \(\Sigma_{y} \approx \begin{bmatrix} J_{\boldsymbol{a}} & 
+            J_{\boldsymbol{b}} \end{bmatrix} \begin{bmatrix}
+            \Sigma_{\boldsymbol{a}} & \Sigma_{\boldsymbol{ab}} \\ 
+            \Sigma_{\boldsymbol{b}} & \Sigma_{\boldsymbol{ba}} 
+            \end{bmatrix} \begin{bmatrix} J_{\boldsymbol{a}}^{T} \\
+            J_\boldsymbol{b}^{T} \end{bmatrix} \) 
+        </p>
+        <br>
+        where \(J_{\boldsymbol{a}}=\partial\boldsymbol{y}/\partial
+        \boldsymbol{a}\) and \(J_{\boldsymbol{b}}=\partial\boldsymbol{y}/
+        \partial \boldsymbol{b} \).
       </div>
-      <br>
-      <br>
+      
+      <br><br>
+      
       <hr>
-      <center>
+      <p style="text-align:center">
       <a href="../index.html">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="../about.html">About</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="../research.html">Research</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="../software.html">Software</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="../blog.html">Blog</a>
-      </center>
       <hr>
       <br><br>
     </body> 
