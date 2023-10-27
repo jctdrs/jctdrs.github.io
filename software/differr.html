@@ -17,34 +17,169 @@
       operations ?</i><br><br>
       
       <div>
-        Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with mean 
-        \(\boldsymbol{\mu_{x}}\) and covariance matrix \(\boldsymbol{\Sigma_{x}}
-        \) and let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) be a 
-        nonlinear function. Up to first-order approximation, \(\boldsymbol{y}=
-        f(\boldsymbol{x}) \approx f(\boldsymbol{\mu_{x}}) + J(\boldsymbol{x-
-        \mu_{x}})\), where \(J \in \mathbb{R}^{m \times n}\) is the Jacobian 
-        matrix \(\partial f/\partial \boldsymbol{x}\) evaluated at 
-        \(\boldsymbol{\mu_{x}}\). This approximation is reasonably accepted and
-        the random vector \(\boldsymbol{y} \in \mathbb{R}^{m}\) has mean 
-        \(\boldsymbol{\mu_{y}} \approx f(\boldsymbol{\mu_{x}})\) and covariance
-        \(\Sigma_{y} \approx J \Sigma_{x} J^{T}\).<br><br>
-        For example, if \(\boldsymbol{x}\) is composed of two random vectors
-        \(\boldsymbol{a}\) and \(\boldsymbol{b}\) such that \(\boldsymbol{x}=(
-        \boldsymbol{a}^{T}, \boldsymbol{b}^{T})^{T}\), then <br>
+        <p style="font-size:11px">
+        <b> Idea </b><br>
+        </p>
+        Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with mean
+        \(\boldsymbol{\mu_{x}}\) and covariance matrix
+        \(\boldsymbol{\Sigma_{x}} \) and let \(f: \mathbb{R}^{n} \rightarrow
+        \mathbb{R}^{m}\) be a nonlinear function. Up to first-order
+        approximation, \(\boldsymbol{y}= f(\boldsymbol{x}) \approx
+        f(\boldsymbol{\mu_{x}}) + J(\boldsymbol{x- \mu_{x}})\), where \(J \in
+        \mathbb{R}^{m \times n}\) is the Jacobian matrix \(\partial f/\partial
+        \boldsymbol{x}\) evaluated at \(\boldsymbol{\mu_{x}}\). This
+        approximation is reasonably accepted\(^{*}\) and the random vector
+        \(\boldsymbol{y} \in \mathbb{R}^{m}\) has mean \(\boldsymbol{\mu_{y}}
+        \approx f(\boldsymbol{\mu_{x}})\) and covariance \(\Sigma_{y} \approx J
+        \Sigma_{x} J^{T}\).<br><br> For example, if \(\boldsymbol{x}\) is
+        composed of two random vectors \(\boldsymbol{a}\) and
+        \(\boldsymbol{b}\) such that \(\boldsymbol{x}=( \boldsymbol{a},
+        \boldsymbol{b})\), then <br>
         <p style="text-align:center">    
-            \(\Sigma_{y} \approx \begin{bmatrix} J_{\boldsymbol{a}} & 
+            \(\Sigma_{y} = \begin{bmatrix} J_{\boldsymbol{a}} & 
             J_{\boldsymbol{b}} \end{bmatrix} \begin{bmatrix}
-            \Sigma_{\boldsymbol{a}} & \Sigma_{\boldsymbol{ab}} \\ 
-            \Sigma_{\boldsymbol{b}} & \Sigma_{\boldsymbol{ba}} 
+            \sigma_{\boldsymbol{a}} & \sigma_{\boldsymbol{ab}} \\ 
+            \sigma_{\boldsymbol{ba}} & \sigma_{\boldsymbol{b}} 
             \end{bmatrix} \begin{bmatrix} J_{\boldsymbol{a}}^{T} \\
-            J_\boldsymbol{b}^{T} \end{bmatrix} \) 
+            J_\boldsymbol{b}^{T} \end{bmatrix} + O(N^2) \) 
+            &nbsp;&nbsp;&nbsp;&nbsp;(1)
         </p>
         <br>
         where \(J_{\boldsymbol{a}}=\partial\boldsymbol{y}/\partial
         \boldsymbol{a}\) and \(J_{\boldsymbol{b}}=\partial\boldsymbol{y}/
-        \partial \boldsymbol{b} \).
+        \partial \boldsymbol{b} \). <br><br>
+        
+        It can be seen that the uncertainty, characterized by the covariance 
+        matrix, \( \Sigma_{\boldsymbol{x}} \), of the input data 
+        \(\boldsymbol{x}\), is propagated to first degree by the Jacobian, 
+        \(J\), through the operation, \( f \). <br><br> 
+        
+        <p style="font-size:11px">
+        <b> Method </b><br>
+        </p>
+        Automatic differentiation relies on the fact that every operation, as 
+        complex as it gets, boils down to a sequence of elementary arithmetic 
+        operations and functions. And therefore, by tracking the chain of 
+        operations for every input data from beginning to end, one could in 
+        principle apply the chain rule repeatedly and compute partial 
+        derivatives automatically. <br><br>
+
+        <p style="font-size:11px">
+        <b> Implementation </b><br>
+        </p>
+        Write about software .. <br><br>
+
+        <p style="font-size:11px">
+        <b> Example </b><br>
+        </p>
+        We'll illustrate our idea with an application from multi-wavelength
+        astronomy, where we are interested in comparing images of the same
+        physical space taken from different instruments with different
+        resolutions. One would need to degrade the images to a minimum common
+        resolution and reproject to a common grid; by this, changing the pixel
+        size, orientation, while preserving the colors of the astronomical
+        source. This task involves applying a chain of convolution operations 
+        in the pixel space with specially constructed kernels depending on 
+        the ratio of the final and initial pixel size and resolution. <br><br>
+        
+        Let \( \boldsymbol{x} \in \mathbb{R}^{n\times m} \), be a regularly
+        gridded image of dimensions \( n\times m \) with covariance matrix \(
+        \Sigma_{\boldsymbol{x}} \). And let, \( y \in \mathbb{R}^{n'\times m'}
+        \), be the result image of dimensions \( n'\times m' \) with \( n' \leq
+        n \) and \( m' \leq m \), where \( \boldsymbol{y} = h( \boldsymbol{x})
+        = ( g \circ f)(\boldsymbol{x}) \), with \(f\) and \(g\) the degrading
+        and re-gridding operation respectively.<br><br>
+        <table style="text-align:left;background-color:rgb(255, 221,170); 
+        width:500px" border="4" cellpadding="10" cellspacing="2">
+        <tbody>
+            <tr> 
+            <td> 
+            <img
+                src="../images/NGC4254_PACS1_SPIRE1.png"
+                alt="Result of degrading and re-gridding NGC4254"
+                width="460"
+                title="Result of degrading and re-gridding NGC4254">
+                <p style="color:rgb(51,51,153);text-align:center"> 
+                <i>On the left: the original image of NGC4254 as seen by
+                the instrument PACS on-board of the Herschel space 
+                telescope at a wavelength of 70 \(\mu\)m and pixel size of
+                2 arcseconds. On the right: degrading and re-gridding 
+                to the resolution of the SPIRE instrument on-board of the
+                Herschel space telescope at a wavelength of 250 \(\mu \)m and
+                pixel size of 6 arcseconds.</i>
+                </p>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+        <br>
+        The Jacobian of \(h\) at \( \boldsymbol {x}\), \( J_{h}(\boldsymbol{x})
+        \in \mathbb{R}^{n'\times m' \times n \times m}\), where every element
+        \(J_{i'j'}\) with \(1\leq i'\leq n'\) and \(1\leq j'\leq m'\), is an
+        \(n\times m\) matrix containing the first derivatives of \(
+        \boldsymbol{y} \) with respect to the pixel \(\boldsymbol{x}_{ij} \)
+        with \(1\leq i\leq n \) and \(1\leq j\leq m\). In total, the Jacobian
+        will contain \(n'\times m' \times n \times m\) first derivatives of the
+        final image, \(\boldsymbol{y}\), with respect to every pixel of the
+        input image, \(x_{ij}\).<br><br>
+        <table style="text-align:left;background-color:rgb(255, 221,170); 
+        width:500px" border="4" cellpadding="10" cellspacing="2">
+        <tbody>
+            <tr> 
+            <td> 
+            <img
+                src="../images/jacobian_NGC4254.png"
+                alt="Jacobian of degrading and re-gridding NGC4254"
+                width="460"
+                title="Jacobian of degrading and re-gridding NGC4254">
+                <p style="color:rgb(51,51,153);text-align:center"> 
+                <i>Visualization of the Jacobian, \(J_{h}(\boldsymbol{x})\).
+                Every element, \(J_{i'j'}\), shows the derivative of \( 
+                \boldsymbol{y}\), with respect to \(x_{ij}\). Therefore
+                showing the dependence of \(\boldsymbol{y}\) on every 
+                pixel of \(\boldsymbol{x}\).</i>
+                </p>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+        <br> 
+        In order to estimate the uncertainty of the final image, \(
+        \Sigma_{\boldsymbol{y}} \), one would then have to make use of equation
+        \((1)\) to propagate the uncertainty, \( \Sigma_{\boldsymbol{ x}} \), 
+        of the initial image.<br><br>
+        <table style="text-align:left;background-color:rgb(255, 221,170); 
+        width:500px" border="4" cellpadding="10" cellspacing="2">
+        <tbody>
+            <tr> 
+            <td> 
+            <img
+                src="../images/propagated_NGC4254.png"
+                alt="Propagated uncertainty for NGC4254"
+                width="460"
+                title="Propagated uncertainty for NGC4254">
+                <p style="color:rgb(51,51,153);text-align:center"> 
+                <i>On the left: the underatinty on the pixels of the initial
+                image \( \boldsymbol{x} \). On the right: the propagated 
+                uncertainty of \(\boldsymbol{y}\). </i>
+                </p>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+        <br>
+        <p style="font-size:11px">
+        <b> Verification </b><br>
+        </p>
+        
+   
+        <br>
+        <p style="font-size:10px">
+        \(^{*}\) If \(f\) is approximately affine in the region about the mean
+        of the distribution.
+        
       </div>
-      
+            
       <br><br>
       
       <hr>
