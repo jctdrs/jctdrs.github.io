@@ -76,7 +76,7 @@
         astronomy, where we are interested in comparing images of the same
         physical space taken from different instruments with different
         resolutions. One would need to degrade the images to a minimum common
-        resolution and reproject to a common grid; by this, changing the pixel
+        resolution and re-project to a common grid; by this, changing the pixel
         size, orientation, while preserving the colors of the astronomical
         source. This task involves applying a chain of convolution operations 
         in the pixel space with specially constructed kernels depending on 
@@ -100,13 +100,13 @@
                 width="460"
                 title="Result of degrading and re-gridding NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
-                <i>On the left: the original image of NGC4254 as seen by
-                the instrument PACS on-board of the Herschel space 
-                telescope at a wavelength of 70 \(\mu\)m and pixel size of
-                2 arcseconds. On the right: degrading and re-gridding 
-                to the resolution of the SPIRE instrument on-board of the
-                Herschel space telescope at a wavelength of 250 \(\mu \)m and
-                pixel size of 6 arcseconds.</i>
+                <i>On the left: the original \(90\times 90\) image of NGC4254 as
+                seen by the instrument PACS on-board of the Herschel space
+                telescope at a wavelength of 70 \(\mu\)m and pixel size of 2
+                arcseconds. On the right: degrading and re-gridding to the
+                resolution of the SPIRE instrument on-board of the Herschel
+                space telescope at a wavelength of 250 \(\mu \)m and pixel size
+                of 6 arcseconds resulting in a \( 33 \times 33\) image.</i>
                 </p>
             </td>
             </tr>
@@ -120,8 +120,8 @@
         \boldsymbol{y} \) with respect to the pixel \(\boldsymbol{x}_{ij} \)
         with \(1\leq i\leq n \) and \(1\leq j\leq m\). In total, the Jacobian
         will contain \(n'\times m' \times n \times m\) first derivatives of the
-        final image, \(\boldsymbol{y}\), with respect to every pixel of the
-        input image, \(x_{ij}\).<br><br>
+        every pixel of the final image, \(y_{i'j'}\), with respect to the input
+        image, \(\boldsymbol{x}\).<br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
         width:500px" border="4" cellpadding="10" cellspacing="2">
         <tbody>
@@ -135,19 +135,25 @@
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>Visualization of the Jacobian, \(J_{h}(\boldsymbol{x})\).
                 Every element, \(J_{i'j'}\), shows the derivative of \( 
-                \boldsymbol{y}\), with respect to \(x_{ij}\). Therefore
-                showing the dependence of \(\boldsymbol{y}\) on every 
-                pixel of \(\boldsymbol{x}\).</i>
+                y_{i'j'}\), with respect to \(\boldsymbol{x}\). Therefore
+                showing the dependence of every pixel of \(\boldsymbol{y}\) 
+                on \(\boldsymbol{x}\).</i>
                 </p>
             </td>
             </tr>
         </tbody>
         </table>
         <br> 
-        In order to estimate the uncertainty of the final image, \(
-        \Sigma_{\boldsymbol{y}} \), one would then have to make use of equation
-        \((1)\) to propagate the uncertainty, \( \Sigma_{\boldsymbol{ x}} \), 
-        of the initial image.<br><br>
+        As stated above, the Jacobian, \(J_{h}(\boldsymbol{x})\in
+        \mathbb{R}^{n'\times m'\times n\times m}\), is a \(n'\times m'\) matrix
+        (here \(33\times 33\)) where every element is a \(n\times m\) matrix
+        (here \(90\times 90\)) containing the derivative of \(y_{i'j'}\) with
+        respect to \(\boldsymbol{x}\). Every pixel \(J_{i'j'}\) of shows the
+        dependence of \(y_{i'j'}\) to \(\boldsymbol{x}\).  In order to estimate
+        the uncertainty of the final image, \( \Sigma_{\boldsymbol{y}} \), one
+        would then have to make use of equation \((1)\) to propagate the
+        uncertainty, \( \Sigma_{\boldsymbol{ x}} \), of the initial
+        image.<br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
         width:500px" border="4" cellpadding="10" cellspacing="2">
         <tbody>
@@ -159,7 +165,7 @@
                 width="460"
                 title="Propagated uncertainty for NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
-                <i>On the left: the underatinty on the pixels of the initial
+                <i>On the left: the uncertainty on the pixels of the initial
                 image \( \boldsymbol{x} \). On the right: the propagated 
                 uncertainty of \(\boldsymbol{y}\). </i>
                 </p>
@@ -171,8 +177,21 @@
         <p style="font-size:11px">
         <b> Verification </b><br>
         </p>
+        There exists other techniques, often used in astronomy, to estimate
+        the propagated uncertainty through complex non-linear operations. It is
+        possible to derive analytical solutions, under various statistical 
+        choices and approximations, to the final propagated uncertainties. For 
+        the application we're interested in, Klein (2020), presented a result
+        where one could estimate the propagated uncertainty of convoluting an
+        image with a Gaussian kernel. <br><br>
+
+        A more applicable method, is to repeat the same process each time 
+        adding a Gaussian noise to the pixels proportional to the uncertainty 
+        of that pixel. With enough repetition, one could in principle, estimate
+        the level of uncertainty by the standard deviation of the final 
+        distribution of results. This is a frequentists approach known as 
+        bootstrapping or Monte-Carlo. <br><br>
         
-   
         <br>
         <p style="font-size:10px">
         \(^{*}\) If \(f\) is approximately affine in the region about the mean
