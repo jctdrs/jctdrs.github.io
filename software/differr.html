@@ -182,12 +182,21 @@
         propagated uncertainty through complex non-linear operations. It is
         possible to derive analytical solutions for the propagated uncertainty,
         under various statistical choices and approximations. Klein
-        (2021)\(^{***}\) presented a result where one could estimate the
-        propagated uncertainty of degrading an image by convoluting an image
-        with a Gaussian kernel. The analytical solution state that 
-        the propagated uncertainty of uncorrelated data, i.e where 
-        \( \Sigma_{\boldsymbol{x}}\) is diagonal, is to convolve the 
-        initial uncertainty with the square of the kernel.<br><br>
+        (2021)\(^{***}\) presented an analytical approximation to estimate 
+        the propagated uncertainty when convolving an image with a Gaussian 
+        kernel for both correlated and uncorrelated data. The result states that
+        the propagated uncertainty of uncorrelated data, i.e where \(
+        \Sigma_{\boldsymbol{x}}\) is diagonal, is calculated by convolving the 
+        initial uncertainty with the square of the kernel. <br>
+        <p style="text-align:center">    
+            \(\Sigma_{\boldsymbol{y}} = \Sigma_{\boldsymbol{x}}\star K^{2}\)  
+        </p>
+        Where \(\star\) is the convolution operator and \(K\) is 
+        a 2D normalized Gaussian kernel. In the following, we compare this 
+        method to the <i>differr</i> method applied to the resolution 
+        degradation step for the same example as before. We find that the two 
+        methods yield similar results up to 0.1% in mean absolute percentage 
+        error over the whole image. <br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
         width:500px" border="4" cellpadding="10" cellspacing="2">
         <tbody>
@@ -200,45 +209,30 @@
                 title="Propagated uncertainty for NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>On the left: the propagated uncertainty as estimated by
-                the differentiation method. On the right: the propagated 
+                the differr method. On the right: the propagated 
                 uncertainty as estimated by the method explained in 
-                Klein (2021). The results are the same up to 0.1 %</i>
+                Klein (2021).</i>
                 </p>
             </td>
             </tr>
         </tbody>
         </table>
         <br>
-        A more applicable method, is to repeat the same process each time 
-        adding a Gaussian noise to the pixels proportional to the uncertainty 
-        of that pixel. With enough repetition, one could in principle, estimate
-        the level of uncertainty by the standard deviation of the final 
-        distribution of results. This is a frequentists approach known as 
-        bootstrapping or Monte-Carlo. <br><br>
-        <table style="text-align:left;background-color:rgb(255, 221,170); 
-        width:500px" border="4" cellpadding="10" cellspacing="2">
-        <tbody>
-            <tr> 
-            <td> 
-            <img
-                src="../images/differr_comparision.png"
-                alt="Comparision between differr and MC"
-                width="460"
-                title="Comparision between differr and MC">
-                <p style="color:rgb(51,51,153);text-align:center"> 
-                <i>The unceratinty calculated by MC
-                method for different iterations compared to the one calculated
-                by the differentiation method (differr).</i>
-                </p>
-            </td>
-            </tr>
-        </tbody>
-        </table>
+        A more applicable method, is to estimate the propagated uncertainty by
+        repeating the same process and by adding a random noise to each pixel
+        from a Gaussian distribution with a standard deviation equal to the
+        uncertainty associated with each pixel. With enough repetition, one can
+        estimate the propagated uncertainty of each output pixel by the
+        standard deviation of its values over all iterations. This method,
+        known as bootstrapping or Monte-Carlo, can be shown to be equivalent to
+        equation \((1)\), and therefore converges after enough iterations to
+        the <i>differr</i> method.
         <br>
         <br>
+        <br><br>
         <p style="font-size:10px">
         \(^{*}\) If \(f\) is approximately affine in the region about the mean
-        of the distribution.<br><br>
+        of the distribution<br><br>
         \(^{**}\) Aniano, G., Draine, B. T., Gordon, K. D., and Sandstrom, K.,
         “Common-Resolution Convolution Kernels for Space- and Ground-Based
         Telescopes”, <i>Publications of the Astronomical Society of the
