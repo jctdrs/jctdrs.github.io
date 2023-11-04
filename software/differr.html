@@ -3,14 +3,20 @@
   <head>
     <title> differr: error propagation through automatic differentiation 
     </title>
-    <meta charset="UTF-8" name="viewport" content="width=device-width"> 
+    <meta charset="UTF-8">
+    <meta name="description" content="Jean Tedros website">
+    <meta name="keywords" content="Jean Tedros, astronomy, IRAM, 30m, software">
+    <meta name="author" content="Jean Tedors">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">         
+    <link rel="stylesheet" href="style.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async 
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
     <link rel="stylesheet" href="../style.css">
-    <body style="max-width: 500px; margin: auto; color: rgb(0,0,0);
-	         background-color: rgb(255,235,225); font-size: 12px">
+  </head>
+  <body style="max-width: 500px; margin: auto; color: rgb(0,0,0);
+  background-color: rgb(255,235,225); font-size: 12px">
       <br>
       <b>differr: error propagation through automatic differentiation</b><br>
       <i>How to propagate uncertainties through a chain of non-linear 
@@ -91,14 +97,14 @@
         = ( g \circ f)(\boldsymbol{x}) \), with \(f\) and \(g\) the degrading
         and re-gridding operation respectively.<br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
-        width:500px" border="4" cellpadding="10" cellspacing="2">
+        width:100%" border="4" cellpadding="10" cellspacing="2">
         <tbody>
             <tr> 
             <td> 
             <img
                 src="../images/NGC4254_PACS1_SPIRE1.png"
                 alt="Result of degrading and re-gridding NGC4254"
-                width="460"
+                width="100%"
                 title="Result of degrading and re-gridding NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>On the left: the original \(90\times 90\) image of NGC4254 as
@@ -124,14 +130,14 @@
         every pixel of the final image, \(y_{i'j'}\), with respect to the input
         image, \(\boldsymbol{x}\).<br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
-        width:500px" border="4" cellpadding="10" cellspacing="2">
+        width:100%" border="4" cellpadding="10" cellspacing="2">
         <tbody>
             <tr> 
             <td> 
             <img
                 src="../images/jacobian_NGC4254.png"
                 alt="Jacobian of degrading and re-gridding NGC4254"
-                width="460"
+                width="100%"
                 title="Jacobian of degrading and re-gridding NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>Visualization of the Jacobian, \(J_{h}(\boldsymbol{x})\).
@@ -156,14 +162,14 @@
         uncertainty, \( \Sigma_{\boldsymbol{ x}} \), of the initial
         image.<br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
-        width:500px" border="4" cellpadding="10" cellspacing="2">
+        width:100%" border="4" cellpadding="10" cellspacing="2">
         <tbody>
             <tr> 
             <td> 
             <img
                 src="../images/propagated_NGC4254.png"
                 alt="Propagated uncertainty for NGC4254"
-                width="460"
+                width="100%"
                 title="Propagated uncertainty for NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>On the left: the uncertainty on the pixels of the initial
@@ -198,14 +204,14 @@
         methods yield similar results up to 0.1% in mean absolute percentage 
         error over the whole image. <br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
-        width:500px" border="4" cellpadding="10" cellspacing="2">
+        width:100%" border="4" cellpadding="10" cellspacing="2">
         <tbody>
             <tr> 
             <td> 
             <img
                 src="../images/differr_klein.png"
                 alt="Propagated uncertainty for NGC4254"
-                width="460"
+                width="100%"
                 title="Propagated uncertainty for NGC4254">
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>On the left: the propagated uncertainty as estimated by
