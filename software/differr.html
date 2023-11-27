@@ -6,8 +6,8 @@
     <link rel="icon" type=images/icon.jpg" href="../images/icon.jpg">
     <meta charset="UTF-8">
     <meta name="description" content="Jean Tedros website">
-    <meta name="author" content="Jean Tedors">
-    <meta name="viewport" content="width=device-width, initial-scale=0.7">         
+    <meta name="author" content="Jean Tedros">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <link rel="stylesheet" href="style.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async 
@@ -24,7 +24,7 @@
       
       <div>
         <p style="font-size:11px">
-        <b> Idea </b><br>
+        <b>Idea</b><br>
         </p>
         Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with mean
         \(\boldsymbol{\mu_{x}}\) and covariance matrix
@@ -40,7 +40,7 @@
         \Sigma_{x} J^{T}\).<br><br> For example, if \(\boldsymbol{x}\) is
         composed of two random vectors \(\boldsymbol{a}\) and
         \(\boldsymbol{b}\) such that \(\boldsymbol{x}=( \boldsymbol{a},
-        \boldsymbol{b})\), then <br>
+        \boldsymbol{b})\), then<br>
         <p style="text-align:center">    
             \(\Sigma_{y} = \begin{bmatrix} J_{\boldsymbol{a}} & 
             J_{\boldsymbol{b}} \end{bmatrix} \begin{bmatrix}
@@ -53,30 +53,30 @@
         <br>
         where \(J_{\boldsymbol{a}}=\partial\boldsymbol{y}/\partial
         \boldsymbol{a}\) and \(J_{\boldsymbol{b}}=\partial\boldsymbol{y}/
-        \partial \boldsymbol{b} \). <br><br>
+        \partial \boldsymbol{b} \).<br><br>
         
         It can be seen that the uncertainty, characterized by the covariance 
         matrix, \( \Sigma_{\boldsymbol{x}} \), of the input data 
         \(\boldsymbol{x}\), is propagated to first degree by the Jacobian, 
-        \(J\), through the operation, \( f \). <br><br> 
+        \(J\), through the operation, \( f \).<br><br> 
         
         <p style="font-size:11px">
-        <b> Method </b><br>
+        <b>Method</b><br>
         </p>
         Automatic differentiation relies on the fact that every operation, as 
         complex as it gets, boils down to a sequence of elementary arithmetic 
         operations and functions. And therefore, by tracking the chain of 
         operations for every input data from beginning to end, one could in 
         principle apply the chain rule repeatedly and compute partial 
-        derivatives automatically. <br><br>
+        derivatives automatically.<br><br>
 
         <p style="font-size:11px">
-        <b> Implementation </b><br>
+        <b>Implementation</b><br>
         </p>
-        Write about software .. <br><br>
+        Write about software ..<br><br>
 
         <p style="font-size:11px">
-        <b> Example </b><br>
+        <b>Example</b><br>
         </p>
         We'll illustrate our idea with an application from multi-wavelength
         astronomy, where we are interested in comparing images of the same
@@ -87,7 +87,7 @@
         source. This task involves applying a chain of convolution operations
         in the pixel space with specially constructed non-Gaussian kernels\(^{**
         }\) depending on the ratio of the final and initial pixel size and
-        resolution. <br><br>
+        resolution.<br><br>
         
         Let \( \boldsymbol{x} \in \mathbb{R}^{n\times m} \), be a regularly
         gridded image of dimensions \( n\times m \) with covariance matrix \(
@@ -174,7 +174,7 @@
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>On the left: the uncertainty on the pixels of the initial
                 image \( \boldsymbol{x} \). On the right: the propagated 
-                uncertainty of \(\boldsymbol{y}\). </i>
+                uncertainty of \(\boldsymbol{y}\).</i>
                 </p>
             </td>
             </tr>
@@ -182,7 +182,6 @@
         </table>
         <br>
         <p style="font-size:11px">
-        <b> Verification </b><br>
         </p>
         There exists other techniques, often used in astronomy, to estimate the
         propagated uncertainty through complex non-linear operations. It is
@@ -193,7 +192,7 @@
         kernel for both correlated and uncorrelated data. The result states that
         the propagated uncertainty of uncorrelated data, i.e where \(
         \Sigma_{\boldsymbol{x}}\) is diagonal, is calculated by convolving the 
-        initial uncertainty with the square of the kernel. <br>
+        initial uncertainty with the square of the kernel.<br>
         <p style="text-align:center">    
             \(\Sigma_{\boldsymbol{y}} = \Sigma_{\boldsymbol{x}}\star K^{2}\)  
         </p>
@@ -202,7 +201,7 @@
         method to the <i>differr</i> method applied to the resolution 
         degradation step for the same example as before. We find that the two 
         methods yield similar results up to 0.1% in mean absolute percentage 
-        error over the whole image. <br><br>
+        error over the whole image.<br><br>
         <table style="text-align:left;background-color:rgb(255, 221,170); 
         width:100%" border="4" cellpadding="10" cellspacing="2">
         <tbody>
