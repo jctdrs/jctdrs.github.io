@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> hip: homogenization of IMEGIN photometry 
+    <title> hip: homogenization of multi-wavelength images
     </title>
     <link rel="icon" type=images/icon.jpg" href="../images/icon.jpg">
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
   <body style="max-width: 500px; margin: auto; color: rgb(0,0,0);
   background-color: rgb(255,235,225); font-size: 12px">
       <br>
-      <b>hip: homogenization of IMEGIN photometry</b><br>
+      <b>hip: homogenization of multi-wavelength images</b><br>
       <i>Multi-\(\lambda\) image homogenization pipeline</i><br><br>
       <div>
         <p style="font-size:11px">
@@ -28,7 +28,7 @@
         the same physical space, i.e galaxies, at different wavelengths. These
         images are usually taken with different instruments of different 
         field-of-view and resolution. In order to do a consistent comparision,
-        we need to allign all images to a common world-coordinate-system, 
+        we need to align all images to a common world-coordinate-system, 
         degrade them to a common lower resolution, and resample them on the 
         same pixel grid. The homogenization process consists in three main
         steps:<br><br>
@@ -39,34 +39,29 @@
         The HIP pipeline, written initially by L.Pantoni and maintained by me,
         is a multi-\(\lambda\) homogenization pipeline used within the IMEGIN
         collaboration to homogenize NIKA2 and 
-        <a href=http://dustpedia.astro.noa.gr/Data>Dustpedia data</a> 
-        and allow the construction of pixel-by-pixel SED models of nearby 
-        extended galaxies. Other than the afore-mentioned steps, the pipeline 
+        <a href=http://dustpedia.astro.noa.gr/Data>Dustpedia data</a>. 
+        Other than the afore-mentioned steps, the pipeline 
         also offers the possiblity to:<br><br>
-        &nbsp;1. <b>Subtraction</b> of background and foreground<br>
+        &nbsp;1. <b>Subtract</b> background and foreground<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<i>(i.e Galactic cirrus, CIB, etc.)</i><br>
-        &nbsp;2. <b>Masking</b> bright foreground stars<br>
+        &nbsp;2. <b>Mask</b> bright foreground stars<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<i>(point source catalog by Cutri 
         et al. 2003)</i><br>
-        &nbsp;3. <b>Subtraction</b> of CO(2-1) emission in the 1.15 mm 
+        &nbsp;3. <b>Subtract</b> CO(2-1) emission in the 1.15 mm 
         continuum<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<i>(as presented in Drabek et al. 2012)</i><br>
-        &nbsp;4. <b>Propagation</b> of uncertainties through a Monte-Carlo 
+        &nbsp;4. <b>Propagate</b> uncertainties through a Monte-Carlo 
         loop<br><br>
         
         <p style="font-size:11px">
         <b>Implementation</b><br>
         </p>
-        All details are available in the 
+        All details are available on the 
         <a href=https://gitlab.com/lara8_92/hip#documentation>repository's 
-        documentation section</a> (for now, restricted to IMEGIN members).<br>
-        <br>
-        The pipeline is controlled by a user-defined environment file, and 
-        allows to homogenize multiple bands for multiple galaxies at once. The
-        users has to input, among other things, the list of bands to 
-        homogenize, the target band, error maps (if available), and parameters 
-        to control the setting of the different sections of the pipeline.<br>
-        <br>
+        documentation section</a> (restricted to IMEGIN members, for now). The 
+        pipeline is controlled by a user-defined environment file, and 
+        allows to homogenize multiple bands for multiple galaxies at once.
+        <br><br>
         
         <p style="font-size:11px">
         <b>Example</b><br>
