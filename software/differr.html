@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> differr: error propagation through automatic differentiation 
+    <title> differr: error propagation through data pipelines
     </title>
     <link rel="icon" type=images/icon.jpg" href="../images/icon.jpg">
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
   <body style="max-width: 500px; margin: auto; color: rgb(0,0,0);
   background-color: rgb(255,235,225); font-size: 12px">
       <br>
-      <b>differr: error propagation through automatic differentiation</b><br>
+      <b>differr: error propagation through data pipelines</b><br>
       <i>How to propagate uncertainties through a chain of non-linear 
       operations ?</i><br><br>
       
@@ -73,7 +73,8 @@
         <p style="font-size:11px">
         <b>Implementation</b><br>
         </p>
-        Write about software ..<br><br>
+	Re-write the pipeline in JAX and use autodiff to get the derivatives 
+	for free...<br><br>
 
         <p style="font-size:11px">
         <b>Example</b><br>
@@ -215,7 +216,7 @@
                 <p style="color:rgb(51,51,153);text-align:center"> 
                 <i>On the left: the propagated uncertainty as estimated by
                 the differr method. On the right: the propagated 
-                uncertainty as estimated by the method explained in 
+                uncertainty as estimated by the method presented in 
                 Klein (2021).</i>
                 </p>
             </td>
