@@ -1,104 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <meta name="description" content="Jean Tedros website">
     <meta name="author" content="Jean Tedros">
     <link rel="stylesheet" href="style.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async 
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+    <script id="MathJax-script" async src=
+    "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <link rel="icon" type=images/icon.jpg" href="../images/icon.jpg">
-    <title> hip: homogenization of multi-wavelength images
-    </title>
-  </head>
-  <body style="max-width: 500px; margin: auto; color: rgb(0,0,0);
-  background-color: rgb(255,235,225); font-size: 12px">
-      <br>
-      <b>hip: homogenization of multi-wavelength images</b><br>
-      <i>Multi-\(\lambda\) image homogenization pipeline</i><br><br>
-      <div>
-        <p style="font-size:11px">
-        <b>Idea</b><br>
-        </p>
-        A common idea in multi-\(\lambda\) astronomy is to compare images of
-        the same physical space, i.e galaxies, at different wavelengths. These
-        images are usually taken with different instruments of different 
-        field-of-view and resolution. In order to do a consistent comparision,
-        we need to align all images to a common world-coordinate-system, 
-        degrade them to a common lower resolution, and resample them on the 
-        same pixel grid. The homogenization process consists in three main
-        steps:<br><br>
-        &nbsp;1. <b>Reprojecting</b> the images to the same orientation<br>
-        &nbsp;2. <b>Degrading</b> the images to the same spatial resolution<br>
-        &nbsp;3. <b>Regridding</b> the images to the same pixel size<br><br>
-        
-	<p style="font-size:11px">
-        <b>Implementation</b><br>
-        </p>
-
-	The HIP pipeline, written initially by L.Pantoni and maintained by me,
-        is a multi-\(\lambda\) homogenization pipeline used within the IMEGIN
-        collaboration to homogenize NIKA2 and 
-        <a href=http://dustpedia.astro.noa.gr/Data>Dustpedia data</a>. 
-        Other than the afore-mentioned steps, the pipeline 
-        also offers the possiblity to:<br><br>
-        &nbsp;1. <b>Subtract</b> background and foreground<br>
-        &nbsp;2. <b>Mask</b> bright foreground stars<br>
-        &nbsp;3. <b>Subtract</b> CO(2-1) emission in the 1.15 mm 
-        continuum<br>
-        &nbsp;4. <b>Propagate</b> uncertainties through a Monte-Carlo 
-        loop<br><br>
-        
-        All details are available on the 
-        <a href=https://gitlab.com/lara8_92/hip#documentation>repository's 
-        documentation section</a> (restricted to IMEGIN members, for now). The 
-        pipeline is controlled by a user-defined environment file, and 
-        allows to homogenize multiple bands for multiple galaxies at once.
-        <br><br>
-        
-        <p style="font-size:11px">
-        <b>Example</b><br>
-        </p>
-        We'll showcase one example with a case of extreme homogenization for
-        NGC4254/M99, from images at 8\(\mu\)m with IPAC and 500\(\mu\)m with
-        SPIRE. The input and target bands are provided from the Dustpedia
-        database.<br><br>
-        
-	<table style="text-align:left;background-color:rgb(255, 221,170); 
-        width:100%" border="4" cellpadding="10" cellspacing="2">
-        <tbody>
-            <tr> 
-            <td> 
-            <img
-                src="../images/HIP_ex.png"
-                alt="Photometry cutouts for NGC4254 from Dustpedia"
-                width="100%"
-                title="Photometry cutouts for NGC4254 from Dustpedia">
-                <p style="color:rgb(51,51,153);text-align:center"> 
-                <i>Homogenization example as done by the HIP pipeline</i>
-                </p>
-            </td>
-            </tr>
-        </tbody>
-      </table>
-      <br>
-
-
-        </div>
-            
-      <br>
-      <hr>
-      <p style="text-align:center">
-      <a href="../index.html"><b>Home</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="../about.html"><b>About</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="../research.html"><b>Research</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="../software.html"><b>Software</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="../blog.html"><b>Blog</b></a>
-      <hr>
-      <br><br>
-    </body> 
+    <link rel="icon" type="images/icon.jpg&quot;" href="../images/icon.jpg">
+    <title>hip: homogenization of multi-wavelength images</title>
+</head>
+<body style=
+"max-width: 500px; margin: auto; color: rgb(0,0,0); background-color: rgb(255,235,225); font-size: 12px">
+    <br>
+    <b>hip: homogenization of multi-wavelength images</b><br>
+    <i>Multi-\(\lambda\) image homogenization pipeline</i><br>
+    <br>
+    <div>
+        <p style="font-size:11px"><b>Idea</b><br></p>A common idea in
+        multi-\(\lambda\) astronomy is to compare images of the same physical
+        space, i.e galaxies, at different wavelengths. These images are usually
+        taken with different instruments of different field-of-view and
+        resolution. In order to do a consistent comparision, we need to align
+        all images to a common world-coordinate-system, degrade them to a
+        common lower resolution, and resample them on the same pixel grid. The
+        homogenization process consists in three main steps:<br>
+        <br>
+        &#160;1. <b>Reprojecting</b> the images to the same orientation<br>
+        &#160;2. <b>Degrading</b> the images to the same spatial resolution<br>
+        &#160;3. <b>Regridding</b> the images to the same pixel size<br>
+        <br>
+        <p style="font-size:11px"><b>Implementation</b><br></p>The HIP
+        pipeline, written initially by L.Pantoni and maintained by me, is a
+        multi-\(\lambda\) homogenization pipeline used within the IMEGIN
+        collaboration to homogenize NIKA2 and <a href=
+        "http://dustpedia.astro.noa.gr/Data">Dustpedia data</a>. Other than the
+        afore-mentioned steps, the pipeline also offers the possiblity to:<br>
+        <br>
+        &#160;1. <b>Subtract</b> background and foreground<br>
+        &#160;2. <b>Mask</b> bright foreground stars<br>
+        &#160;3. <b>Subtract</b> CO(2-1) emission in the 1.15 mm continuum<br>
+        &#160;4. <b>Propagate</b> uncertainties through a Monte-Carlo loop<br>
+        <br>
+        All details are available on the <a href=
+        "https://gitlab.com/lara8_92/hip#documentation">repository&#39;s
+        documentation section</a> (restricted to IMEGIN members, for now). The
+        pipeline is controlled by a user-defined environment file, and allows
+        to homogenize multiple bands for multiple galaxies at once.<br>
+        <br>
+        <p style="font-size:11px"><b>Example</b><br></p>We&#39;ll showcase one
+        example with a case of extreme homogenization for NGC4254/M99, from
+        images at 8\(\mu\)m with IPAC and 500\(\mu\)m with SPIRE. The input and
+        target bands are provided from the Dustpedia database.<br>
+        <br>
+        <table style=
+        "text-align:left;background-color:rgb(255, 221,170); width:100%"
+        border="4" cellpadding="10" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/HIP_ex.png" alt=
+                        "Photometry cutouts for NGC4254 from Dustpedia" width=
+                        "100%" title=
+                        "Photometry cutouts for NGC4254 from Dustpedia">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Homogenization example as done by the HIP
+                        pipeline</i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+    </div><br>
+    <hr>
+    <p style="text-align:center"><a href=
+    "../index.html"><b>Home</b></a>&#160;&#160;&#160;&#160; <a href=
+    "../about.html"><b>About</b></a>&#160;&#160;&#160;&#160; <a href=
+    "../research.html"><b>Research</b></a>&#160;&#160;&#160;&#160; <a href=
+    "../software.html"><b>Software</b></a>&#160;&#160;&#160;&#160; <a href=
+    "../blog.html"><b>Blog</b></a></p>
+    <hr>
+    <br>
+    <br>
+</body>
 </html>
