@@ -22,4 +22,9 @@ body {
     border: 6px double grey;
     background-color: rgba(255, 221,170);
   }
+
+  button.active {
+      background: #999999;
+      color: white;
+  }
 </style>

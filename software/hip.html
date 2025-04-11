@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <meta name="description" content="Jean Tedros website">
+    <meta name="author" content="Jean Tedros">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src=
+    "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function changeContent(targetId, event) {
+        const button = event.target.closest('button');
+        const nav = button.closest('.navbar');
+        nav.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        // Get all elements with the same class in the parent container
+        const parent = target.parentNode;
+        const siblings = parent.querySelectorAll(`.${target.className}`);
+        
+        // Toggle visibility
+        siblings.forEach(element => {
+            element.style.display = element === target ? 'block' : 'none';
+        });
+    }
+    </script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="images/icon.jpg&quot;" href="../images/icon.jpg">
+    <title>hip: homogenization of multi-wavelength images</title>
+</head>
+<body style="max-width: 500px; margin: auto;"> 
+    <br>
+    <b>HIP: homogenization of IMEGIN photometry</b><br><br>
+    <div>
+    HIP is a multi-wavelength homogenization framework, with support for
+    error propagation. HIP allows the homogenization of multiple images of
+    the same source at once. Each HIP pipeline is made up of a stack of
+    sequential steps where the output of one step is piped to the next. Each
+    step has a unique module name and configuration parameters. Once
+    defined, the pipeline is then configured and run on all input images to
+    produce both output and propagated error images.<br><br>
+    
+    <table style="text-align:left; width:100%; border=4"> 
+        <tbody>
+            <tr>
+                <td>
+                    <img src="../images/HIP_ex.png" alt=
+                    "Photometry cutouts for NGC4254 from Dustpedia" width=
+                    "100%" title=
+                    "Photometry cutouts for NGC4254 from Dustpedia">
+                    <p style="color:rgb(51,51,153);text-align:center">
+                    <i>Homogenization example with HIP</i></p>
+                </td>
+            </tr>
+        </tbody>
+    </table><br>
+
+    HIP pipelines and data sources are defined in a configuration file using
+    YAML, a human-readable data serialization language. HIP configuration
+    files consist of the following main sections: <i>meta</i>,
+    <i>config</i>, <i>data</i>, and <i>pipeline</i>.<br><br>
+    <div class="navbar">
+        <button class="toggle-btn" onclick="changeContent('meta', event)">Meta</button>
+        <button class="toggle-btn" onclick="changeContent('config', event)">Config</button>
+        <button class="toggle-btn" onclick="changeContent('data', event)">Data</button>
+        <button class="toggle-btn" onclick="changeContent('pipeline', event)">Pipeline</button>
+    </div>
+  
+    <div id="meta" class="content-paragraph" style="display: none;">
+    <b><br>Meta</b><br>
+    The <i>meta</i> section is used to define meta-data. Fields in
+    <i>meta</i> are not mandatory. Elements not defined by the user will
+    default to "Default". Elements of this section will be used for logging
+    purposes. The <i>meta</i> section is defined by two elements:
+    <i>name</i>, and <i>description</i>. <br><br> 
+    name: (Defaults to "Default")<br>
+    * <u>Type</u>: string<br>
+    * <u>Description</u>: Name of pipeline<br><br>
+    description: (Defaults to "Default")<br>
+    * <u>Type</u>: string<br>
+    * <u>Description</u>: Description of pipeline<br><br>
+    <table style="text-align:left; width:100%; border=4"> 
+        <tbody>
+            <tr>
+                <td>
+                    <i>
+                        meta:<br>
+                        &#160;&#160;&#160;&#160;name: HIP<br>
+                        &#160;&#160;&#160;&#160;description: IRAC1 to SPIRE3 for M99<br>
+                    </i>
+               </td>
+           </tr>
+       </tbody>
+    </table>
+    </div>
+
+    <div id="config" class="content-paragraph" style="display: none;">
+    <b><br>Config</b><br>
+    The <i>config</i> section is used to define the run mode. Modes define
+    whether or not to propagate uncertainties, and if yes, how to do so. The
+    <i>config</i> section is defined with two elements: <i>mode</i>, and
+    <i>niter</i>.<br><br>
+    mode:<br>
+    * <u>Type</u>: Literal string ("Single Pass", "Monte-Carlo", "Analytic").<br>
+    * <u>Description</u>: "Single Pass" mode does not propagate uncertainties,
+    "Monte-Carlo" mode propagates uncertainties using a Monte-Carlo loop,
+    "Analytic" mode propagates uncertainties analytically.<br><br>
+    niter:<br>
+    * <u>Type</u>: Positive integer.<br>
+    * <u>Description</u>: Number of iterations for  "Monte-Carlo" mode.<br><br>
+    <table style="text-align:left; width:100%; border=4"> 
+        <tbody>
+            <tr>
+                <td>
+                    <i>
+                        config:<br>
+                        &#160;&#160;&#160;&#160;mode: Monte-Carlo<br>
+                        &#160;&#160;&#160;&#160;niter: 1000<br>
+                    </i>
+               </td>
+           </tr>
+       </tbody>
+    </table>
+    </div>
+
+    <div id="data" class="content-paragraph" style="display: none;">
+    <b><br>Data</b><br>
+    The <i>data</i> section is used to define the astronomical body and the
+    bands used for the pipeline. The <i>data</i> section is defined with
+    three elements: <i>body</i>, <i>geometry</i>, and <i>bands</i>.<br><br>
+    body:<br>
+    * <u>Type</u>: String <br>
+    * <u>Description</u>: Name of astronomical source.<br><br><br>
+
+    The <i>geometry</i> and <i>bands</i> elements are by themselves other
+    sections within the <i>data</i> section.<br><br> 
+
+        <div class="navbar">
+            <button class="toggle-btn"onclick="changeContent('geometry', event)">Geometry</button>
+            <button class="toggle-btn"onclick="changeContent('bands', event)">Bands</button>
+        </div><br>
+
+        <div id="geometry" class="sub-content-paragraph" style="display: none;">
+        The <i>geometry</i> element is by itself another section within the
+        <i>data</i> section. The <i>geometry</i> section is defined by eight
+        elements: <i>ra</i>, <i>dec</i>, <i>positionAngle</i>,
+        <i>axialRatio</i>, <i>semiMajorAxis</i>, <i>inclination</i>,
+        <i>radius</i>, and <i>distance</i>. This section and/or any of the
+        elements of this section are not mandatory. Elements not defined by the
+        user will default to values loaded from the Dustpedia project for the
+        used <i>body</i>.<br><br>
+        ra: (Defaults to value from Dustpedia) <br>
+        * <u>Type</u>: Float<br> 
+        * <u>Description</u>: Right ascension in degrees.<br><br>
+        dec: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Declination in degrees.<br><br>
+        positionAngle: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Position angle in degrees.<br><br>
+        axialRatio: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Axial ratio.<br><br>
+        semiMajorAxis: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Semi-major axis in arcseconds.<br><br>
+        inclination: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Inclination in degrees.<br><br>
+        radius: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Major axis isophote at which optical surface
+        brightness falls beneath 25 mag arcsec−2, in arcseconds.<br><br>
+        distance: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Distance in Mega parsecs.<br><br><br>
+        </div>
+
+        <div id="bands" class="sub-content-paragraph" style="display: none;">
+        The <i>bands</i> element is by itself another section within the
+        <i>data</i> section. The <i>bands</i> section is defined by five
+        elements: <i>input</i>, <i>output</i>, <i>error</i>,
+        <i>name</i>, and <i>calError</i>. The <i>error</i>, and <i>calError</i>
+        are not mandatory elements. The <i>error</i> element is only defined in
+        case an uncertainty map is needed for the pipeline. The <i>calError</i>
+        element defaults to values from the Dustpedia project if not explicitly
+        defined. The <i>bands</i> section can define multiple bands using lists.<br><br>
+        input:<br>
+        * <u>Type</u>: String<br> 
+        * <u>Description</u>: Absolute path towards input data fits file.<br><br>
+        output:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Absolute path towards output directory.<br><br>
+        error:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Absolute path towards input error fits file.<br><br>
+        name:<br>
+        * <u>Type</u>: Literal string <br> 
+        * <u>Description</u>: Name of band following HerBIE nomenclature.<br><br>
+        calError: (Defaults to value from Dustpedia)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Photometric calibration error in percentage.<br><br>
+
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            data:<br>
+                            &#160;&#160;&#160;&#160;body: NGC4254<br>
+                            &#160;&#160;&#160;&#160;bands:<br>
+                            &#160;&#160;&#160;&#160;&#160;- input:
+                            data/inputs/NGC4254/NGC4254_PACS1.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                            data/inputs/NGC4254/NGC4254_PACS1_Error.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                            data/outputs/NGC4254/<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                            PACS1<br><br>
+                            &#160;&#160;&#160;&#160;&#160;- input:
+                            data/inputs/NGC4254/NGC4254_SPIRE2.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                            data/outputs/NGC4254/<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                            SPIRE2<br><br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div id="pipeline" class="content-paragraph" style="display: none;">
+    <b><br>Pipeline</b><br>
+    The <i>pipeline</i> section is used to define the homogenization
+    pipeline.  The <i>pipeline</i> section is defined with three elements:
+    <i>step</i>, <i>diagnosis</i>, and <i>parameters</i>. <br><br>
+    step:<br>
+    * <u>Type</u>: Literal string (hip.cutout, hip.foregroundMask,
+    hip.skySubtract, hip.degrade, hip.regrid, hip.integrate)<br> 
+    * <u>Description</u>: Name of step.<br><br>
+    diagnosis:<br>
+    * <u>Type</u>: Boolean<br> 
+    * <u>Description</u>: Enable/Disbale debug messages and diagnosis plots.<br><br>
+    The <i>parameters</i> section is by itself another section within the
+    <i>pipeline</i> section. The <i>parameters</i> section is defined with
+    different elements for each choice of <i>step</i>. The following are the
+    possible elements of <i>parameters</i> for each <i>step</i>:<br><br>
+    <div class="navbar">
+        <button class="toggle-btn"onclick="changeContent('hip.cutout', event)">Cutout</button>
+        <button class="toggle-btn"onclick="changeContent('hip.foregroundMask', event)">Foreground mask</button>
+        <button class="toggle-btn"onclick="changeContent('hip.skySubtract', event)">Sky subtract</button>
+        <button class="toggle-btn"onclick="changeContent('hip.degrade', event)">Degrade</button>
+        <button class="toggle-btn"onclick="changeContent('hip.regrid', event)">Regrid</button>
+        <button class="toggle-btn"onclick="changeContent('hip.integrate', event)">Integrate</button>
+    </div><br>
+
+    <div id="hip.cutout" class="sub-content-paragraph" style="display: none;">
+        <u>hip.cutout</u>:<br><br>
+        This step allows to perform a cutout the data centered at <i>ra</i>,
+        <i>dec</i> as defined in <i>geometry</i>. This step is defined with
+        three elements: <i>band</i>, <i>raTrim</i>, and <i>decTrim</i>.<br><br>
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band.<br><br>
+        raTrim:<br>
+        * <u>Type</u>: Float<br> 
+        * <u>Description</u>: Size of the cutout along the x axis in arcminutes.<br><br>
+        decTrim:<br>
+        * <u>Type</u>: Float<br> 
+        * <u>Description</u>: Size of the cutout along the y axis in arcminutes.<br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: hip.cutout<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: PACS1, SPIRE2<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/cutout.png" alt=
+                        "Cutout example" width=
+                        "100%" title="Cutout example">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Cutout example for PACS1 image of NGC4254. The cutout
+                        region was defined to be 10x10 arcmins as shown in the
+                        example above.</i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+    </div>
+    <div id="hip.foregroundMask" class="sub-content-paragraph" style="display: none;">
+        <u>hip.foregroundMask</u>:<br><br>
+        This step allows to mask foreground objects within a specific area
+        centered at <i>ra</i>, <i>dec</i> as defined in <i>geometry</i>. This
+        step is defined with four elements: <i>band</i>, <i>raTrim</i>,
+        <i>decTrim</i>, and <i>factor</i>.<br><br> 
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band.<br><br>
+        raTrim:<br>
+        * <u>Type</u>: Float<br> 
+        * <u>Description</u>: Size of the area along the x axis in arcminutes.<br><br>
+        decTrim:<br>
+        * <u>Type</u>: Float<br> 
+        * <u>Description</u>: Size of the are along the y axis in arcminutes.<br><br>
+        factor:<br>
+        * <u>Type</u>: Float<br> 
+        * <u>Description</u>: <br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: hip.foregroundMask<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;factor: 2<br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        <br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/foregroundMask.png" alt=
+                        "Cutout example" width=
+                        "100%" title="ForegroundMask example">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Foreground masking for MIPS1 image of NGC4254. The
+                        foreground masking was defined to be 10x10 arcmins with a
+                        factor of 2 as seen in the example above.</i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+    </div>
+    <div id="hip.skySubtract" class="sub-content-paragraph" style="display: none;">
+        <u>hip.skySubtract</u>:<br><br>
+        This step allows to estimate and subtract the background from the data.
+        The background is estimated using 3 sigma-clipped statistics in each box
+        of a grid that covers the data. The high-resolution background map is
+        then calculated by cubic interpolation of the low-resolution background
+        map. This step is defined with two elements: <i>band</i>, and
+        <i>cellFactor</i>.<br><br>
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band.<br><br>
+        cellFactor:<br>
+        * <u>Type</u>: Positive integer<br> 
+        * <u>Description</u>: Number of resolution elements per box.<br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: hip.skySubtract<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: SPIRE1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellfactor: 3<br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        <br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/skySubtract.png" alt=
+                        "Sky-subtract for SPIRE1 image of NGC4254." width=
+                        "100%" title="SkySubtract example">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Sky subtract example for SPIRE1 image of NGC4254.</i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+    </div>
+
+    <div id="hip.degrade" class="sub-content-paragraph" style="display: none;">
+        <u>hip.degrade</u>:<br><br>
+        This step allows to degrade an image to a target lower resolution. The step
+        can be done either by providing a kernel to be applied, or by specifying the
+        target resolution. The first method allows the user to use a specific kernel
+        for the degradation, whereas the second method constructs a Gaussian kernel
+        with the correct full-width-half-maximum to degrade the image to the target
+        resolution. This step can be defined with three elements: <i>band</i>,
+        <i>target</i>, and/or <i>kernel</i>.<br><br>
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band.<br><br>
+        kernel:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Absolute path towards kernel FITS file.<br><br>
+        target:<br>
+        * <u>Type</u>: Positive integer<br> 
+        * <u>Description</u>: Target resolution in arcseconds.<br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: hip.degrade<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
+                            kernels/Kernel_LowRes_PACS_70_to_SPIRE_500.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;target: 36<br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        <br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/degrade.png" alt=
+                        "Degradation from PACS1 to SPIRE3 for NGC4254." width=
+                        "100%" title="Degrade example">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Degradation from PACS1 with a resolution of 9
+                        arcseconds to SPIRE3 with resolution of 36 arcseconds
+                        for NGC4254.</i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+    </div>
+    <div id="hip.regrid" class="sub-content-paragraph" style="display: none;">
+        <u>hip.regrid</u>:<br><br>
+        This step allows to reproject an image to a target WCS projection. This
+        step can be defined with two elements: <i>band</i>, and
+        <i>target</i>.<br>
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band.<br><br>
+        target:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Absolute path towards a target FITS file.<br><br>
+
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/regrid.png" alt=
+                        "Regridding PACS1 image with pixel size 3 arcseconds to
+                        SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
+                        "100%" title="Regrid example">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Regridding PACS1 image with pixel size 3 arcseconds to
+                        SPIRE3 with pixel size 12 arcseconds for NGC4254.</i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    </div>
+    </div>
+    <br>
+    <hr>
+    <p style="text-align:center">
+        <a href="../index.html"><b>Home</b></a>&#160;&#160;&#160;&#160; 
+        <a href="../blog.html"><b>Blog</b></a>&#160;&#160;&#160;&#160; 
+        <a href="../software.html"><b>Software</b></a>&#160;&#160;&#160;&#160; 
+    </p>
+    <hr>
+    <br>
+    <br>
+</body>
+</html>
