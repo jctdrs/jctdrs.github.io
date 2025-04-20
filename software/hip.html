@@ -288,6 +288,7 @@
         <button class="toggle-btn"onclick="changeContent('hip.skySubtract', event)">Sky subtract</button>
         <button class="toggle-btn"onclick="changeContent('hip.degrade', event)">Degrade</button>
         <button class="toggle-btn"onclick="changeContent('hip.regrid', event)">Regrid</button>
+        <button class="toggle-btn"onclick="changeContent('hip.integrate', event)">Integrate</button>
     </div><br>
 
     <div id="hip.cutout" class="sub-content-paragraph" style="display: none;">
@@ -491,7 +492,7 @@
         <u>hip.regrid</u>:<br><br>
         This step allows to reproject an image to a target WCS projection. This
         step can be defined with two elements: <i>band</i>, and
-        <i>target</i>.<br>
+        <i>target</i>.<br><br>
         band:<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band.<br><br>
@@ -527,6 +528,49 @@
                         <i>Regridding PACS1 image with pixel size 3 arcseconds to
                         SPIRE3 with pixel size 12 arcseconds for NGC4254.</i></p>
                     </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <div id="hip.integrate" class="sub-content-paragraph" style="display: none;">
+        <u>hip.integrate</u>:<br><br>
+        This step allows to perform aperture photometry over an elliptical
+        aperture. This step can be defined with two elements: <i>band</i>, and
+        <i>radius</i>.<br><br>
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band.<br><br>
+        radius:<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: <br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: hip.integrate<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: SPIRE2<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;radius: 3<br><br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/integrate.png" alt=
+                        "Regridding PACS1 image with pixel size 3 arcseconds to
+                        SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
+                        "100%" title="Regrid example">
+                        <p style="color:rgb(51,51,153);text-align:center">
+                        <i>Elliptical aperture of radius 3 to perform aperture
+                        photomtry on SPIRE 2 image of NGC4254.</i></p> </td>
                 </tr>
             </tbody>
         </table>
