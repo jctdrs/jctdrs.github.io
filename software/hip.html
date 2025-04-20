@@ -78,10 +78,13 @@
     default to "Default". Elements of this section will be used for logging
     purposes. The <i>meta</i> section is defined by two elements:
     <i>name</i>, and <i>description</i>. <br><br> 
-    name: (Defaults to "Default")<br>
+    name:<br>
+    Defaults to <i>Default</i><br>
     * <u>Type</u>: string<br>
     * <u>Description</u>: Name of pipeline<br><br>
-    description: (Defaults to "Default")<br>
+
+    description: <br>
+    Defaults to <i>Default</i><br>
     * <u>Type</u>: string<br>
     * <u>Description</u>: Description of pipeline<br><br>
     <table style="text-align:left; width:100%; border=4"> 
@@ -107,10 +110,11 @@
     <i>config</i> section is defined with two elements: <i>mode</i>, and
     <i>niter</i>.<br><br>
     mode:<br>
-    * <u>Type</u>: Literal string ("Single Pass", "Monte-Carlo", "Analytic").<br>
-    * <u>Description</u>: "Single Pass" mode does not propagate uncertainties,
-    "Monte-Carlo" mode propagates uncertainties using a Monte-Carlo loop,
-    "Analytic" mode propagates uncertainties analytically.<br><br>
+    * <u>Type</u>: Literal string (<i>Single Pass</i>, <i>Monte-Carlo</i>,
+    <i>Analytic</i>).<br>
+    * <u>Description</u>: <i>Single Pass</i> mode does not propagate uncertainties,
+    <i>Monte-Carlo</i> mode propagates uncertainties using a Monte-Carlo loop,
+    <i>Analytic</i> mode propagates uncertainties analytically.<br><br>
     niter:<br>
     * <u>Type</u>: Positive integer.<br>
     * <u>Description</u>: Number of iterations for  "Monte-Carlo" mode.<br><br>
@@ -136,7 +140,7 @@
     three elements: <i>body</i>, <i>geometry</i>, and <i>bands</i>.<br><br>
     body:<br>
     * <u>Type</u>: String <br>
-    * <u>Description</u>: Name of astronomical source.<br><br><br>
+    * <u>Description</u>: Name of astronomical source.<br><br>
     <table style="text-align:left; width:100%; border=4"> 
         <tbody>
             <tr>
@@ -212,7 +216,7 @@
         distance: <br>
         Defaults from <i>DustPedia HyperLEDA ned_dist_z_corr</i><br>
         * <u>Type</u>: Float <br> 
-        * <u>Description</u>: Distance in Mega parsecs.<br><br><br>
+        * <u>Description</u>: Distance in Mega parsecs.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
