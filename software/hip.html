@@ -91,7 +91,8 @@
                     <i>
                         meta:<br>
                         &#160;&#160;&#160;&#160;name: HIP<br>
-                        &#160;&#160;&#160;&#160;description: IRAC1 to SPIRE3 for M99<br>
+                        &#160;&#160;&#160;&#160;description: PACS1 and MIPS1
+                        to SPIRE3 for M99<br>
                     </i>
                </td>
            </tr>
@@ -120,7 +121,7 @@
                     <i>
                         config:<br>
                         &#160;&#160;&#160;&#160;mode: Monte-Carlo<br>
-                        &#160;&#160;&#160;&#160;niter: 1000<br>
+                        &#160;&#160;&#160;&#160;niter: 10000<br>
                     </i>
                </td>
            </tr>
@@ -136,7 +137,19 @@
     body:<br>
     * <u>Type</u>: String <br>
     * <u>Description</u>: Name of astronomical source.<br><br><br>
-
+    <table style="text-align:left; width:100%; border=4"> 
+        <tbody>
+            <tr>
+                <td>
+                    <i>
+                        data:<br>
+                        &#160;&#160;&#160;&#160;body: NGC4254<br>
+                    </i>
+               </td>
+           </tr>
+       </tbody>
+    </table>
+    <br>
     The <i>geometry</i> and <i>bands</i> elements are by themselves other
     sections within the <i>data</i> section.<br><br> 
 
@@ -205,7 +218,7 @@
                 <tr>
                     <td>
                         <i>
-                            data:<br> &#160;&#160;&#160;&#160;body: NGC4254<br>
+                            data:<br> 
                             &#160;&#160;&#160;&#160;geometry:<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;ra:
                             184.70655<br>
@@ -263,7 +276,6 @@
                     <td>
                         <i>
                             data:<br>
-                            &#160;&#160;&#160;&#160;body: NGC4254<br>
                             &#160;&#160;&#160;&#160;bands:<br>
                             &#160;&#160;&#160;&#160;&#160;- input:
                             data/inputs/NGC4254/NGC4254_PACS1.fits<br>
@@ -276,13 +288,15 @@
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
                             PACS1<br><br>
                             &#160;&#160;&#160;&#160;&#160;- input:
-                            data/inputs/NGC4254/NGC4254_SPIRE2.fits<br>
+                            data/inputs/NGC4254/NGC4254_MIPS1.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                            data/inputs/NGC4254/NGC4254_Spitzer_24_Error.fits<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
                             data/outputs/NGC4254/<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
-                            5.9<br>
+                            5<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
-                            SPIRE2<br><br>
+                            MIPS1<br><br>
                         </i>
                    </td>
                </tr>
@@ -321,12 +335,15 @@
         This step allows to perform a cutout the data centered at <i>ra</i>,
         <i>dec</i> as defined in <i>geometry</i>. This step is defined with
         three elements: <i>band</i>, <i>raTrim</i>, and <i>decTrim</i>.<br><br>
+
         band:<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band.<br><br>
+        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+
         raTrim:<br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Size of the cutout along the x axis in arcminutes.<br><br>
+
         decTrim:<br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Size of the cutout along the y axis in arcminutes.<br><br>
@@ -339,7 +356,7 @@
                             &#160;&#160; - step: hip.cutout<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: PACS1, SPIRE2<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
                         </i>
@@ -369,17 +386,22 @@
         centered at <i>ra</i>, <i>dec</i> as defined in <i>geometry</i>. This
         step is defined with four elements: <i>band</i>, <i>raTrim</i>,
         <i>decTrim</i>, and <i>factor</i>.<br><br> 
+
         band:<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band.<br><br>
+        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+
         raTrim:<br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Size of the area along the x axis in arcminutes.<br><br>
+
         decTrim:<br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Size of the are along the y axis in arcminutes.<br><br>
+
         factor:<br>
         * <u>Type</u>: Float<br> 
+        <!-- TODO -->
         * <u>Description</u>: <br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
@@ -423,12 +445,16 @@
         then calculated by cubic interpolation of the low-resolution background
         map. This step is defined with two elements: <i>band</i>, and
         <i>cellFactor</i>.<br><br>
+
         band:<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band.<br><br>
+        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+
+        <!--TODO: Explain what is the cellFactor-->
         cellFactor:<br>
         * <u>Type</u>: Positive integer<br> 
         * <u>Description</u>: Number of resolution elements per box.<br><br>
+
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -438,13 +464,14 @@
                             &#160;&#160; - step: hip.skySubtract<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: SPIRE1<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellfactor: 3<br>
                         </i>
                    </td>
                </tr>
            </tbody>
         </table>
+        <!--TODO: Add image for MIPS1-->
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -469,12 +496,15 @@
         with the correct full-width-half-maximum to degrade the image to the target
         resolution. This step can be defined with three elements: <i>band</i>,
         <i>target</i>, and/or <i>kernel</i>.<br><br>
+
         band:<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band.<br><br>
+        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+
         kernel:<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Absolute path towards kernel FITS file.<br><br>
+
         target:<br>
         * <u>Type</u>: Positive integer<br> 
         * <u>Description</u>: Target resolution in arcseconds.<br><br>
@@ -490,13 +520,14 @@
                             &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
                             kernels/Kernel_LowRes_PACS_70_to_SPIRE_500.fits<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;target: 36<br>
                         </i>
                    </td>
                </tr>
            </tbody>
         </table>
+        <!--TODO: Add image for MIPS1-->
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -518,9 +549,11 @@
         This step allows to reproject an image to a target WCS projection. This
         step can be defined with two elements: <i>band</i>, and
         <i>target</i>.<br><br>
+
         band:<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band.<br><br>
+        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+
         target:<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Absolute path towards a target FITS file.<br><br>
@@ -533,7 +566,7 @@
                             &#160;&#160; - step: hip.regrid<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
                             data/inputs/NGC4254/NGC4254_SPIRE3.fits<br>
                         </i>
@@ -541,6 +574,7 @@
                </tr>
            </tbody>
         </table>
+        <!--TODO: Add regrid for MIPS1-->
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -563,9 +597,11 @@
         This step allows to perform aperture photometry over an elliptical
         aperture. This step can be defined with two elements: <i>band</i>, and
         <i>radius</i>.<br><br>
+
         band:<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band.<br><br>
+        * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
+
         radius:<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: <br><br>
@@ -578,13 +614,14 @@
                             &#160;&#160; - step: hip.integrate<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: SPIRE2<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;radius: 3<br><br>
                         </i>
                    </td>
                </tr>
            </tbody>
         </table>
+        <!--TODO: Add image for PACS1 and MIPS1-->
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
