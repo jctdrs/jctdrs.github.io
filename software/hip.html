@@ -69,6 +69,7 @@
         <button class="toggle-btn" onclick="changeContent('config', event)">Config</button>
         <button class="toggle-btn" onclick="changeContent('data', event)">Data</button>
         <button class="toggle-btn" onclick="changeContent('pipeline', event)">Pipeline</button>
+        <button class="toggle-btn" onclick="changeContent('example', event)">Full Example</button>
     </div>
   
     <div id="meta" class="content-paragraph" style="display: none;">
@@ -658,6 +659,95 @@
         </table>
         <br>
     </div>
+    </div>
+    <div id="example" class="content-paragraph" style="display: none;">
+    <br>
+    <table style="text-align:left; width:100%; border=4"> 
+        <tbody>
+            <tr>
+                <td>
+                    <i>
+                        meta:<br>
+                        &#160;&#160;&#160;&#160;name: HIP<br>
+                        &#160;&#160;&#160;&#160;description: PACS1 and MIPS1
+                        to SPIRE3 for M99<br><br>
+                        config:<br>
+                        &#160;&#160;&#160;&#160;mode: Monte-Carlo<br>
+                        &#160;&#160;&#160;&#160;niter: 10000<br><br>
+
+                        data:<br>
+                        &#160;&#160;&#160;&#160;body: NGC4254<br>
+                        &#160;&#160;&#160;&#160;bands:<br>
+                        &#160;&#160;&#160;&#160;&#160;- input:
+                        data/inputs/NGC4254/NGC4254_PACS1.fits<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                        data/inputs/NGC4254/NGC4254_PACS1_Error.fits<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                        data/outputs/NGC4254/<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
+                        5.4<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                        PACS1<br><br>
+                        &#160;&#160;&#160;&#160;&#160;- input:
+                        data/inputs/NGC4254/NGC4254_MIPS1.fits<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                        data/inputs/NGC4254/NGC4254_Spitzer_24_Error.fits<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                        data/outputs/NGC4254/<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
+                        5<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                        MIPS1<br><br>
+                        pipeline:<br>
+
+                        &#160;&#160; - step: hip.cutout<br>
+                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br><br>
+
+                        &#160;&#160; - step: hip.foregroundMask<br>
+                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;factor: 2<br><br>
+
+                        &#160;&#160; - step: hip.skySubtract<br>
+                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellfactor: 3<br><br>
+
+                        &#160;&#160; - step: hip.degrade<br>
+                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
+                        kernels/Kernel_LowRes_PACS1_to_SPIRE3.fits<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
+                        kernels/Kernel_LowRes_MIPS1_to_SPIRE3.fits<br><br>
+
+                        &#160;&#160; - step: hip.regrid<br>
+                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
+                        data/inputs/NGC4254/NGC4254_SPIRE3.fits<br><br>
+
+                        &#160;&#160; - step: hip.integrate<br>
+                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;radius: 3<br><br>
+                    </i>
+               </td>
+           </tr>
+       </tbody>
+    </table>
     </div>
     </div>
     <br>
