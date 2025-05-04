@@ -502,7 +502,32 @@
                     </td>
                 </tr>
             </tbody>
-        </table><br>
+        </table><br><br>
+        <u>More details on the choice of <i>cellFactor</i></u>:<br><br>
+        The background interpolation operation is done with the Background2D
+        object from photutils. First, a low-resolution background map is
+        estimated within boxes of a grid, and then interpolated to create the
+        final background map to be subtracted. The <i>cellFactor</i> is an
+        integer multipler factor of the instrument's resolution per every box of
+        the grid. A larger <i>cellFactor</i> results in smaller boxes, and
+        therefore a finer grid. A fine grid is not necessarily the optimal
+        choice, as one would want to interpolate the background while also
+        capturing its large-scale structure.<br><br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="../images/skySubtract_meshes.png" alt=
+                        "Sky-subtract meshes for PACS1 image of NGC4254." width=
+                        "100%" title="SkySubtract meshes example"> <p
+                        style="color:rgb(51,51,153);text-align:center"> <i>Grid
+                        structure corresponding to a cellFactor of 1 for PACS1.
+                        In that case, every box is 60 pixels wide or 10
+                        arcseconds.</i></p><br>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br><br>
     </div>
 
     <div id="hip.degrade" class="sub-content-paragraph" style="display: none;">
