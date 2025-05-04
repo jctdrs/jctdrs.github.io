@@ -396,7 +396,7 @@
         This step allows to mask foreground objects within a specific area
         centered at <i>ra</i>, <i>dec</i> as defined in <i>geometry</i>. This
         step is defined with four elements: <i>band</i>, <i>raTrim</i>,
-        <i>decTrim</i>, and <i>factor</i>.<br><br> 
+        <i>decTrim</i>, and <i>maskFactor</i>.<br><br> 
 
         band:<br>
         * <u>Type</u>: Literal string<br> 
@@ -410,10 +410,9 @@
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Size of the are along the y axis in arcminutes.<br><br>
 
-        factor:<br>
+        maskFactor:<br>
         * <u>Type</u>: Float<br> 
-        <!-- TODO: Define what is factor -->
-        * <u>Description</u>: <br><br>
+        * <u>Description</u>: Factor multiplier for mask radius.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -426,7 +425,7 @@
                             &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;factor: 2<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;maskFactor: 2<br>
                         </i>
                    </td>
                </tr>
@@ -442,12 +441,54 @@
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Foreground masking for MIPS1 image of NGC4254. The
                         foreground masking was defined to be 10x10 arcmins with a
-                        factor of 2 as seen in the example above.</i></p>
+                        maskFactor of 2 as seen in the example above.</i></p>
                     </td>
                 </tr>
             </tbody>
         </table><br>
+        <u>More details on the choice of <i>maskFactor</i></u>:<br><br>
+        The <i>maskFactor</i> scales the size of the masked regions around
+        foreground sources. It multiplies the base radius and the instrument's
+        resolution.  It is useful to adjust how aggressively pixels near these
+        sources are masked.<br>
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
+            <table border="1" style="border-collapse: collapse; width: 50%; margin: 10px;">
+              <thead>
+                <tr>
+                  <th style="padding: 8px; text-align: center;">Magnitude Threshold</th>
+                  <th style="padding: 8px; text-align: center;">Base radius (arcseconds)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 8px; text-align: center;">&lt;13.5</td>
+                  <td style="padding: 8px; text-align: center;">4.6</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: center;">&lt;14.0</td>
+                  <td style="padding: 8px; text-align: center;">3.0</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: center;">&lt;15.5</td>
+                  <td style="padding: 8px; text-align: center;">2.1</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: center;">&lt;16.0</td>
+                  <td style="padding: 8px; text-align: center;">1.4</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: center;">&lt;18.0</td>
+                  <td style="padding: 8px; text-align: center;">1.15</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: center;">&lt;40.0</td>
+                  <td style="padding: 8px; text-align: center;">0.7</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
     </div>
+
     <div id="hip.skySubtract" class="sub-content-paragraph" style="display: none;">
         <u>hip.skySubtract</u>:<br><br>
         This step allows to estimate and subtract the background from the data.
@@ -463,7 +504,7 @@
 
         cellFactor:<br>
         * <u>Type</u>: Positive integer<br> 
-        * <u>Description</u>: Number of resolution elements per box.<br><br>
+        * <u>Description</u>: Factor multiplier for grid size.<br><br>
 
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
@@ -741,7 +782,7 @@
                         &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;factor: 2<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;maskFactor: 2<br><br>
 
                         &#160;&#160; - step: hip.skySubtract<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
