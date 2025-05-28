@@ -63,7 +63,7 @@
     HIP pipelines and data sources are defined in a configuration file using
     YAML, a human-readable data serialization language. Once a configuration
     file is defined, HIP is launched as follows:<br> <mark>python main.py --file
-    config.yml</mark><br><br>
+    [config file]</mark><br><br>
     HIP configuration files consist of the following main
     sections: <i>meta</i>, <i>config</i>, <i>data</i>, and
     <i>pipeline</i>.<br><br>
@@ -81,7 +81,7 @@
     The <i>meta</i> section is used to define meta-data. Fields in
     <i>meta</i> are not mandatory. Elements not defined by the user will
     default to "Default". Elements of this section will be used for logging
-    purposes. The <i>meta</i> section is defined by two elements:
+    purposes. The <i>meta</i> section is defined by two fields:
     <i>name</i>, and <i>description</i>. <br><br> 
     name:<br>
     Defaults to <i>Default</i><br>
@@ -112,7 +112,7 @@
     <b><br>Config</b><br>
     The <i>config</i> section is used to define the run mode. Modes define
     whether or not to propagate uncertainties, and if yes, how to do so. The
-    <i>config</i> section is defined with two elements: <i>mode</i>, and
+    <i>config</i> section is defined with two fields: <i>mode</i>, and
     <i>niter</i>.<br><br>
     mode:<br>
     * <u>Type</u>: Literal string (<i>Single Pass</i>, <i>Monte-Carlo</i>,
@@ -144,7 +144,7 @@
     <b><br>Data</b><br>
     The <i>data</i> section is used to define the astronomical body and the
     bands used for the pipeline. The <i>data</i> section is defined with
-    three elements: <i>body</i>, <i>geometry</i>, and <i>bands</i>.<br><br>
+    three fields: <i>body</i>, <i>geometry</i>, and <i>bands</i>.<br><br>
     body:<br>
     * <u>Type</u>: String <br>
     * <u>Description</u>: Name of astronomical source.<br><br>
@@ -161,7 +161,7 @@
        </tbody>
     </table>
     <br>
-    The <i>geometry</i> and <i>bands</i> elements are by themselves other
+    The <i>geometry</i> and <i>bands</i> fields are by themselves other
     sections within the <i>data</i> section.<br><br> 
 
         <div class="navbar">
@@ -170,53 +170,53 @@
         </div><br>
 
         <div id="geometry" class="sub-content-paragraph" style="display: none;">
-        The <i>geometry</i> element is by itself another section within the
+        The <i>geometry</i> field is by itself another section within the
         <i>data</i> section. The <i>geometry</i> section is defined by eight
-        elements: <i>ra</i>, <i>dec</i>, <i>positionAngle</i>,
+        fields: <i>ra</i>, <i>dec</i>, <i>positionAngle</i>,
         <i>axialRatio</i>, <i>semiMajorAxis</i>, <i>inclination</i>,
         <i>radius</i>, and <i>distance</i>. This section and/or any of the
-        elements of this section are not mandatory. Elements not defined by the
+        fields of this section are not mandatory. Elements not defined by the
         user will default to values loaded from the DustPedia project for the
         used <i>body</i>. A full list of the available galaxies and their
-        elements can be found in the <a
+        fields can be found in the <a
         href="http://www.dustpedia.astro.noa.gr/Photometry"><b>photometry
         files</b></a> of the DustPedia archive.<br><br>
 
         ra: <br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 ra</i> <br>
+        Defaults from <i>DustPedia Aperture Photometry 2.2 - ra</i> <br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Right ascension in degrees.<br><br>
 
         dec: <br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 dec</i> <br>
+        Defaults from <i>DustPedia Aperture Photometry 2.2 - dec</i> <br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Declination in degrees.<br><br>
 
         positionAngle: <br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2
+        Defaults from <i>DustPedia Aperture Photometry 2.2 - 
         pos_angle</i> <br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Position angle in degrees.<br><br>
 
         axialRatio:<br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2
+        Defaults from <i>DustPedia Aperture Photometry 2.2 - 
         axial_ratio</i><br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Axial ratio.<br><br>
 
         semiMajorAxis:<br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2
+        Defaults from <i>DustPedia Aperture Photometry 2.2 - 
         semimaj_arcsec</i> <br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Semi-major axis in arcseconds.<br><br>
 
         inclination: <br>
-        Defaults from <i>Duspedia HyperLEDA incl</i><br>
+        Defaults from <i>Duspedia HyperLEDA - incl</i><br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Inclination in degrees.<br><br>
 
         radius: <br>
-        Defaults from <i>DustPedia HyperLEDA d25</i><br>
+        Defaults from <i>DustPedia HyperLEDA - d25</i><br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Major axis isophote at which optical surface
         brightness falls beneath 25 mag arcsec−2, in arcseconds.<br><br>
@@ -257,23 +257,23 @@
         </div>
 
         <div id="bands" class="sub-content-paragraph" style="display: none;">
-        The <i>bands</i> element is by itself another section within the
+        The <i>bands</i> field is by itself another section within the
         <i>data</i> section. The <i>bands</i> section is defined by five
-        elements: <i>input</i>, <i>output</i>, <i>error</i>,
+        fields: <i>input</i>, <i>output</i>, <i>error</i>,
         <i>name</i>, and <i>calError</i>. The <i>error</i>, and <i>calError</i>
-        are not mandatory elements. The <i>error</i> element is only defined in
+        are not mandatory fields. The <i>error</i> field is only defined in
         case an uncertainty map is needed for the pipeline. The <i>calError</i>
-        element defaults to values from the DustPedia project if not explicitly
+        field defaults to values from the DustPedia project if not explicitly
         defined. The <i>bands</i> section can define multiple bands using lists.<br><br>
         input:<br>
         * <u>Type</u>: String<br> 
-        * <u>Description</u>: Absolute path towards input data fits file.<br><br>
+        * <u>Description</u>: Relative path towards input data fits file.<br><br>
         output:<br>
         * <u>Type</u>: String <br> 
-        * <u>Description</u>: Absolute path towards output directory.<br><br>
+        * <u>Description</u>: Relative path towards output directory.<br><br>
         error:<br>
         * <u>Type</u>: String <br> 
-        * <u>Description</u>: Absolute path towards input error fits file.<br><br>
+        * <u>Description</u>: Relative path towards input error fits file.<br><br>
         name:<br>
         * <u>Type</u>: Literal string <br> 
         * <u>Description</u>: Name of band following HerBIE nomenclature.<br><br>
@@ -319,7 +319,7 @@
     <div id="pipeline" class="content-paragraph" style="display: none;">
     <b><br>Pipeline</b><br>
     The <i>pipeline</i> section is used to define the homogenization
-    pipeline.  The <i>pipeline</i> section is defined with three elements:
+    pipeline.  The <i>pipeline</i> section is defined with three fields:
     <i>step</i>, <i>diagnosis</i>, and <i>parameters</i>. <br><br>
     step:<br>
     * <u>Type</u>: Literal string (hip.cutout, hip.foregroundMask,
@@ -330,8 +330,8 @@
     * <u>Description</u>: Enable/Disbale debug messages and diagnosis plots.<br><br>
     The <i>parameters</i> section is by itself another section within the
     <i>pipeline</i> section. The <i>parameters</i> section is defined with
-    different elements for each choice of <i>step</i>. The following are the
-    possible elements of <i>parameters</i> for each <i>step</i>:<br><br>
+    different fields for each choice of <i>step</i>. The following are the
+    possible fields of <i>parameters</i> for each <i>step</i>:<br><br>
     <div class="navbar">
         <button class="toggle-btn"onclick="changeContent('hip.cutout', event)">Cutout</button>
         <button class="toggle-btn"onclick="changeContent('hip.foregroundMask', event)">Foreground mask</button>
@@ -345,7 +345,7 @@
         <u>hip.cutout</u>:<br><br>
         This step allows to perform a cutout the data centered at <i>ra</i>,
         <i>dec</i> as defined in <i>geometry</i>. This step is defined with
-        three elements: <i>band</i>, <i>raTrim</i>, and <i>decTrim</i>.<br><br>
+        three fields: <i>band</i>, <i>raTrim</i>, and <i>decTrim</i>.<br><br>
 
         band:<br>
         * <u>Type</u>: Literal string<br> 
@@ -395,7 +395,7 @@
         <u>hip.foregroundMask</u>:<br><br>
         This step allows to mask foreground objects within a specific area
         centered at <i>ra</i>, <i>dec</i> as defined in <i>geometry</i>. This
-        step is defined with four elements: <i>band</i>, <i>raTrim</i>,
+        step is defined with four fields: <i>band</i>, <i>raTrim</i>,
         <i>decTrim</i>, and <i>maskFactor</i>.<br><br> 
 
         band:<br>
@@ -446,11 +446,11 @@
                 </tr>
             </tbody>
         </table><br>
-        <u>More details on the choice of <i>maskFactor</i></u>:<br><br>
-        The <i>maskFactor</i> scales the size of the masked regions around
-        foreground sources. It multiplies the base radius and the instrument's
-        resolution.  It is useful to adjust how aggressively pixels near these
-        sources are masked.<br>
+        <u>More details on the choice of <i>maskFactor</i></u>:<br><br> The
+        <i>maskFactor</i> scales the size of the masked regions around
+        foreground sources. It multiplies the base radius corresponding to the
+        object's magnitude as seen in the following table. This is useful to
+        adjust how aggressively pixels near these objects are masked.<br>
         <div style="display: flex; justify-content: center; margin: 20px 0;">
             <table border="1" style="border-collapse: collapse; width: 50%; margin: 10px;">
               <thead>
@@ -495,7 +495,7 @@
         The background is estimated using 3 sigma-clipped statistics in each box
         of a grid that covers the data. The high-resolution background map is
         then calculated by cubic interpolation of the low-resolution background
-        map. This step is defined with two elements: <i>band</i>, and
+        map. This step is defined with two fields: <i>band</i>, and
         <i>cellFactor</i>.<br><br>
 
         band:<br>
@@ -577,7 +577,7 @@
         target resolution. The first method allows the user to use a specific kernel
         for the degradation, whereas the second method constructs a Gaussian kernel
         with the correct full-width-half-maximum to degrade the image to the target
-        resolution. This step can be defined with three elements: <i>band</i>,
+        resolution. This step can be defined with three fields: <i>band</i>,
         <i>target</i>, and/or <i>kernel</i>.<br><br>
 
         band:<br>
@@ -586,7 +586,7 @@
 
         kernel:<br>
         * <u>Type</u>: String <br> 
-        * <u>Description</u>: Absolute path towards kernel FITS file.<br><br>
+        * <u>Description</u>: Relative path towards kernel FITS file.<br><br>
 
         target:<br>
         * <u>Type</u>: Positive integer<br> 
@@ -637,7 +637,7 @@
     <div id="hip.regrid" class="sub-content-paragraph" style="display: none;">
         <u>hip.regrid</u>:<br><br>
         This step allows to reproject an image to a target WCS projection. This
-        step can be defined with two elements: <i>band</i>, and
+        step can be defined with two fields: <i>band</i>, and
         <i>target</i>.<br><br>
 
         band:<br>
@@ -646,7 +646,7 @@
 
         target:<br>
         * <u>Type</u>: String <br> 
-        * <u>Description</u>: Absolute path towards a target FITS file.<br><br>
+        * <u>Description</u>: Relative path towards a target FITS file.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -668,14 +668,14 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/regrid.png" alt=
+                        <img src="../images/regrid_PACS1.png" alt=
                         "Regridding PACS1 image with pixel size 3 arcseconds to
                         SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
                         "100%" title="Regrid example">
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Result of regridding PACS1 with pixel size 3
-                        arcseconds and MIPS1 with pixel size 2.4 to a pixel
-                        size of 12 arcseconds as of SPIRE3 for NGC4254.</i></p>
+                        arcseconds to a pixel size of 12 arcseconds as of SPIRE3
+                        for NGC4254.</i></p>
                     </td>
                 </tr>
             </tbody>
@@ -685,7 +685,7 @@
     <div id="hip.integrate" class="sub-content-paragraph" style="display: none;">
         <u>hip.integrate</u>:<br><br>
         This step allows to perform aperture photometry over an elliptical
-        aperture. This step can be defined with two elements: <i>band</i>, and
+        aperture. This step can be defined with two fields: <i>band</i>, and
         <i>radius</i>.<br><br>
 
         band:<br>
@@ -716,7 +716,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/integrate.png" alt=
+                        <img src="../images/integrate_PACS1.png" alt=
                         "Regridding PACS1 image with pixel size 3 arcseconds to
                         SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
                         "100%" title="Regrid example">
