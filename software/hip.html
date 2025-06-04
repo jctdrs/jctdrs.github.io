@@ -685,16 +685,16 @@
     <div id="hip.integrate" class="sub-content-paragraph" style="display: none;">
         <u>hip.integrate</u>:<br><br>
         This step allows to perform aperture photometry over an elliptical
-        aperture. This step can be defined with two fields: <i>band</i>, and
-        <i>radius</i>.<br><br>
+        aperture defined by the semi-major axis of the galaxy. This step can 
+        be defined with two fields: <i>band</i>, and <i>sizeFactor</i>.<br><br>
 
         band:<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
 
-        radius:<br>
+        sizeFactor:<br>
         * <u>Type</u>: Float <br> 
-        * <u>Description</u>: <br><br>
+        * <u>Description</u>: Factor multiplier for size of aperture.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -705,7 +705,7 @@
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
                             &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;radius: 3<br><br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;sizeFactor: 3<br><br>
                         </i>
                    </td>
                </tr>
@@ -812,7 +812,7 @@
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;radius: 3<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;sizeFactor: 3<br><br>
                     </i>
                </td>
            </tr>
