@@ -369,8 +369,8 @@
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
                             &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br>
                         </i>
                    </td>
                </tr>
@@ -385,7 +385,7 @@
                         "100%" title="Cutout example">
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Cutout example for PACS1 image of NGC4254. The cutout
-                        region was defined to be 10x10 arcmins as shown in the
+                        region was defined to be 15x15 arcmins as shown in the
                         example above.</i></p>
                     </td>
                 </tr>
@@ -425,8 +425,8 @@
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
                             &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;maskFactor: 1<br>
                         </i>
                    </td>
@@ -442,7 +442,7 @@
                         "100%" title="ForegroundMask example">
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Foreground masking for MIPS1 image of NGC4254. The
-                        foreground masking was defined to be 10x10 arcmins with a
+                        foreground masking was defined to be 15x15 arcmins with a
                         maskFactor of 1 as seen in the example above.</i></p>
                     </td>
                 </tr>
@@ -518,7 +518,7 @@
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
                             &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 2<br>
                         </i>
                    </td>
                </tr>
@@ -528,7 +528,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/skySubtract_PACS1.png" alt=
+                        <img src="../images/test.png" alt=
                         "Sky-subtract for PACS1 image of NGC4254." width=
                         "100%" title="SkySubtract example"> <p
                         style="color:rgb(51,51,153);text-align:center"> <i>Sky
@@ -563,8 +563,8 @@
                         "Sky-subtract meshes for PACS1 image of NGC4254." width=
                         "100%" title="SkySubtract meshes example"> <p
                         style="color:rgb(51,51,153);text-align:center"> <i>Grid
-                        structure corresponding to a cellFactor of 1 for PACS1.
-                        In that case, every box is 60 pixels wide or 10
+                        structure corresponding to a cellFactor of 2 for PACS1.
+                        In that case, every box is 9 pixels wide or 18 arcseconds.
                         arcseconds.</i></p><br>
                     </td>
                 </tr>
@@ -770,21 +770,21 @@
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br><br>
 
                         &#160;&#160; - step: hip.foregroundMask<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 10<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 10<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br><br>
 
                         &#160;&#160; - step: hip.skySubtract<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 1<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 2<br><br>
 
                         &#160;&#160; - step: hip.degrade<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
