@@ -518,7 +518,7 @@
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
                             &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 2<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 10<br>
                         </i>
                    </td>
                </tr>
@@ -550,9 +550,9 @@
         object from photutils. First, a low-resolution background map is
         estimated within boxes of a grid, and then interpolated to create the
         final background map to be subtracted. The <i>cellFactor</i> is an
-        integer multipler factor of the instrument's resolution per every box of
-        the grid. A larger <i>cellFactor</i> results in smaller boxes, and
-        therefore a finer grid. A fine grid is not necessarily the optimal
+        integer multipler factor of the instrument's resolution per box of
+        the grid. A larger <i>cellFactor</i> results in larger boxes, and
+        therefore a coarser grid. A fine grid is not necessarily the optimal
         choice, as one would want to interpolate the background while also
         capturing its large-scale structure.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
@@ -563,9 +563,9 @@
                         "Sky-subtract meshes for PACS1 image of NGC4254." width=
                         "100%" title="SkySubtract meshes example"> <p
                         style="color:rgb(51,51,153);text-align:center"> <i>Grid
-                        structure corresponding to a cellFactor of 2 for PACS1.
-                        In that case, every box is 9 pixels wide or 18 arcseconds.
-                        arcseconds.</i></p><br>
+                        structure corresponding to a cellFactor of 10 for PACS1.
+                        In that case, every box is 23 pixels wide or 46 arcseconds.
+                        </i></p><br>
                     </td>
                 </tr>
             </tbody>
@@ -784,7 +784,7 @@
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 2<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 10<br><br>
 
                         &#160;&#160; - step: hip.degrade<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
