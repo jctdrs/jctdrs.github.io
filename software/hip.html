@@ -260,13 +260,15 @@
         <div id="bands" class="sub-content-paragraph" style="display: none;">
         The <i>bands</i> field is by itself another section within the
         <i>data</i> section. The <i>bands</i> section is defined by five
-        fields: <i>input</i>, <i>output</i>, <i>error</i>,
-        <i>name</i>, and <i>calError</i>. The <i>error</i>, and <i>calError</i>
-        are not mandatory fields. The <i>error</i> field is only defined in
-        case an uncertainty map is needed for the pipeline. The <i>calError</i>
-        field defaults to values from the DustPedia project if not explicitly
-        defined. The <i>bands</i> section can define multiple bands using lists.<br><br>
-        input:<br>
+        fields: <i>input</i>, <i>output</i>, <i>error</i>, <i>name</i>,
+        <i>resolution</i>, and <i>calError</i>. The <i>error</i>, and
+        <i>calError</i> are not mandatory fields. The <i>error</i> field is
+        only defined in case an uncertainty map is needed for the pipeline.
+        The <i>resolution</i> section is only needed in case the <i>name</i> of
+        the band does not follow the HerBIE nomenclature, otherwise, the
+        resolution will be defined automatically. The <i>bands</i> section can
+        define multiple non-repeating bands using lists.
+        <br><br> input:<br>
         * <u>Type</u>: String<br> 
         * <u>Description</u>: Relative path towards input data fits file.<br><br>
         output:<br>
@@ -277,10 +279,13 @@
         * <u>Description</u>: Relative path towards input error fits file.<br><br>
         name:<br>
         * <u>Type</u>: Literal string <br> 
-        * <u>Description</u>: Name of band following HerBIE nomenclature.<br><br>
+        * <u>Description</u>: Name of band.<br><br>
         calError: (Defaults to value from DustPedia)<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Photometric calibration error in percentage.<br><br>
+        resolution: (Defaults to value from DustPedia if name follows HerBIE nomenclature)<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Full-width at half-maximum (FWHM) in arcsec.<br><br>
 
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
@@ -302,18 +307,298 @@
                             &#160;&#160;&#160;&#160;&#160;- input:
                             data/inputs/NGC4254/NGC4254_MIPS1.fits<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
-                            data/inputs/NGC4254/NGC4254_Spitzer_24_Error.fits<br>
+                            data/inputs/NGC4254/Spitzer_24_Error.fits<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
                             data/outputs/NGC4254/<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
                             5<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
                             MIPS1<br><br>
+                            &#160;&#160;&#160;&#160;&#160;- input:
+                            data/inputs/NGC4254/M99_NIKA2_1_SCANAM.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                            data/inputs/NGC4254/NIKA_Error.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                            data/outputs/NGC4254/<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                            NIKA2_1_SCANAM<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;resolution:
+                            12<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
+                            5<br><br>
                         </i>
                    </td>
                </tr>
            </tbody>
         </table>
+        <br><u>More details on the HerBIE nomenclature:</u><br>
+        The HerBIE nomenclature is a system of names for the most used bands 
+        within the IMEGIN collaboration. In case the <i>name</i> field is
+        any of the following, then the <i>resolution</i> will be defined as
+        follows.
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
+            <table border="1" style="border-collapse: collapse; width: 50%; margin: 10px;">
+              <thead>
+                <tr>
+                  <th style="padding: 8px; text-align: center;">Facility</th>
+                  <th style="padding: 8px; text-align: center;">Effective wavelength</th>
+                  <th style="padding: 8px; text-align: center;">HerBIE name</th>
+                  <th style="padding: 8px; text-align: center;">Resolution FWHM (arcsec)</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!-- GALEX -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">GALEX</td>
+                    <td style="padding: 8px; text-align: center;">153 nm</td>
+                    <td style="padding: 8px; text-align: center;">GALEX_FUV</td>
+                    <td style="padding: 8px; text-align: center;">4.3</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">GALEX</td>
+                    <td style="padding: 8px; text-align: center;">227 nm</td>
+                    <td style="padding: 8px; text-align: center;">GALEX_NUV</td>
+                    <td style="padding: 8px; text-align: center;">5.3</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+              <!-- SDSS -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">SDSS</td>
+                    <td style="padding: 8px; text-align: center;">353 nm</td>
+                    <td style="padding: 8px; text-align: center;">SDSS1</td>
+                    <td style="padding: 8px; text-align: center;">1.3</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">SDSS</td>
+                    <td style="padding: 8px; text-align: center;">475 nm</td>
+                    <td style="padding: 8px; text-align: center;">SDSS2</td>
+                    <td style="padding: 8px; text-align: center;">1.3</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">SDSS</td>
+                    <td style="padding: 8px; text-align: center;">622 nm</td>
+                    <td style="padding: 8px; text-align: center;">SDSS3</td>
+                    <td style="padding: 8px; text-align: center;">1.3</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">SDSS</td>
+                    <td style="padding: 8px; text-align: center;">763 nm</td>
+                    <td style="padding: 8px; text-align: center;">SDSS4</td>
+                    <td style="padding: 8px; text-align: center;">1.3</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">SDSS</td>
+                    <td style="padding: 8px; text-align: center;">905 nm</td>
+                    <td style="padding: 8px; text-align: center;">SDSS5</td>
+                    <td style="padding: 8px; text-align: center;">1.3</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+
+              <!-- 2MASS -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">2MASS</td>
+                    <td style="padding: 8px; text-align: center;">1.24 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">2MASS1</td>
+                    <td style="padding: 8px; text-align: center;">2.0</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">2MASS</td>
+                    <td style="padding: 8px; text-align: center;">1.66 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">2MASS2</td>
+                    <td style="padding: 8px; text-align: center;">2.0</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">2MASS</td>
+                    <td style="padding: 8px; text-align: center;">2.16 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">2MASS3</td>
+                    <td style="padding: 8px; text-align: center;">2.0</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+
+              <!-- WISE -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">WISE</td>
+                    <td style="padding: 8px; text-align: center;">3.4 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">WISE1</td>
+                    <td style="padding: 8px; text-align: center;">6.1</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">WISE</td>
+                    <td style="padding: 8px; text-align: center;">4.6 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">WISE2</td>
+                    <td style="padding: 8px; text-align: center;">6.4</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">WISE</td>
+                    <td style="padding: 8px; text-align: center;">12 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">WISE3</td>
+                    <td style="padding: 8px; text-align: center;">6.5</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">WISE</td>
+                    <td style="padding: 8px; text-align: center;">22 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">WISE4</td>
+                    <td style="padding: 8px; text-align: center;">12</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+
+              <!-- Spitzer -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">3.6 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">IRAC1</td>
+                    <td style="padding: 8px; text-align: center;">1.66</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">4.5 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">IRAC2</td>
+                    <td style="padding: 8px; text-align: center;">1.72</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">5.8 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">IRAC3</td>
+                    <td style="padding: 8px; text-align: center;">1.88</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">8 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">IRAC4</td>
+                    <td style="padding: 8px; text-align: center;">1.98</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">24 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">MIPS1</td>
+                    <td style="padding: 8px; text-align: center;">6</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">70 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">MIPS2</td>
+                    <td style="padding: 8px; text-align: center;">18</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Spitzer</td>
+                    <td style="padding: 8px; text-align: center;">160 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">MIPS3</td>
+                    <td style="padding: 8px; text-align: center;">38</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+
+              <!-- Herschel -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Herschel</td>
+                    <td style="padding: 8px; text-align: center;">70 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">PACS1</td>
+                    <td style="padding: 8px; text-align: center;">9</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Herschel</td>
+                    <td style="padding: 8px; text-align: center;">100 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">PACS2</td>
+                    <td style="padding: 8px; text-align: center;">10</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Herschel</td>
+                    <td style="padding: 8px; text-align: center;">160 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">PACS3</td>
+                    <td style="padding: 8px; text-align: center;">13</td>
+               </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Herschel</td>
+                    <td style="padding: 8px; text-align: center;">250 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">SPIRE1</td>
+                    <td style="padding: 8px; text-align: center;">18</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Herschel</td>
+                    <td style="padding: 8px; text-align: center;">350 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">SPIRE2</td>
+                    <td style="padding: 8px; text-align: center;">25</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Herschel</td>
+                    <td style="padding: 8px; text-align: center;">500 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">SPIRE3</td>
+                    <td style="padding: 8px; text-align: center;">36</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+
+              <!-- Planck -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">350 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">HFI1</td>
+                    <td style="padding: 8px; text-align: center;">278</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">550 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">HFI2</td>
+                    <td style="padding: 8px; text-align: center;">290</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">850 \(\mu\)m</td>
+                    <td style="padding: 8px; text-align: center;">HFI3</td>
+                    <td style="padding: 8px; text-align: center;">296</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">1.38 mm</td>
+                    <td style="padding: 8px; text-align: center;">HFI4</td>
+                    <td style="padding: 8px; text-align: center;">301</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">2.10 mm</td>
+                    <td style="padding: 8px; text-align: center;">HFI5</td>
+                    <td style="padding: 8px; text-align: center;">438</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">3 mm</td>
+                    <td style="padding: 8px; text-align: center;">LFI1</td>
+                    <td style="padding: 8px; text-align: center;">581</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">4.26 mm</td>
+                    <td style="padding: 8px; text-align: center;">LFI2</td>
+                    <td style="padding: 8px; text-align: center;">799</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;">6.81 mm</td>
+                    <td style="padding: 8px; text-align: center;">LFI3</td>
+                    <td style="padding: 8px; text-align: center;">1630</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">Planck</td>
+                    <td style="padding: 8px; text-align: center;"> 10.6 mm</td>
+                    <td style="padding: 8px; text-align: center;">LFI4</td>
+                    <td style="padding: 8px; text-align: center;">1940</td>
+              </tr>
+              <tr><td colspan="4" style="height: 10px;"></td></tr>
+
+              <!-- IRAM 30m -->
+              <tr>
+                    <td style="padding: 8px; text-align: center;">IRAM 30m</td>
+                    <td style="padding: 8px; text-align: center;">1.15 mm</td>
+                    <td style="padding: 8px; text-align: center;">NIKA2_1</td>
+                    <td style="padding: 8px; text-align: center;">12</td>
+              </tr>
+              <tr>
+                    <td style="padding: 8px; text-align: center;">IRAM 30m</td>
+                    <td style="padding: 8px; text-align: center;">2 mm</td>
+                    <td style="padding: 8px; text-align: center;">NIKA2_2</td>
+                    <td style="padding: 8px; text-align: center;">18</td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
         </div>
     </div>
 
