@@ -50,7 +50,7 @@
         of the input data \(\boldsymbol{x}\), is propagated to first degree by
         the Jacobian, \(J\), through the operation, \( f \).
 
-        <p style="font-size:11px"><b>Example</b></p>
+        <p style="font-size:11px"><b>Explicit example</b></p>
         I&#39;ll illustrate the idea with an application from multi-wavelength
         astronomy of comparing images of the same physical object taken from
         different instruments with different resolutions. One would have to
@@ -105,7 +105,7 @@
             </tbody>
         </table>
 
-        <p style="font-size:11px"><b>Implementation</b></p>
+        <p style="font-size:11px"><b>Example</b></p>
         Assuming the input covariance matrix, \(\Sigma_{\boldsymbol{x}}\), to
         have zero non-diagonal elements, then every pixel \((i,j)\) of the
         initial uncertainty map is equal to the total variance, \(\sigma_{i,i}\)
@@ -114,18 +114,19 @@
         <br>
         Resolution degradation is done by convolving the image with a specific
         kernel based on the ratio of initial and target resolutions.  The
-        convolution, \(\boldsymbol{y}=\boldsymbol{x}\star K\), can be written as
-        \(\boldsymbol{y}[i,j] = \sum_{n,m}K[n,m]\times x[i-n,j-m]\).  The
+        convolution, \(\boldsymbol{y}=\boldsymbol{x}\star K\), can be written
+        as \(\boldsymbol{y}[i,j] = \sum_{n,m}K[n,m]\times x[i-n,j-m]\).  The
         Jacobian is an array with each row corresponding to an output pixel
         \(y[i,j]\), equal to the partial derivative of \(y[i,j]\) with respect
-        to \(x[k,l]\) is simply \(K[i-k, j-l]\). This shows that the derivative
-        at each pixel is the kernel itself but shifted depending on the position
-        of the pixel with respect to the center of the kernel. Following
-        equation (1), and assuming independent initial uncertainties, the
-        propagated uncertainty \(\sigma_{y}\) at \((i,j)\) is
-        \(\sigma_{y}^{2}[i,j] = \sum_{n,m}K[n,m]^{2}\times \sigma_{x}^{2}[i-m,
-        j-n]\), which is nothing but convolving the square of the initial
-        uncertainties with the square of the kernel,
+        to \(x[k,l]\). The Jacbobian represents how each output pixel depends
+        on each input pixel. The derivative at each pixel is the kernel itself
+        but shifted depending on the position of the pixel with respect to the
+        center of the kernel, therefore the derivatives are equal to \(K[i-k,
+        j-l]\). Following equation (1), and assuming independent initial
+        uncertainties, the propagated uncertainty \(\sigma_{y}\) at \((i,j)\)
+        is \(\sigma_{y}^{2}[i,j] = \sum_{n,m}K[n,m]^{2}\times
+        \sigma_{x}^{2}[i-m, j-n]\), which is nothing but convolving the square
+        of the initial uncertainties with the square of the kernel,
         \(\sigma_{y}^{2}=\sigma_{x}^{2}\star K{^2}\). Klein (2021)*** offers a
         more general method for uncertainty propgation in convolution while
         taking into account cross-correlations between pixels.
@@ -140,20 +141,15 @@
                         "Jacobian of degrading and re-gridding NGC4254">
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Visualization of the Jacobian,
-                        \(J_{h}(\boldsymbol{x})\) for a convolution. Every element,
-                        \(J_{i&#39;j&#39;}\), shows the derivative of \(
-                        y_{i&#39;j&#39;}\), with respect to \(\boldsymbol{x}\).
-                        Therefore showing the dependence of every pixel of
-                        \(\boldsymbol{y}\) on \(\boldsymbol{x}\). As seen
-                        before, every pixel of the Jacobian is the kernel
-                        itself shifted with respect to the distance of that
-                        pixel with the central pixel. For example, the central
-                        pixel shows the kernel centerred, etc.</i></p>
+                        \(J_{h}(\boldsymbol{x})\) for a convolution. Each row
+                        corresponds to one output pixel and containes the kernel
+                        flattened and shifted to align with the input pixels
+                        that influence that output pixel.
+                        </i></p>
                     </td>
                 </tr>
             </tbody>
         </table><br>
-        <p style="font-size:11px"><b>Results</b></p>
         A more applicable method, is to estimate the propagated uncertainty by
         repeating the same process and by adding a random noise to each pixel
         from a Gaussian distribution with a standard deviation equal to the
@@ -172,14 +168,17 @@
                         "Result of propagated error after MC" width="100%"
                         title="Result of propagated error after MC">
                         <p style="color:rgb(51,51,153);text-align:center"><i>
-                        Input uncertainty map, MC 100 iterations, MC 1000
-                        iterations, and differr method for NGC4254 PACS1->SPIRE3
-                        in the top row and for NGC3627 MIPS1->WISE4 in the
-                        bottom row. </i></p>
+                        Input uncertainty map, MC 1000 iterations, MC 100
+                        iterations, MC 10 iterations, and differr method for
+                        NGC4254 PACS1->SPIRE3 </i></p>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <p style="font-size:11px"><b>Implementation</b></p>
+        To calculate the Jacobian corresponding to a chain of non-linear
+        operations, i.e. convolution and regridding, rewrite software in JAX
+        and use automatic differentiation..
         
         <p style="font-size:10px">\(^{*}\) If \(f\) is approximately affine in
         the region about the mean of the distribution<br>
