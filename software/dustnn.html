@@ -241,6 +241,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     animation: false,
+                    plugins: {
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
                     scales: {
                         x: {
                             type: 'logarithmic',
@@ -266,21 +271,36 @@
                         y: {
                             type: 'logarithmic',
                             min: 1e-18,
-                            max: 1e-8,
+                            max: 1e-9,
                             title: {
                                 display: true,
                                 text: 'Emissivity, ε_ν [L☉ / M☉ / Hz]',
                                 font: { size: 13 }
                             },
                             ticks: {
-                                callback: function(value, index, values) {
-                                    const exponent = Math.log10(value);
-                                    if (Number.isInteger(exponent) && exponent >= -18 && exponent <= -8 && exponent % 2 === 0) {
-                                        return '10⁻' + Math.abs(exponent);
-                                    }
-                                    return null;
-                                },
-                                font: { size: 13 }
+                              callback: function(value, index, values) {
+                              const exponent = Math.log10(value);
+                              if (Number.isInteger(exponent) && exponent >= -18 && exponent <= -8) {
+                                  // Map digits to superscript characters
+                                  const superscriptMap = {
+                                      '0': '⁰',
+                                      '1': '¹',
+                                      '2': '²',
+                                      '3': '³',
+                                      '4': '⁴',
+                                      '5': '⁵',
+                                      '6': '⁶',
+                                      '7': '⁷',
+                                      '8': '⁸',
+                                      '9': '⁹',
+                                      '-': '⁻'
+                                  };
+                                  const expStr = exponent.toString().split('').map(d => superscriptMap[d] || '').join('');
+                                  return '10' + expStr;
+                              }
+                              return null;
+                            },
+                            font: { size: 13 }
                             },
                         }
                     },
