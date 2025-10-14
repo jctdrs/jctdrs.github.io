@@ -7,6 +7,7 @@
     <meta name="description" content="Jean Tedros website">
     <meta name="author" content="Jean Tedros">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script id="MathJax-script" async src=
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script data-goatcounter="https://jctdrs.goatcounter.com/count"
@@ -126,8 +127,165 @@
         ranges for each parameter spanning over values of interest to
         interstellar medium (ISD) studies.  In total, our dataset will comprise
         51 \(\times\) 51 \(\times\) 91 = 236691 model dust emission spectra
-        <br><br>
+        <br>
+        <p id="status"></p>
+        <hr>
+            <label>ISRF Intensity (U): <input type="number" id="U" value="1.0" step="0.1" min="0.01" max="1000000" oninput="calculate()"></label><br><br>
+    <label>Stellar Age (Myr): <input type="number" id="age" value="13000" step="100" min="1" max="100000" oninput="calculate()"></label><br><br>
+    <label>Min Grain Size (μm): <input type="number" id="amin" value="0.0004" step="0.0001" min="0.0004" max="0.02" oninput="calculate()"></label><br><br>
+        <hr>
+        <br>
+        <div style="height: 600px;">
+            <canvas id="myChart"></canvas>
+        </div>
+ <script>
+        let modelParams = null;
+        let chart = null;
 
+        // Load the JSON file automatically
+        fetch('../data/param_forward_mod.json')
+            .then(response => response.json())
+            .then(data => {
+                modelParams = data;
+                document.getElementById('status').textContent = '';
+                calculate(); // Run automatically on load
+            })
+            .catch(error => {
+                document.getElementById('status').textContent = '';
+            });
+
+        function relu(x) {
+            return x.map(val => Math.max(0, val));
+        }
+
+        function matrixVectorMultiply(matrix, vector) {
+            const result = new Array(matrix[0].length).fill(0);
+            for (let i = 0; i < matrix[0].length; i++) {
+                for (let j = 0; j < matrix.length; j++) {
+                    result[i] += matrix[j][i] * vector[j];
+                }
+            }
+            return result;
+        }
+
+        function propagation(a, W, b, activation) {
+            const z = matrixVectorMultiply(W, a).map((val, idx) => val + b[idx]);
+            
+            if (activation === 'relu') {
+                return relu(z);
+            } else if (activation === 'linear') {
+                return z;
+            }
+            throw new Error('Unsupported activation: ' + activation);
+        }
+
+        function NN_prediction_forward(U, age, amin, params) {
+            let pred = [Math.log10(U), Math.log10(age), Math.log10(amin)];
+            
+            const layerNames = Object.keys(params.W).sort();
+            for (const name of layerNames) {
+                const W = params.W[name];
+                const b = params.b[name];
+                const activation = name === 'dense_9' ? 'linear' : 'relu';
+                pred = propagation(pred, W, b, activation);
+            }
+            
+            const wavemod = params.wavemod;
+            const norm = pred.map((p, idx) => 
+                Math.pow(10, p) * ((wavemod[idx] * 1e-6) / 3e8) * U
+            );
+            
+            return { norm, wavemod };
+        }
+
+        function calculate() {
+            if (!modelParams) {
+                alert('Model not loaded yet!');
+                return;
+            }
+
+            const U = parseFloat(document.getElementById('U').value);
+            const age = parseFloat(document.getElementById('age').value);
+            const amin = parseFloat(document.getElementById('amin').value);
+
+            try {
+                const { norm, wavemod } = NN_prediction_forward(U, age, amin, modelParams);
+                plotResults(wavemod, norm, U, age, amin);
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function plotResults(wavemod, norm, U, age, amin) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: wavemod,
+                    datasets: [{
+                        label: `Dust Emissivity`,
+                        data: norm,
+                        borderColor: 'rgb(173,25,43)',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    scales: {
+                        x: {
+                            type: 'logarithmic',
+                            min: 1,
+                            max: 100000,
+                            title: {
+                                display: true,
+                                text: 'Wavelength, λ [μm]',
+                                font: { size: 13 }
+                            },
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    if (value === 1) return '1';
+                                    if (value === 10) return '10';
+                                    if (value === 100) return '10²';
+                                    if (value === 1000) return '10³';
+                                    if (value === 10000) return '10⁴';
+                                    return null;
+                                },
+                                font: { size: 13 }
+                            },
+                        },
+                        y: {
+                            type: 'logarithmic',
+                            min: 1e-18,
+                            max: 1e-8,
+                            title: {
+                                display: true,
+                                text: 'Emissivity, ε_ν [L☉ / M☉ / Hz]',
+                                font: { size: 13 }
+                            },
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    const exponent = Math.log10(value);
+                                    if (Number.isInteger(exponent) && exponent >= -18 && exponent <= -8 && exponent % 2 === 0) {
+                                        return '10⁻' + Math.abs(exponent);
+                                    }
+                                    return null;
+                                },
+                                font: { size: 13 }
+                            },
+                        }
+                    },
+                }
+            });
+        }
+    </script>
       </div><br>
       <hr>
       <nav>
