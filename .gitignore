@@ -1,1 +1,3 @@
 scripts/
+blog/
+!blog/.gitkeep
