@@ -813,19 +813,12 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/skySubtract_PACS1.png" alt=
-                        "Sky-subtract for PACS1 image of NGC4254." width=
+                        <img src="../images/skySubtract_MIPS1.png" alt=
+                        "Sky-subtract for MIPS1 image of NGC4254." width=
                         "100%" title="skySubtract example"> <p
                         style="color:rgb(51,51,153);text-align:center"> <i>Sky
-                        subtract mask and background interpolation for PACS1
-                        image of NGC4254.</i></p><br> <img
-                        src="../images/skySubtract_MIPS1.png" alt=
-                        "Sky-subtract for MIPS1 image of NGC4254." width=
-                        "100%" title="SkySubtract example"> <p
-                        style="color:rgb(51,51,153);text-align:center"> <i>Sky
-                        subtract mask for MIPS1 image of NGC4254. In that case,
-                        the sky subtraction is done after foreground masking
-                        for MIPS1.</i></p>
+                        background interpolation for MIPS1 image of
+                        NGC4254.</i></p> 
                     </td>
                 </tr>
             </tbody>
@@ -845,12 +838,11 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/skySubtract_PACS1_meshes.png" alt=
-                        "Sky-subtract meshes for PACS1 image of NGC4254." width=
+                        <img src="../images/skySubtract_MIPS1_meshes.png" alt=
+                        "Sky-subtract meshes for MIPS1 image of NGC4254." width=
                         "100%" title="SkySubtract meshes example"> <p
                         style="color:rgb(51,51,153);text-align:center"> <i>Grid
-                        structure corresponding to a cellFactor of 10 for PACS1.
-                        In that case, every box is 23 pixels wide or 46 arcseconds.
+                        structure corresponding to a cellFactor of 10 for MIPS1.
                         </i></p><br>
                     </td>
                 </tr>
@@ -888,9 +880,6 @@
                             &#160;&#160; - step: hip.degrade<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
-                            kernels/Kernel_LowRes_PACS1_to_SPIRE3.fits<br>
                             &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
                             kernels/Kernel_LowRes_MIPS1_to_SPIRE3.fits<br>
@@ -903,11 +892,11 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/degrade_PACS1.png" alt=
-                        "Degradation from PACS1 to SPIRE3 for NGC4254." width=
+                        <img src="../images/degrade_MIPS1.png" alt=
+                        "Degradation from MIPS1 to SPIRE3 for NGC4254." width=
                         "100%" title="Degrade example">
                         <p style="color:rgb(51,51,153);text-align:center">
-                        <i>Degradation from PACS1 with a resolution of 9
+                        <i>Degradation from MIPS1 with a resolution of 6
                         arcseconds to SPIRE3 with resolution of 36 arcseconds
                         for NGC4254.</i></p>
                     </td>
@@ -937,7 +926,7 @@
                             &#160;&#160; - step: hip.regrid<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
                             data/inputs/NGC4254/NGC4254_SPIRE3.fits<br>
                         </i>
@@ -949,12 +938,12 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/regrid_PACS1.png" alt=
+                        <img src="../images/regrid_MIPS1.png" alt=
                         "Regridding PACS1 image with pixel size 3 arcseconds to
                         SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
                         "100%" title="Regrid example">
                         <p style="color:rgb(51,51,153);text-align:center">
-                        <i>Result of regridding PACS1 with pixel size 3
+                        <i>Result of regridding MIPS1 with pixel size 1.3
                         arcseconds to a pixel size of 12 arcseconds as of SPIRE3
                         for NGC4254.</i></p>
                     </td>
@@ -986,8 +975,8 @@
                             &#160;&#160; - step: hip.integrate<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;sizeFactor: 1<br><br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;sizeFactor: 2<br><br>
                         </i>
                    </td>
                </tr>
@@ -998,13 +987,12 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/integrate_PACS1.png" alt=
-                        "Regridding PACS1 image with pixel size 3 arcseconds to
-                        SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
+                        <img src="../images/integrate_MIPS1.png" alt=
+                        "Integration of MIPS1 for NGC4254." width=
                         "100%" title="Regrid example">
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Elliptical aperture with sizeFactor of 1 to 
-                        perform aperture photometry on PACS1 image of NGC4254.</i></p>
+                        perform aperture photometry on MIPS1 image of NGC4254.</i></p>
                     </td>
                 </tr>
             </tbody>
