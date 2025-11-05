@@ -98,7 +98,7 @@
                 <td>
                     <i>
                         meta:<br>
-                        &#160;&#160;&#160;&#160;name: HIP<br>
+                        &#160;&#160;&#160;&#160;name: Pipeline for IMEGIN M99<br>
                         &#160;&#160;&#160;&#160;description: PACS1 and MIPS1
                         to SPIRE3 for M99<br>
                     </i>
@@ -120,7 +120,7 @@
     * <u>Description</u>: <i>Single Pass</i> mode does not propagate uncertainties,
     <i>Monte-Carlo</i> mode propagates uncertainties using a Monte-Carlo loop,
     <i>Analytic</i> mode propagates uncertainties analytically. For more
-    information on the <i>Analytic</i> method, see also the posr on <a
+    information on the <i>Analytic</i> method, see also the post on <a
     href="differr.html">error propagation through data
     pipelines.</a><br><br>
     niter:<br>
@@ -265,8 +265,9 @@
         only defined in case an uncertainty map is needed for the pipeline.
         The <i>resolution</i> section is only needed in case the <i>name</i> of
         the band does not follow the HerBIE nomenclature, otherwise, the
-        resolution will be defined automatically. The <i>bands</i> section can
-        define multiple non-repeating bands using lists.
+        resolution will be defined automatically as presented in the table
+        below. The <i>bands</i> section can define multiple non-repeating bands
+        using lists.
         <br><br> input:<br>
         * <u>Type</u>: String<br> 
         * <u>Description</u>: Relative path towards input data fits file.<br><br>
@@ -279,7 +280,7 @@
         name:<br>
         * <u>Type</u>: Literal string <br> 
         * <u>Description</u>: Name of band.<br><br>
-        calError: (Defaults to value from DustPedia)<br>
+        calError: (Defaults to null)<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Photometric calibration error in percentage.<br><br>
         resolution: (Defaults to value from DustPedia if name follows HerBIE nomenclature)<br>
@@ -610,7 +611,7 @@
     * <u>Type</u>: Literal string (hip.cutout, hip.foregroundMask,
     hip.skySubtract, hip.degrade, hip.regrid, hip.integrate)<br> 
     * <u>Description</u>: Name of step.<br><br>
-    diagnosis:<br>
+    diagnosis: (Defaults to False)<br>
     * <u>Type</u>: Boolean<br> 
     * <u>Description</u>: Enable/Disbale debug messages and diagnosis plots.<br><br>
     The <i>parameters</i> section is by itself another section within the
@@ -652,7 +653,7 @@
                             &#160;&#160; - step: hip.cutout<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br>
                         </i>
@@ -664,11 +665,11 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="../images/cutout_PACS1.png" alt=
+                        <img src="../images/cutout_MIPS1.png" alt=
                         "Cutout example" width=
                         "100%" title="Cutout example">
                         <p style="color:rgb(51,51,153);text-align:center">
-                        <i>Cutout example for PACS1 image of NGC4254. The cutout
+                        <i>Cutout example for MIPS1 image of NGC4254. The cutout
                         region was defined to be 15x15 arcmins as shown in the
                         example above.</i></p>
                     </td>
