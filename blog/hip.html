@@ -624,7 +624,9 @@
         <button class="toggle-btn"onclick="changeContent('hip.skySubtract', event)">Sky subtract</button>
         <button class="toggle-btn"onclick="changeContent('hip.degrade', event)">Degrade</button>
         <button class="toggle-btn"onclick="changeContent('hip.regrid', event)">Regrid</button>
-        <button class="toggle-btn"onclick="changeContent('hip.integrate', event)">Integrate</button>
+        <button class="toggle-btn"onclick="changeContent('hip.integrate', event)">Integrate</button><br><br>
+        <button class="toggle-btn"onclick="changeContent('core.subtract', event)">Subtract</button>
+        <button class="toggle-btn"onclick="changeContent('core.multiply', event)">Gain</button>
     </div><br>
 
     <div id="hip.cutout" class="sub-content-paragraph" style="display: none;">
@@ -996,6 +998,90 @@
                     </td>
                 </tr>
             </tbody>
+        </table>
+        <br>
+    </div>
+    <div id="core.subtract" class="sub-content-paragraph" style="display: none;">
+        <u>core.subtract</u>:<br><br>
+        This step allows to subtract one result from another. This step can be
+        defined with two fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
+        and <i>biasFactor</i>. Only the <i>band</i> is mandatory, whereas one of
+        the other fields is required to define the step.<br><br>
+
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
+
+        target:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Relative path towards a target FITS file.<br><br>
+
+        biasFactor:<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Constant bias to be subtracted.<br><br>
+
+        resultOf:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Relative path towards another pipeline
+        configuration whose result to be subtracted.<br><br>
+
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: core.subtract<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;resultOf: CO_map.yml<br><br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+        <br>
+    </div>
+    <div id="core.multiply" class="sub-content-paragraph" style="display: none;">
+        <u>core.multiply</u>:<br><br>
+        This step allows to multiply one result by another. This step can be
+        defined with two fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
+        and <i>gainFactor</i>. Only the <i>band</i> is mandatory, whereas one of
+        the other fields is required to define the step.<br><br>
+
+        band:<br>
+        * <u>Type</u>: Literal string<br> 
+        * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
+
+        target:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Relative path towards a target FITS file.<br><br>
+
+        gainFactor:<br>
+        * <u>Type</u>: Float <br> 
+        * <u>Description</u>: Constant gain to be multiplied by.<br><br>
+
+        resultOf:<br>
+        * <u>Type</u>: String <br> 
+        * <u>Description</u>: Relative path towards another pipeline
+        configuration whose result to be multiplied by.<br><br>
+
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            pipeline:<br>
+                            &#160;&#160; - step: core.multiply<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1 <br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;gainFactor: 2<br><br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
         </table>
         <br>
     </div>
