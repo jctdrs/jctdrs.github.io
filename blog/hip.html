@@ -1113,88 +1113,248 @@
         <br>
     </div>
     </div>
-    <div id="example" class="content-paragraph" style="display: none;">
-    <br>
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <i>
-                        meta:<br> &#160;&#160;&#160;&#160;name: HIP<br>
-                        &#160;&#160;&#160;&#160;description: PACS1 and MIPS1 to
-                        SPIRE3 for M99<br><br> config:<br>
-                        &#160;&#160;&#160;&#160;mode: Single Pass<br><br>
+    <div id="example" class="content-paragraph" style="display: none;"><br>
+    The following section presents two example configuration files.  The first
+    specifies a homogenization pipeline for PACS1 and MIPS1 targeting SPIRE3
+    for the galaxy NGC4254. The second demonstrates a homogenization setup for
+    NIKA2_1 to SPIRE1 with an additional step for CO-contamination removal for
+    NGC0337.<br><br>
+        <div class="navbar">
+            <button class="toggle-btn"onclick="changeContent('simple', event)">Simple</button>
+            <button class="toggle-btn"onclick="changeContent('cosub', event)">CO subtraction</button>
+        </div><br>
+        <div id="simple" class="sub-content-paragraph" style="display: none;">
+            <br>
+            <table style="text-align:left; width:100%; border=4"> 
+                <tbody>
+                    <tr>
+                        <td>
+                            <i>
+                                meta:<br> &#160;&#160;&#160;&#160;name: HIP<br>
+                                &#160;&#160;&#160;&#160;description: PACS1 and MIPS1 to
+                                SPIRE3 for M99<br><br> config:<br>
+                                &#160;&#160;&#160;&#160;mode: Single Pass<br><br>
 
-                        data:<br> &#160;&#160;&#160;&#160;body: NGC4254<br>
-                        &#160;&#160;&#160;&#160;bands:<br>
-                        &#160;&#160;&#160;&#160;&#160;- input:
-                        inputs/NGC4254_PACS1.fits<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
-                        inputs/NGC4254_PACS1_Error.fits<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
-                        outputs/<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
-                        PACS1<br><br> &#160;&#160;&#160;&#160;&#160;- input:
-                        inputs/NGC4254_MIPS1.fits<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
-                        NGC4254/NGC4254_Spitzer_24_Error.fits<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
-                        outputs/<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
-                        5<br> &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
-                        MIPS1<br><br> pipeline:<br>
+                                data:<br> &#160;&#160;&#160;&#160;body: NGC4254<br>
+                                &#160;&#160;&#160;&#160;bands:<br>
+                                &#160;&#160;&#160;&#160;&#160;- input:
+                                inputs/NGC4254_PACS1.fits<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                                inputs/NGC4254_PACS1_Error.fits<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                                outputs/<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                                PACS1<br><br> &#160;&#160;&#160;&#160;&#160;- input:
+                                inputs/NGC4254_MIPS1.fits<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                                NGC4254/NGC4254_Spitzer_24_Error.fits<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                                outputs/<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
+                                5<br> &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                                MIPS1<br><br> pipeline:<br>
 
-                        &#160;&#160; - step: hip.cutout<br>
-                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
-                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
-                        15<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
-                        15<br><br>
+                                &#160;&#160; - step: hip.cutout<br>
+                                &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                                &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                                15<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                                15<br><br>
 
-                        &#160;&#160; - step: hip.foregroundMask<br>
-                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
-                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
-                        15<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
-                        15<br><br>
+                                &#160;&#160; - step: hip.foregroundMask<br>
+                                &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                                &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                                15<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                                15<br><br>
 
-                        &#160;&#160; - step: hip.skySubtract<br>
-                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
-                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor:
-                        10<br><br>
+                                &#160;&#160; - step: hip.skySubtract<br>
+                                &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                                &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor:
+                                10<br><br>
 
-                        &#160;&#160; - step: hip.degrade<br>
-                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
-                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
-                        kernels/Kernel_LowRes_PACS1_to_SPIRE3.fits<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
-                        kernels/Kernel_LowRes_MIPS1_to_SPIRE3.fits<br><br>
+                                &#160;&#160; - step: hip.degrade<br>
+                                &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                                &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: PACS1<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
+                                kernels/Kernel_LowRes_PACS1_to_SPIRE3.fits<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;kernel:
+                                kernels/Kernel_LowRes_MIPS1_to_SPIRE3.fits<br><br>
 
-                        &#160;&#160; - step: hip.regrid<br>
-                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
-                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
-                        data/inputs/NGC4254/NGC4254_SPIRE3.fits<br><br>
+                                &#160;&#160; - step: hip.regrid<br>
+                                &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                                &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: all<br>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
+                                inputs/NGC4254_SPIRE3.fits<br><br>
 
-                        &#160;&#160; - step: hip.integrate<br>
-                        &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
-                        &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                        &#160;&#160;&#160;&#160;&#160;- band: all<br><br>
-                    </i>
-               </td>
-           </tr>
-       </tbody>
-    </table>
+                                &#160;&#160; - step: hip.integrate<br>
+                                &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                                &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                                &#160;&#160;&#160;&#160;&#160;- band: all<br><br>
+                            </i>
+                       </td>
+                   </tr>
+               </tbody>
+            </table>
+        </div>
+        <div id="cosub" class="sub-content-paragraph" style="display: none;">
+        <br>
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            meta:<br> &#160;&#160;&#160;&#160;name: HIP<br>
+                            &#160;&#160;&#160;&#160;description: NIKA2_1 to
+                            SPIRE1 with CO subtraction.<br><br> config:<br>
+                            &#160;&#160;&#160;&#160;mode: Monte-Carlo<br>
+                            &#160;&#160;&#160;&#160;niter: 10000<br><br>
+
+                            data:<br> &#160;&#160;&#160;&#160;body: NGC0337<br>
+                            &#160;&#160;&#160;&#160;bands:<br>
+                            &#160;&#160;&#160;&#160;&#160;- input:
+                            inputs/NGC0337_NIKA2_1.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
+                            inputs/NGC0337_NIKA2_1_Error.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                            outputs/<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                            NIKA2_1<br><br> pipeline:<br>
+
+                            &#160;&#160; - step: hip.cutout<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                            10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                            10<br><br>
+
+                            &#160;&#160; - step: hip.skySubtract<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor:
+                            5<br><br>
+
+                            &#160;&#160; - step: hip.degrade<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
+                            18<br><br>
+
+                            &#160;&#160; - step: hip.regrid<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
+                            inputs/NGC0337_SPIRE1.fits<br><br>
+
+                            &#160;&#160; - step: hip.cutout<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                            10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                            10<br><br>
+
+                            &#160;&#160; - step: core.subtract<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;resultOf: NGC0337_CO.yml<br><br>
+
+                            &#160;&#160; - step: hip.integrate<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: NIKA2_1<br><br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table><br>
+        In this example we make use of a <i>core.subtract</i> with a
+        <i>resultOf</i> key to subtract the result of another pipeline. The
+        other pipeline configuation stored in <i>NGC0337_CO.yml</i> is another
+        HIP pipeline which homogenize the CO map to the same target, here
+        SPIRE1. Given that the CO pipeline is including within another one, the
+        mode of that pipeline should be defined as Inner.<br><br> 
+        <table style="text-align:left; width:100%; border=4"> 
+            <tbody>
+                <tr>
+                    <td>
+                        <i>
+                            meta:<br> &#160;&#160;&#160;&#160;name: HIP<br>
+                            &#160;&#160;&#160;&#160;description: CO
+                            preparation.<br><br> config:<br>
+                            &#160;&#160;&#160;&#160;mode: Inner<br><br>
+
+                            data:<br> &#160;&#160;&#160;&#160;body: NGC0337<br>
+                            &#160;&#160;&#160;&#160;bands:<br>
+                            &#160;&#160;&#160;&#160;&#160;- input:
+                            inputs/NGC0337_CO.fits<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
+                            outputs/<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;resolution:
+                            13.3<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                            CO<br><br> pipeline:<br>
+
+                            &#160;&#160; - step: hip.cutout<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: CO<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                            10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                            10<br><br>
+
+                            &#160;&#160; - step: hip.degrade<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: CO<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
+                            18<br><br>
+
+                            &#160;&#160; - step: hip.regrid<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: CO<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;target:
+                            inputs/NGC0337_SPIRE1.fits<br><br>
+
+                            &#160;&#160; - step: hip.cutout<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: CO<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                            10<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                            10<br><br>
+
+                            &#160;&#160; - step: core.multiply<br>
+                            &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
+                            &#160;&#160;&#160;&#160;&#160;parameters:<br>
+                            &#160;&#160;&#160;&#160;&#160;- band: CO<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;gainFactor:??<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;unit:'Jy/px'<br><br>
+                        </i>
+                   </td>
+               </tr>
+           </tbody>
+        </table><br>
+        </div>
     </div>
     </div>
     <br>
