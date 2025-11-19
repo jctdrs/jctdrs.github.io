@@ -73,23 +73,21 @@
         <button class="toggle-btn" onclick="changeContent('config', event)">Config</button>
         <button class="toggle-btn" onclick="changeContent('data', event)">Data</button>
         <button class="toggle-btn" onclick="changeContent('pipeline', event)">Pipeline</button>
-        <button class="toggle-btn" onclick="changeContent('example', event)">Full Example</button>
+        <button class="toggle-btn" onclick="changeContent('example', event)">Examples</button>
     </div>
   
     <div id="meta" class="content-paragraph" style="display: none;">
     <b><br>Meta</b><br>
-    The <i>meta</i> section is used to define meta-data. Fields in
-    <i>meta</i> are not mandatory. Elements not defined by the user will
-    default to "Default". Elements of this section will be used for logging
-    purposes. The <i>meta</i> section is defined by two fields:
-    <i>name</i>, and <i>description</i>. <br><br> 
+    The <i>meta</i> section is used to define meta-data. Elements of this
+    section will be used for logging purposes. The <i>meta</i> section is
+    defined by two fields: <i>name</i>, and <i>description</i>. <br><br> 
     name:<br>
-    Defaults to <i>Default</i><br>
+    * <u>Validation</u>: Not required, defaults to "Default".<br>
     * <u>Type</u>: string<br>
     * <u>Description</u>: Name of pipeline<br><br>
 
     description: <br>
-    Defaults to <i>Default</i><br>
+    * <u>Validation</u>: Not required, defaults to "Default".<br>
     * <u>Type</u>: string<br>
     * <u>Description</u>: Description of pipeline<br><br>
     <table style="text-align:left; width:100%; border=4"> 
@@ -115,16 +113,17 @@
     <i>config</i> section is defined with two fields: <i>mode</i>, and
     <i>niter</i>.<br><br>
     mode:<br>
+    * <u>Validation</u>: Required.<br>
     * <u>Type</u>: Literal string (<i>Single Pass</i>, <i>Monte-Carlo</i>,
-    <i>Analytic</i>).<br>
-    * <u>Description</u>: <i>Single Pass</i> mode does not propagate uncertainties,
-    <i>Monte-Carlo</i> mode propagates uncertainties using a Monte-Carlo loop,
-    <i>Analytic</i> mode propagates uncertainties analytically. For more
-    information on the <i>Analytic</i> method, see also the post on <a
-    href="differr.html">error propagation through data
-    pipelines.</a><br><br>
+    <i>Inner</i>).<br>
+    * <u>Description</u>: <i>Single Pass</i> mode does not propagate
+    uncertainties, <i>Monte-Carlo</i> mode propagates uncertainties using a
+    Monte-Carlo loop, and <i>Inner</i> mode allows to pipe the result of one
+    pipeline into another (Check sections <i>Subtract</i>, <i>Multiply</i>,
+    <i>Examples</i> for more informarmation).<br><br>
     niter:<br>
-    * <u>Type</u>: Positive integer.<br>
+    * <u>Validation</u>: Only valid and required for "Monte-Carlo" mode.<br>
+    * <u>Type</u>: Positive integer larger than one.<br> 
     * <u>Description</u>: Number of iterations for  "Monte-Carlo" mode.<br><br>
     <table style="text-align:left; width:100%; border=4"> 
         <tbody>
@@ -146,6 +145,7 @@
     bands used for the pipeline. The <i>data</i> section is defined with
     three fields: <i>body</i>, <i>geometry</i>, and <i>bands</i>.<br><br>
     body:<br>
+    * <u>Validation</u>: Required.<br>
     * <u>Type</u>: String <br>
     * <u>Description</u>: Name of astronomical source.<br><br>
     <table style="text-align:left; width:100%; border=4"> 
@@ -171,59 +171,49 @@
 
         <div id="geometry" class="sub-content-paragraph" style="display: none;">
         The <i>geometry</i> field is by itself another section within the
-        <i>data</i> section. The <i>geometry</i> section is defined by eight
-        fields: <i>ra</i>, <i>dec</i>, <i>positionAngle</i>,
-        <i>axialRatio</i>, <i>semiMajorAxis</i>, <i>inclination</i>,
-        <i>radius</i>, and <i>distance</i>. This section and/or any of the
-        fields of this section are not mandatory. Elements not defined by the
-        user will default to values loaded from the DustPedia project for the
-        used <i>body</i>. A full list of the available galaxies and their
-        fields can be found in the <a
+        <i>data</i> section. The <i>geometry</i> section is defined by six
+        fields: <i>ra</i>, <i>dec</i>, <i>positionAngle</i>, <i>axialRatio</i>,
+        <i>semiMajorAxis</i>, and <i>inclination</i>. A full list of the
+        available galaxies and their fields can be found in the <a
         href="http://www.dustpedia.astro.noa.gr/Photometry"><b>photometry
-        files</b></a> of the DustPedia archive.<br><br>
+        files</b></a> of the DustPedia archive. <br><br>
 
         ra: <br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 - ra</i> <br>
+        * <u>Validation</u>: Only required if "body" not in <i>DustPedia</i>,
+        else defaults from catalogue.<br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Right ascension in degrees.<br><br>
 
         dec: <br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 - dec</i> <br>
+        * <u>Validation</u>: Only required if "body" not in <i>DustPedia</i>,
+        else defaults from catalogue.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Declination in degrees.<br><br>
 
         positionAngle: <br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 - 
-        pos_angle</i> <br>
+        * <u>Validation</u>: Only required if "body" not in <i>DustPedia</i>,
+        else defaults from catalogue.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Position angle in degrees.<br><br>
 
         axialRatio:<br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 - 
-        axial_ratio</i><br>
+        * <u>Validation</u>: Only required if "body" not in <i>DustPedia</i>,
+        else defaults from catalogue.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Axial ratio.<br><br>
 
         semiMajorAxis:<br>
-        Defaults from <i>DustPedia Aperture Photometry 2.2 - 
-        semimaj_arcsec</i> <br>
+        * <u>Validation</u>: Only required if "body" not in <i>DustPedia</i>,
+        else defaults from catalogue.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Semi-major axis in arcseconds.<br><br>
 
         inclination: <br>
-        Defaults from <i>Duspedia HyperLEDA - incl</i><br>
+        * <u>Validation</u>: Only required if "body" not in <i>DustPedia</i>,
+        else defaults from catalogue.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Inclination in degrees.<br><br>
 
-        radius: <br>
-        Defaults from <i>DustPedia HyperLEDA - d25</i><br>
-        * <u>Type</u>: Float <br> 
-        * <u>Description</u>: Major axis isophote at which optical surface
-        brightness falls beneath 25 mag arcsec−2, in arcseconds.<br><br>
-        distance: <br>
-        Defaults from <i>DustPedia HyperLEDA ned_dist_z_corr</i><br>
-        * <u>Type</u>: Float <br> 
-        * <u>Description</u>: Distance in Mega parsecs.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -242,11 +232,7 @@
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;semiMajorAxis:
                             421.336905129<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;inclination:
-                            20.1<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;radius:
-                            39.70507919<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;distance:
-                            5.9<br><br>
+                            20.1<br><br>
                         </i>
                    </td>
                </tr>
@@ -258,32 +244,37 @@
 
         <div id="bands" class="sub-content-paragraph" style="display: none;">
         The <i>bands</i> field is by itself another section within the
-        <i>data</i> section. The <i>bands</i> section is defined by five
-        fields: <i>input</i>, <i>output</i>, <i>error</i>, <i>name</i>,
-        <i>resolution</i>, and <i>calError</i>. The <i>error</i>, and
-        <i>calError</i> are not mandatory fields. The <i>error</i> field is
-        only defined in case an uncertainty map is needed for the pipeline.
-        The <i>resolution</i> section is only needed in case the <i>name</i> of
-        the band does not follow the HerBIE nomenclature, otherwise, the
-        resolution will be defined automatically as presented in the table
-        below. The <i>bands</i> section can define multiple non-repeating bands
-        using lists.
+        <i>data</i> section. The <i>bands</i> section is defined by six fields:
+        <i>input</i>, <i>output</i>, <i>error</i>, <i>name</i>,
+        <i>resolution</i>, and <i>calError</i>. The <i>bands</i> section can
+        define multiple non-repeating bands using lists as seen in the example
+        below.
         <br><br> input:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: String<br> 
         * <u>Description</u>: Relative path towards input data fits file.<br><br>
         output:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards output directory.<br><br>
         error:<br>
+        Not required, only valid for 'Monte-Carlo' and 'Inner' modes. If not
+        defined then defaults to the Median Absolute Deviation (MAD) of the
+        input.<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards input error fits file.<br><br>
         name:<br>
-        * <u>Type</u>: Literal string <br> 
+        * <u>Validation</u>: Required.<br>
+        * <u>Type</u>: String <br> 
         * <u>Description</u>: Name of band.<br><br>
-        calError: (Defaults to null)<br>
+        calError:<br>
+        * <u>Validation</u>: Not required, defaults to zero.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Photometric calibration error in percentage.<br><br>
-        resolution: (Defaults to value from DustPedia if name follows HerBIE nomenclature)<br>
+        resolution:<br>
+        * <u>Validation</u>: Only required if name does not follow HerBIE
+        nomenclature, else defaults from the table below.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Full-width at half-maximum (FWHM) in arcsec.<br><br>
 
@@ -296,8 +287,6 @@
                             &#160;&#160;&#160;&#160;bands:<br>
                             &#160;&#160;&#160;&#160;&#160;- input:
                             data/inputs/NGC4254/NGC4254_PACS1.fits<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
-                            data/inputs/NGC4254/NGC4254_PACS1_Error.fits<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
                             data/outputs/NGC4254/<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
@@ -310,8 +299,6 @@
                             data/inputs/NGC4254/Spitzer_24_Error.fits<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
                             data/outputs/NGC4254/<br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
-                            5<br>
                             &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
                             MIPS1<br><br>
                             &#160;&#160;&#160;&#160;&#160;- input:
@@ -604,16 +591,21 @@
 
     <div id="pipeline" class="content-paragraph" style="display: none;">
     <b><br>Pipeline</b><br>
-    The <i>pipeline</i> section is used to define the homogenization
-    pipeline.  The <i>pipeline</i> section is defined with three fields:
-    <i>step</i>, <i>diagnosis</i>, and <i>parameters</i>. <br><br>
+    The <i>pipeline</i> section is used to define the homogenization pipeline.
+    The <i>pipeline</i> section is defined with three fields: <i>step</i>,
+    <i>diagnosis</i>, and <i>parameters</i>. Every step section can define
+    multiple non-repeating bands using lists as seen in the examples
+    section.<br><br>
     step:<br>
+    * <u>Validation</u>: Required.<br>
     * <u>Type</u>: Literal string (hip.cutout, hip.foregroundMask,
-    hip.skySubtract, hip.degrade, hip.regrid, hip.integrate)<br> 
+    hip.skySubtract, hip.degrade, hip.regrid, hip.integrate, core.subtract,
+    core.multiply)<br> 
     * <u>Description</u>: Name of step.<br><br>
-    diagnosis: (Defaults to False)<br>
+    diagnosis:<br>
+    * <u>Validation</u>: Not required, defaults to False.<br>
     * <u>Type</u>: Boolean<br> 
-    * <u>Description</u>: Enable/Disbale debug messages and diagnosis plots.<br><br>
+    * <u>Description</u>: Enable/Disbale diagnosis plots.<br><br>
     The <i>parameters</i> section is by itself another section within the
     <i>pipeline</i> section. The <i>parameters</i> section is defined with
     different fields for each choice of <i>step</i>. The following are the
@@ -636,16 +628,19 @@
         three fields: <i>band</i>, <i>raTrim</i>, and <i>decTrim</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+        * <u>Description</u>: Name of input band, <i>all</i> if all of them.<br><br>
 
         raTrim:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Float<br> 
-        * <u>Description</u>: Size of the cutout along the x axis in arcminutes.<br><br>
+        * <u>Description</u>: Size of cutout along the x axis in arcminutes.<br><br>
 
         decTrim:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Float<br> 
-        * <u>Description</u>: Size of the cutout along the y axis in arcminutes.<br><br>
+        * <u>Description</u>: Size of cutout along the y axis in arcminutes.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
                 <tr>
@@ -687,19 +682,22 @@
         <i>decTrim</i>, and <i>maskFactor</i>.<br><br> 
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
-        * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
+        * <u>Description</u>: Name of input band, <i>all</i> if all of them.<br><br>
 
         raTrim:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Float<br> 
-        * <u>Description</u>: Size of the area along the x axis in arcminutes.<br><br>
+        * <u>Description</u>: Size of area along the x axis in arcminutes.<br><br>
 
         decTrim:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Float<br> 
-        * <u>Description</u>: Size of the are along the y axis in arcminutes.<br><br>
+        * <u>Description</u>: Size of area along the y axis in arcminutes.<br><br>
 
         maskFactor:<br>
-        Defaults to <i>1.0</i><br>
+        * <u>Validation</u>: Not required, default to one.<br>
         * <u>Type</u>: Float<br> 
         * <u>Description</u>: Factor multiplier for mask radius.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
@@ -780,18 +778,20 @@
 
     <div id="hip.skySubtract" class="sub-content-paragraph" style="display: none;">
         <u>hip.skySubtract</u>:<br><br>
-        This step allows to estimate and subtract the background from the data.
-        The background is estimated using 3 sigma-clipped statistics in each box
-        of a grid that covers the data. The high-resolution background map is
-        then calculated by cubic interpolation of the low-resolution background
-        map. This step is defined with two fields: <i>band</i>, and
-        <i>cellFactor</i>.<br><br>
+        This step allows to estimate and subtract the background within an
+        aperture as defined by <i>geometry</i>.  The background is estimated
+        using 3 sigma-clipped statistics in each box of a grid that covers the
+        data. The high-resolution background map is then calculated by cubic
+        interpolation of the low-resolution background map. This step is
+        defined with two fields: <i>band</i>, and <i>cellFactor</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
 
         cellFactor:<br>
+        * <u>Validation</u>: Not required, defaults to one.<br>
         * <u>Type</u>: Positive integer<br> 
         * <u>Description</u>: Factor multiplier for grid size.<br><br>
 
@@ -854,23 +854,27 @@
 
     <div id="hip.degrade" class="sub-content-paragraph" style="display: none;">
         <u>hip.degrade</u>:<br><br>
-        This step allows to degrade an image to a target lower resolution. The step
-        can be done either by providing a kernel to be applied, or by specifying the
-        target resolution. The first method allows the user to use a specific kernel
-        for the degradation, whereas the second method constructs a Gaussian kernel
-        with the correct full-width-half-maximum to degrade the image to the target
-        resolution. This step can be defined with three fields: <i>band</i>,
-        <i>target</i>, and/or <i>kernel</i>.<br><br>
+        This step allows to degrade an image to a target lower resolution. This
+        step is defined by can be done either by providing a kernel to be
+        applied, or by specifying the target resolution. The first method
+        allows the user to use a specific kernel for the degradation, whereas
+        the second method constructs a Gaussian kernel with the correct
+        full-width-half-maximum to degrade the image to the target resolution.
+        This step can be defined with three fields: <i>band</i>, <i>target</i>,
+        and <i>kernel</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
 
         kernel:<br>
+        * <u>Validation</u>: Valid and required if target is not defined.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards kernel FITS file.<br><br>
 
         target:<br>
+        * <u>Validation</u>: Valid and required if kernel is not defined.<br>
         * <u>Type</u>: Positive integer<br> 
         * <u>Description</u>: Target resolution in arcseconds.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
@@ -913,10 +917,12 @@
         <i>target</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band(s), <i>all</i> if all of them.<br><br>
 
         target:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards a target FITS file.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
@@ -961,11 +967,12 @@
         be defined with two fields: <i>band</i>, and <i>sizeFactor</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
 
         sizeFactor:<br>
-        Defaults to <i>1.0</i><br>
+        * <u>Validation</u>: Not required, defaults to one.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Factor multiplier for size of aperture.<br><br>
         <table style="text-align:left; width:100%; border=4"> 
@@ -1004,26 +1011,36 @@
     <div id="core.subtract" class="sub-content-paragraph" style="display: none;">
         <u>core.subtract</u>:<br><br>
         This step allows to subtract one result from another. This step can be
-        defined with two fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
-        and <i>biasFactor</i>. Only the <i>band</i> is mandatory, whereas one of
-        the other fields is required to define the step.<br><br>
+        defined with five fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
+        <i>unit</i>, and <i>biasFactor</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
 
         target:<br>
+        * <u>Validation</u>: Valid and required if biasFactor and resultOf not defined.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards a target FITS file.<br><br>
 
         biasFactor:<br>
+        * <u>Validation</u>: Valid and required if target and resultOf not defined.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Constant bias to be subtracted.<br><br>
 
+        unit:<br>
+        * <u>Validation</u>: Not required.<br>
+        * <u>Type</u>: String <br>
+        * <u>Description</u>: Change the unit in the header after subtraction.
+        This string needs to be written between quotes.<br><br>
+
         resultOf:<br>
+        * <u>Validation</u>: Valid and required if target and biasFactor not defined.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards another pipeline
-        configuration whose result to be subtracted.<br><br>
+        configuration of mode <i>Inner</i> whose result to be
+        subtracted.<br><br>
 
         <table style="text-align:left; width:100%; border=4"> 
             <tbody>
@@ -1046,23 +1063,32 @@
     <div id="core.multiply" class="sub-content-paragraph" style="display: none;">
         <u>core.multiply</u>:<br><br>
         This step allows to multiply one result by another. This step can be
-        defined with two fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
-        and <i>gainFactor</i>. Only the <i>band</i> is mandatory, whereas one of
-        the other fields is required to define the step.<br><br>
+        defined with four fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
+        and <i>gainFactor</i>.<br><br>
 
         band:<br>
+        * <u>Validation</u>: Required.<br><br>
         * <u>Type</u>: Literal string<br> 
         * <u>Description</u>: Name(s) of input band, <i>all</i> if all of them.<br><br>
 
         target:<br>
+        * <u>Validation</u>: Valid and required if gainFactor and resultOf not defined.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards a target FITS file.<br><br>
 
         gainFactor:<br>
+        * <u>Validation</u>: Valid and required if target and resultOf not defined.<br>
         * <u>Type</u>: Float <br> 
         * <u>Description</u>: Constant gain to be multiplied by.<br><br>
 
+        unit:<br>
+        * <u>Validation</u>: Not required.<br>
+        * <u>Type</u>: String <br>
+        * <u>Description</u>: Change the unit in the header after multiplication.
+        This string needs to be written between quotes.<br><br>
+
         resultOf:<br>
+        * <u>Validation</u>: Valid and required if target and gainFactor not defined.<br>
         * <u>Type</u>: String <br> 
         * <u>Description</u>: Relative path towards another pipeline
         configuration whose result to be multiplied by.<br><br>
@@ -1076,8 +1102,9 @@
                             &#160;&#160; - step: core.multiply<br>
                             &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                             &#160;&#160;&#160;&#160;&#160;parameters:<br>
-                            &#160;&#160;&#160;&#160;&#160;- band: MIPS1 <br>
-                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;gainFactor: 2<br><br>
+                            &#160;&#160;&#160;&#160;&#160;- band: CO <br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;gainFactor: 2<br>
+                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;unit: 'Jy/px'<br><br>
                         </i>
                    </td>
                </tr>
@@ -1093,58 +1120,54 @@
             <tr>
                 <td>
                     <i>
-                        meta:<br>
-                        &#160;&#160;&#160;&#160;name: HIP<br>
-                        &#160;&#160;&#160;&#160;description: PACS1 and MIPS1
-                        to SPIRE3 for M99<br><br>
-                        config:<br>
-                        &#160;&#160;&#160;&#160;mode: Monte-Carlo<br>
-                        &#160;&#160;&#160;&#160;niter: 10000<br><br>
+                        meta:<br> &#160;&#160;&#160;&#160;name: HIP<br>
+                        &#160;&#160;&#160;&#160;description: PACS1 and MIPS1 to
+                        SPIRE3 for M99<br><br> config:<br>
+                        &#160;&#160;&#160;&#160;mode: Single Pass<br><br>
 
-                        data:<br>
-                        &#160;&#160;&#160;&#160;body: NGC4254<br>
+                        data:<br> &#160;&#160;&#160;&#160;body: NGC4254<br>
                         &#160;&#160;&#160;&#160;bands:<br>
                         &#160;&#160;&#160;&#160;&#160;- input:
-                        data/inputs/NGC4254/NGC4254_PACS1.fits<br>
+                        inputs/NGC4254_PACS1.fits<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
-                        data/inputs/NGC4254/NGC4254_PACS1_Error.fits<br>
+                        inputs/NGC4254_PACS1_Error.fits<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
-                        data/outputs/NGC4254/<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
-                        5.4<br>
+                        outputs/<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
-                        PACS1<br><br>
-                        &#160;&#160;&#160;&#160;&#160;- input:
-                        data/inputs/NGC4254/NGC4254_MIPS1.fits<br>
+                        PACS1<br><br> &#160;&#160;&#160;&#160;&#160;- input:
+                        inputs/NGC4254_MIPS1.fits<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;error:
-                        data/inputs/NGC4254/NGC4254_Spitzer_24_Error.fits<br>
+                        NGC4254/NGC4254_Spitzer_24_Error.fits<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;output:
-                        data/outputs/NGC4254/<br>
+                        outputs/<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;calError:
-                        5<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
-                        MIPS1<br><br>
-                        pipeline:<br>
+                        5<br> &#160;&#160;&#160;&#160;&#160;&#160;&#160;name:
+                        MIPS1<br><br> pipeline:<br>
 
                         &#160;&#160; - step: hip.cutout<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                        15<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                        15<br><br>
 
                         &#160;&#160; - step: hip.foregroundMask<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: MIPS1<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 15<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 15<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim:
+                        15<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim:
+                        15<br><br>
 
                         &#160;&#160; - step: hip.skySubtract<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
                         &#160;&#160;&#160;&#160;&#160;parameters:<br>
                         &#160;&#160;&#160;&#160;&#160;- band: all<br>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor: 10<br><br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;cellFactor:
+                        10<br><br>
 
                         &#160;&#160; - step: hip.degrade<br>
                         &#160;&#160;&#160;&#160;&#160;diagnosis: True<br>
