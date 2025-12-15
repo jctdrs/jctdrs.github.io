@@ -120,7 +120,7 @@
     uncertainties, <i>Monte-Carlo</i> mode propagates uncertainties using a
     Monte-Carlo loop, and <i>Inner</i> mode allows to pipe the result of one
     pipeline into another (Check sections <i>Subtract</i>, <i>Multiply</i>,
-    <i>Examples</i> for more informarmation).<br><br>
+    <i>Examples</i> for more information).<br><br>
     niter:<br>
     * <u>Validation</u>: Only valid and required for "Monte-Carlo" mode.<br>
     * <u>Type</u>: Positive integer larger than one.<br> 
@@ -605,7 +605,7 @@
     diagnosis:<br>
     * <u>Validation</u>: Not required, defaults to False.<br>
     * <u>Type</u>: Boolean<br> 
-    * <u>Description</u>: Enable/Disbale diagnosis plots.<br><br>
+    * <u>Description</u>: Enable/Disable diagnosis plots.<br><br>
     The <i>parameters</i> section is by itself another section within the
     <i>pipeline</i> section. The <i>parameters</i> section is defined with
     different fields for each choice of <i>step</i>. The following are the
@@ -830,7 +830,7 @@
         object from photutils. First, a low-resolution background map is
         estimated within boxes of a grid, and then interpolated to create the
         final background map to be subtracted. The <i>cellFactor</i> is an
-        integer multipler factor of the instrument's resolution per box of
+        integer multiplier factor of the instrument's resolution per box of
         the grid. A larger <i>cellFactor</i> results in larger boxes, and
         therefore a coarser grid. A fine grid is not necessarily the optimal
         choice, as one would want to interpolate the background while also
@@ -1286,7 +1286,7 @@
         </table><br>
         In this example we make use of a <i>core.subtract</i> with a
         <i>resultOf</i> key to subtract the result of another pipeline. The
-        other pipeline configuation stored in <i>NGC0337_CO.yml</i> is another
+        other pipeline configuration stored in <i>NGC0337_CO.yml</i> is another
         HIP pipeline which homogenize the CO map to the same target, here
         SPIRE1. Given that the CO pipeline is including within another one, the
         mode of that pipeline should be defined as Inner.<br><br> 

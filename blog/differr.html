@@ -59,7 +59,7 @@
         the colors of the astronomical source. Resolution degradation is
         achieved by convolving the image with a specially constructed
         kernel\(^{**}\) which depends on the ratio of the initial and target
-        resolutions. Regridding is achieved by interpolating the image to a new
+        resolutions. Regriding is achieved by interpolating the image to a new
         pixel grid defined by the target pixel size. Let \( \boldsymbol{x} \),
         be a regularly gridded image of dimensions \( n\times m \) with
         covariance matrix \( \Sigma_{\boldsymbol{x}} \). Then, \( y \), is the
@@ -128,7 +128,7 @@
         \sigma_{x}^{2}[i-m, j-n]\), which is nothing but convolving the square
         of the initial uncertainties with the square of the kernel,
         \(\sigma_{y}^{2}=\sigma_{x}^{2}\star K{^2}\). Klein (2021)*** offers a
-        more general method for uncertainty propgation in convolution while
+        more general method for uncertainty propagation in convolution while
         taking into account cross-correlations between pixels.
         <br><br>
         <table style="text-align:left">
@@ -142,7 +142,7 @@
                         <p style="color:rgb(51,51,153);text-align:center">
                         <i>Visualization of the Jacobian,
                         \(J_{h}(\boldsymbol{x})\) for a convolution. Each row
-                        corresponds to one output pixel and containes the kernel
+                        corresponds to one output pixel and contains the kernel
                         flattened and shifted to align with the input pixels
                         that influence that output pixel.
                         </i></p>
