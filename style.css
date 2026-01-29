@@ -1,15 +1,15 @@
 html,
 
 body {
-  margin: auto;
+  margin: 1rem auto;
   padding: 0 1rem;
   font-family: monospace;
-  font-size: 16px;
+  font-size: 1rem;
   color: rgba(0,0,0);
   background-attachment: fixed;
   background-position: center;
   background-color: rgba(255,235,225);
-  max-width: 615px;
+  max-width: 60ch;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
@@ -30,7 +30,7 @@ aside {
 
 .flag-img {
   float: right;
-  width: 55px;
+  width: 6ch;
   max-width: 15%;
   margin: 0 0 1rem 1rem;
 }
