@@ -46,6 +46,7 @@ aside {
 .post-list {
   font-size: 1rem;
   padding: 1rem 0;
+  text-align: left;
 }
 
 a {
