@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.7">
-    <link rel="icon" type="images/icon.png" href="../images/icon.png">
-    <meta name="description" content="Jean Tedros website">
-    <meta name="author" content="Jean Tedros">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/icon.png">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script id="MathJax-script" async src=
@@ -13,14 +11,14 @@
     <script data-goatcounter="https://jctdrs.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <title> dustnn: neural network emulation of dust models</title>
+    <title>dustnn: neural network emulation of dust models</title>
 </head>
 <body> 
     <br>
     <b>dustnn: neural-network emulation of dust emission</b><br>
     <div>
-        <p style="font-size:11px"><b>Idea</b></p>
-        Modeling thermal grain emission is an unavoidable tool to study the
+        <h4>Idea</h4>
+        <p>Modeling thermal grain emission is an unavoidable tool to study the
         physics of the interstellar medium. Modeling this emission usually
         relies on sampling dust emission models. For example, MCMC Bayesian
         models rely on interpolating large grids of pre-computed dust emission
@@ -29,17 +27,16 @@
         increasing the number of its modeling parameters, comes at the expense
         of larger grids and fits. Scalability obstacles can be tamed by
         training a statistical estimator to approximate the model and to sample
-        the model-space.<br><br>
+        the model-space.</p>
 
-        The heating and cooling of interstellar dust is controlled by the
+        <p>The heating and cooling of interstellar dust is controlled by the
         absorption and re-emission of electromagnetic radiation from the
         interstellar radiation field (ISRF). The interaction of an
         electromagnetic wave with a dust grain results in its fractional
-        absorption as heat, and then, its re-emission in the infra-red.
-        This dynamics is governed by the interplay of two timescales, the
-        absorption time, \(\tau_{abs}\), the average time between two photon
-        absorptions, and the cooling rate, \(\tau_{cool}\), the average cooling
-        time.<br><br> 
+        absorption as heat, and then, its re-emission in the infra-red.  This
+        dynamics is governed by the interplay of two timescales, the absorption
+        time, \(\tau_{abs}\), the average time between two photon absorptions,
+        and the cooling rate, \(\tau_{cool}\), the average cooling time.</p>
  
         <table style="text-align:left;">
         <tbody>
@@ -63,17 +60,17 @@
             </tr>
         </tbody>
         </table>
-        <br>
-        The absorption time, \(\tau_{abs}\), is inversely proportional to grain
-        size: as the grain gets larger, it intercepts more photons. Whereas the
-        cooling time, \(\tau_{cool}\), is inversely proportional to the
-        temperature and is independent of grain size. The hotter the grain is,
-        the more energetic the absorbed photon is, the faster its dissipation
-        is. Therefore, out-of-equilibrium grains are smaller grains and spend
-        most of their time at low temperatures, whereas, large grains tend to
-        be in thermal equilibrium.  The total emission at a specific time is a
-        sum of the emissions of all the individual grains of different sizes
-        and different temperatures.<br><br> 
+
+        <p>The absorption time, \(\tau_{abs}\), is inversely proportional to
+        grain size: as the grain gets larger, it intercepts more photons.
+        Whereas the cooling time, \(\tau_{cool}\), is inversely proportional to
+        the temperature and is independent of grain size. The hotter the grain
+        is, the more energetic the absorbed photon is, the faster its
+        dissipation is. Therefore, out-of-equilibrium grains are smaller grains
+        and spend most of their time at low temperatures, whereas, large grains
+        tend to be in thermal equilibrium.  The total emission at a specific
+        time is a sum of the emissions of all the individual grains of
+        different sizes and different temperatures.</p> 
 
         <table style="text-align:left">
         <tbody>
@@ -102,17 +99,13 @@
             </tr>
         </tbody>
         </table>
-        <br>
 
-
-        <p style="font-size:11px">
-        <b>Implementation</b><br>
-        </p>
-        The emission of a dust mixture subjected to the ISRF can be modeled
+        <h4>Implementation</h4>
+        <p>The emission of a dust mixture subjected to the ISRF can be modeled
         with the intensity and spectral distribution of the ISRF, as well as,
-        the composition and size distribution of the dust mixture.<br><br>
+        the composition and size distribution of the dust mixture.</p>
 
-        We train a neural-network to emulate the dust emission spectra of a
+        <p>We train a neural-network to emulate the dust emission spectra of a
         THEMIS* dust model, by training it on emission as calculated by SwING**
         (SoftWares for Investigating Nebulae and Galaxies) written by F.
         Galliano adapted to use the stellar evolution model and libraries of
@@ -128,15 +121,13 @@
         interstellar medium (ISD) studies. Run the Neural-Network directly
         in your browser and predict dust emissivity for a given mean intensity, 
         \(U\), stellar population age, \(\tau\), and minimal dust grain size,
-        \(a_{min}\).
-        <br>
+        \(a_{min}\).</p>
         <p id="status"></p>
         <hr>
             <label>ISRF mean intensity U (2.2E-5 W/m2): <input type="number" id="U" value="1" step="0.01" min="0.01" max="1000000" oninput="calculate()"></label><br><br>
     <label>Stellar age (Myr): <input type="number" id="age" value="10" step="10" min="10" max="1300" oninput="calculate()"></label><br><br>
     <label>Minimum grain size (μm): <input type="number" id="amin" value="0.0004" step="0.00001" min="0.0004" max="0.02" oninput="calculate()"></label><br><br>
         <hr>
-        <br>
         <div style="height: 600px;">
             <canvas id="myChart"></canvas>
         </div>
@@ -308,18 +299,15 @@
             });
         }
     </script>
-    <p style="font-size:10px">\(^{*}\) Jones, A. P., Fanciullo, L., K¨ohler, M., et al. 2013, , 558, A62<br><br>
+    <p style="font-size:13px">\(^{*}\) Jones, A. P., Fanciullo, L., K¨ohler, M., et al. 2013, , 558, A62<br><br>
     \(^{**}\) https://irfu.cea.fr/Pisp/frederic.galliano/Research/research_notes_grain_properties.pdf<br><br>
     \(^{***}\) Byrne, C. M., Stanway, E. R., Eldridge, J. J., McSwiney, L., & Townsend, O. T. 2022, , 512,
     5329  and Stanway, E. R. & Eldridge, J. J. 2018, , 479, 75<br></p>
-      </div><br>
+      </div>
       <hr>
       <nav>
-          <a href="../index.html"><b>Home</b></a>
-          <a href="../blog.html"><b>Blog</b></a>
+          <a href="../index.html" class="home-btn"><b>Home</b></a>
       </nav>
       <hr>
-      <br>
-      <br>
 </body> 
 </html>
