@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.7">
-    <link rel="icon" type="images/icon.png" href="../images/icon.png">
-    <meta name="description" content="Jean Tedros website">
-    <meta name="author" content="Jean Tedros">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/icon.png">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src=
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -15,60 +13,62 @@
     <title>differr: error propagation through data pipelines</title>
 </head>
 <body> 
-    <div class="container">
     <b>differr: error propagation through data pipelines</b><br>
     <i>How to propagate uncertainties through a chain of non-linear operations
     ?</i>
     <div>
-        <p style="font-size:11px"><b>Idea</b></p>
-        Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with mean
-        \(\boldsymbol{\mu_{x}}\) and covariance matrix \(\boldsymbol{\Sigma_{x}}
-        \) and let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) be a
-        nonlinear function. Up to first-order approximation, \(\boldsymbol{y}=
-        f(\boldsymbol{x}) \approx f(\boldsymbol{\mu_{x}}) + J(\boldsymbol{x-
-        \mu_{x}})\), where \(J \in \mathbb{R}^{m \times n}\) is the Jacobian
-        matrix \(\partial f/\partial \boldsymbol{x}\) evaluated at
-        \(\boldsymbol{\mu_{x}}\). This approximation is reasonably
-        accepted\(^{*}\) and the random vector \(\boldsymbol{y} \in
-        \mathbb{R}^{m}\) has mean \(\boldsymbol{\mu_{y}} \approx
-        f(\boldsymbol{\mu_{x}})\) and covariance \(\Sigma_{y} \approx J
-        \Sigma_{x} J^{T}\).<br>
-        <br>
-        For example, if \(\boldsymbol{x}\) is composed of two random vectors
+        <h4>Idea</h4>
+        <p>Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with
+        mean \(\boldsymbol{\mu_{x}}\) and covariance matrix
+        \(\boldsymbol{\Sigma_{x}} \) and let \(f: \mathbb{R}^{n} \rightarrow
+        \mathbb{R}^{m}\) be a nonlinear function. Up to first-order
+        approximation, \(\boldsymbol{y}= f(\boldsymbol{x}) \approx
+        f(\boldsymbol{\mu_{x}}) + J(\boldsymbol{x- \mu_{x}})\), where \(J \in
+        \mathbb{R}^{m \times n}\) is the Jacobian matrix \(\partial f/\partial
+        \boldsymbol{x}\) evaluated at \(\boldsymbol{\mu_{x}}\). This
+        approximation is reasonably accepted\(^{*}\) and the random vector
+        \(\boldsymbol{y} \in \mathbb{R}^{m}\) has mean \(\boldsymbol{\mu_{y}}
+        \approx f(\boldsymbol{\mu_{x}})\) and covariance \(\Sigma_{y} \approx J
+        \Sigma_{x} J^{T}\).</p>
+        
+        <p>For example, if \(\boldsymbol{x}\) is composed of two random vectors
         \(\boldsymbol{a}\) and \(\boldsymbol{b}\) such that \(\boldsymbol{x}=(
-        \boldsymbol{a}, \boldsymbol{b})\), then
-        <p style="text-align:center">\(\Sigma_{y} = \begin{bmatrix}
-        J_{\boldsymbol{a}} & J_{\boldsymbol{b}} \end{bmatrix} \begin{bmatrix}
-        \sigma_{\boldsymbol{a}} & \sigma_{\boldsymbol{ab}} \\
-        \sigma_{\boldsymbol{ba}} & \sigma_{\boldsymbol{b}} \end{bmatrix}
-        \begin{bmatrix} J_{\boldsymbol{a}}^{T} \\ J_\boldsymbol{b}^{T}
-        \end{bmatrix} + O(N^2) \) &#160;&#160;&#160;&#160;(1)</p> 
-        where \(J_{\boldsymbol{a}}=\partial\boldsymbol{y}/\partial
-        \boldsymbol{a}\) and \(J_{\boldsymbol{b}}=\partial\boldsymbol{y}/
-        \partial \boldsymbol{b} \). It can be seen that the uncertainty,
-        characterized by the covariance matrix, \( \Sigma_{\boldsymbol{x}} \),
-        of the input data \(\boldsymbol{x}\), is propagated to first degree by
-        the Jacobian, \(J\), through the operation, \( f \).
+        \boldsymbol{a}, \boldsymbol{b})\), and
+        \(J_{\boldsymbol{a}}=\partial\boldsymbol{y}/\partial \boldsymbol{a}\)
+        and \(J_{\boldsymbol{b}}=\partial\boldsymbol{y}/ \partial
+        \boldsymbol{b} \), then, </p> 
+        
+        <p style="text-align:center">
+            \(\Sigma_{y} = \begin{bmatrix} J_{\boldsymbol{a}} &
+            J_{\boldsymbol{b}} \end{bmatrix} \begin{bmatrix}
+            \sigma_{\boldsymbol{a}} & \sigma_{\boldsymbol{ab}} \\
+            \sigma_{\boldsymbol{ba}} & \sigma_{\boldsymbol{b}} \end{bmatrix}
+            \begin{bmatrix} J_{\boldsymbol{a}}^{T} \\ J_\boldsymbol{b}^{T}
+            \end{bmatrix} + O(N^2) \) &#160;&#160;&#160;&#160;(1)
+        </p>
+ 
+        <p>It can be seen that the uncertainty, characterized by the covariance
+        matrix, \( \Sigma_{\boldsymbol{x}} \), of the input data
+        \(\boldsymbol{x}\), is propagated to first degree by the Jacobian,
+        \(J\), through the operation \( f \). I'll illustrate the idea with an
+        application from multi-wavelength astronomy of comparing images of the
+        same physical object taken from different instruments with different
+        resolutions. One would have to degrade the images to a minimum common
+        resolution and then re-grid to a common pixel size; by this, homogenize
+        multiple images while preserving the colors of the astronomical source.
+        Resolution degradation is achieved by convolving the image with a
+        specially constructed kernel\(^{**}\) which depends on the ratio of the
+        initial and target resolutions. Regriding is achieved by interpolating
+        the image to a new pixel grid defined by the target pixel size. Let \(
+        \boldsymbol{x} \), be a regularly gridded image of dimensions \(
+        n\times m \) with covariance matrix \( \Sigma_{\boldsymbol{x}} \).
+        Then, \( y \), is the result image of dimensions \( n&#39;\times m&#39;
+        \) with \( n&#39; \leq n \) and \( m&#39; \leq m \), where
+        \(\boldsymbol{y} = h( \boldsymbol{x}) = ( g \circ f)(\boldsymbol{x})
+        \), where \(f\) and \(g\) the degrading and re-gridding operation
+        respectively, and \( \Sigma_{y} \) the propagated uncertainty of
+        \(\boldsymbol{y}\).</p>
 
-        <p style="font-size:11px"><b>Explicit example</b></p>
-        I&#39;ll illustrate the idea with an application from multi-wavelength
-        astronomy of comparing images of the same physical object taken from
-        different instruments with different resolutions. One would have to
-        degrade the images to a minimum common resolution and then re-grid to a
-        common pixel size; by this, homogenize multiple images while preserving
-        the colors of the astronomical source. Resolution degradation is
-        achieved by convolving the image with a specially constructed
-        kernel\(^{**}\) which depends on the ratio of the initial and target
-        resolutions. Regriding is achieved by interpolating the image to a new
-        pixel grid defined by the target pixel size. Let \( \boldsymbol{x} \),
-        be a regularly gridded image of dimensions \( n\times m \) with
-        covariance matrix \( \Sigma_{\boldsymbol{x}} \). Then, \( y \), is the
-        result image of dimensions \( n&#39;\times m&#39; \) with \( n&#39; \leq
-        n \) and \( m&#39; \leq m \), where \(\boldsymbol{y} = h(
-        \boldsymbol{x}) = ( g \circ f)(\boldsymbol{x}) \), where \(f\) and \(g\)
-        the degrading and re-gridding operation respectively, and \( \Sigma_{y}
-        \) the propagated uncertainty of \(\boldsymbol{y}\).
-        <br><br>
         <table style="text-align:left;">
             <tbody>
                 <tr>
@@ -104,14 +104,13 @@
                 </tr>
             </tbody>
         </table>
-
-        <p style="font-size:11px"><b>Example</b></p>
-        Assuming the input covariance matrix, \(\Sigma_{\boldsymbol{x}}\), to
-        have zero non-diagonal elements, then every pixel \((i,j)\) of the
-        initial uncertainty map is equal to the total variance, \(\sigma_{i,i}\)
-        of the input pixel \(\boldsymbol{x_{i,j}}\). This assumes no
-        correlation between uncertainties in different pixels. <br>
-        <br>
+  
+        <h4>Example</h4>
+        <p>Assuming the input covariance matrix, \(\Sigma_{\boldsymbol{x}}\),
+        to have zero non-diagonal elements, then every pixel \((i,j)\) of the
+        initial uncertainty map is equal to the total variance,
+        \(\sigma_{i,i}\) of the input pixel \(\boldsymbol{x_{i,j}}\). This
+        assumes no correlation between uncertainties in different pixels.
         Resolution degradation is done by convolving the image with a specific
         kernel based on the ratio of initial and target resolutions.  The
         convolution, \(\boldsymbol{y}=\boldsymbol{x}\star K\), can be written
@@ -129,8 +128,8 @@
         of the initial uncertainties with the square of the kernel,
         \(\sigma_{y}^{2}=\sigma_{x}^{2}\star K{^2}\). Klein (2021)*** offers a
         more general method for uncertainty propagation in convolution while
-        taking into account cross-correlations between pixels.
-        <br><br>
+        taking into account cross-correlations between pixels.</p>
+        
         <table style="text-align:left">
             <tbody>
                 <tr>
@@ -149,17 +148,18 @@
                     </td>
                 </tr>
             </tbody>
-        </table><br>
-        A more applicable method, is to estimate the propagated uncertainty by
-        repeating the same process and by adding a random noise to each pixel
-        from a Gaussian distribution with a standard deviation equal to the
-        uncertainty associated with each pixel. With enough repetition, one can
-        estimate the propagated uncertainty of each output pixel by the
+        </table>
+
+        <p>A more applicable method, is to estimate the propagated uncertainty
+        by repeating the same process and by adding a random noise to each
+        pixel from a Gaussian distribution with a standard deviation equal to
+        the uncertainty associated with each pixel. With enough repetition, one
+        can estimate the propagated uncertainty of each output pixel by the
         standard deviation of its values over all iterations. This method,
         known as bootstrapping or Monte-Carlo, can be shown to be equivalent to
         equation \((1)\), and therefore converges after enough iterations to
-        the <i>differr</i> method.
-        <br><br>
+        the <i>differr</i> method.</p>
+
         <table style="text-align:left;">
             <tbody>
                 <tr>
@@ -175,12 +175,14 @@
                 </tr>
             </tbody>
         </table>
-        <p style="font-size:11px"><b>Implementation</b></p> To calculate the
-        Jacobian corresponding to a chain of non-linear operations, i.e.
-        convolution and regridding, rewrite software in JAX and use automatic
-        differentiation.. Implementation details to come.. Have fun!
+
+        <h4>Implementation</h4>
+        <p>To calculate the Jacobian corresponding to a chain of non-linear
+        operations, i.e.  convolution and regridding, rewrite software in JAX
+        and use automatic differentiation.. Implementation details to come..
+        Have fun!</p>
         
-        <p style="font-size:10px">\(^{*}\) If \(f\) is approximately affine in
+        <p style="font-size:13px">\(^{*}\) If \(f\) is approximately affine in
         the region about the mean of the distribution<br><br>
         \(^{**}\) Aniano, G., Draine, B. T., Gordon, K. D., and Sandstrom, K.,
         “Common-Resolution Convolution Kernels for Space- and Ground-Based
@@ -188,15 +190,11 @@
         Pacific</i>, vol. 123, no. 908, p. 1218, 2011. doi:10.1086/662219.<br>
         <br>
         \(^{***}\) Randolf Klein 2021 Res. Notes AAS 5 39</p>
-    </div><br>
     <hr>
     <nav>
-        <a href="../index.html"><b>Home</b></a>
-        <a href="../blog.html"><b>Blog</b></a>
+        <a href="../index.html" class="home-btn"><b>Home</b></a>
     </nav>
     <hr>
-    <br>
-    <br>
     </div>
 </body>
 </html>
