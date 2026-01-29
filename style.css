@@ -1,13 +1,13 @@
 html,
 
 body {
-  margin: 1rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
+  padding: 20px;
   font-family: monospace;
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
-  font-size: 1rem;
+  font-size: 16px;
   color: rgba(0,0,0);
   background-attachment: fixed;
   background-position: center;
@@ -15,6 +15,13 @@ body {
   max-width: 80ch;
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
 }
 
 mark {
@@ -46,6 +53,9 @@ aside {
 a {
   text-decoration: none;
   color: rgb(51,51,153);
+  display: inline-block;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 a:hover { 
