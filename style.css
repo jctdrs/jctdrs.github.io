@@ -17,11 +17,17 @@ body {
   margin-top: 1rem;
 }
 
+@media (max-width: 600px) {
+  body {
+    max-width: 32ch;
+    margin: 0 auto;
+  }
+}
 img {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 mark {
