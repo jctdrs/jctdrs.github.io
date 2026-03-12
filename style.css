@@ -34,6 +34,7 @@ header {
 
 aside {
   font-size: 1rem;
+  text-align: left;
 }
 
 .flag-img {
@@ -45,8 +46,20 @@ aside {
 
 .post-list {
   font-size: 1rem;
-  padding: 1rem 0;
   text-align: left;
+}
+
+.post-list > div {
+  margin-bottom: 0;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .desktop { display: none; }
+  .mobile { display: inline; }
 }
 
 a {
