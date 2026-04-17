@@ -11,6 +11,7 @@
     <script data-goatcounter="https://jctdrs.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
     <title>dustnn / Blog</title>
 </head>
 <body> 
@@ -38,28 +39,17 @@
         time, \(\tau_{abs}\), the average time between two photon absorptions,
         and the cooling rate, \(\tau_{cool}\), the average cooling time.</p>
  
-        <table style="text-align:left;">
-        <tbody>
-            <tr> 
-            <td> 
-            <img
-                src="../images/BPASS_ISRF.png"
-                alt="BPASS models"
-                width="100%"
-                title="BPASS models">
-                <p style="color:rgb(51,51,153);text-align:center"> 
-                <i>Spectral energy distributions of the interstellar radiation
+        <div class="image-block">
+            <img src="../images/BPASS_ISRF.png" alt="BPASS models" width="100%">
+            <p class="caption"><i>Spectral energy distributions of the interstellar radiation
                 field (ISRF) as provided by the BPASS model for a stellar
                 metallicty of Z = 0.004 dex, age range 1 Myr \( \leq\tau\leq\)
                 10 Gyr, and mean intensity U=1. The energy distribution of
                 young stellar population with massive stars dominate in the
                 ultra-violet range compared to infra-red for older
                 populations</i>
-                </p>
-            </td>
-            </tr>
-        </tbody>
-        </table>
+            </p>
+        </div>
 
         <p>The absorption time, \(\tau_{abs}\), is inversely proportional to
         grain size: as the grain gets larger, it intercepts more photons.
@@ -72,33 +62,24 @@
         time is a sum of the emissions of all the individual grains of
         different sizes and different temperatures.</p> 
 
-        <table style="text-align:left">
-        <tbody>
-            <tr> 
-            <td> 
-            <img src="../images/change_U.png" alt="BPASS models" width="100%"
-            title="BPASS models">
-            <p style="color:rgb(51,51,153);text-align:center"> 
-            <i>An increase in the intensity, U, of the insterstellar radiation
+        <div class="image-block">
+            <img src="../images/change_U.png" alt="BPASS models" width="100%">
+            <p class="caption"><i>An increase in the intensity, U, of the insterstellar radiation
             field brings about a shift of the emission peak of big grains
             closer to the mid-infrared range, consequently resulting in higher
-            equilibrium temperatures, \(T_{eq}\).</i>
-            <img src="../images/change_age.png" alt="BPASS models" width="100%"
-            title="BPASS models">
-            <p style="color:rgb(51,51,153);text-align:center"> 
-            <i>Older stellar population predominantly contain low-mass stars.
+            equilibrium temperatures, \(T_{eq}\).</i></p>
+        </div>
+        <div class="image-block">
+            <img src="../images/change_age.png" alt="BPASS models" width="100%">
+            <p class="caption"><i>Older stellar population predominantly contain low-mass stars.
             Emission from massive stars (O-B) peak in the UV.  Emission from
-            low-mass stars peak in the NIR.</i>
-            <img src="../images/change_amin.png" alt="BPASS models"
-            width="100%" title="BPASS models">
-            <p style="color:rgb(51,51,153);text-align:center"> 
-            <i>Increasing the minimal size of grains lowers the small-grain
-            component of dust emission.</i>
-            </p>
-            </td>
-            </tr>
-        </tbody>
-        </table>
+            low-mass stars peak in the NIR.</i></p>
+        </div>
+        <div class="image-block">
+            <img src="../images/change_amin.png" alt="BPASS models" width="100%">
+            <p class="caption"><i>Increasing the minimal size of grains lowers the small-grain
+            component of dust emission.</i></p>
+        </div>
 
         <h4>Implementation</h4>
         <p>The emission of a dust mixture subjected to the ISRF can be modeled

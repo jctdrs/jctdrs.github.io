@@ -18,17 +18,19 @@
         const target = document.getElementById(targetId);
         if (!target) return;
 
-        // Get all elements with the same class in the parent container
         const parent = target.parentNode;
         const siblings = parent.querySelectorAll(`.${target.className}`);
         
-        // Toggle visibility
         siblings.forEach(element => {
-            element.style.display = element === target ? 'block' : 'none';
+            element.style.display = 'none';
+            element.classList.remove('active');
         });
+        target.style.display = 'block';
+        target.classList.add('active');
     }
     </script>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
     <link rel="icon" type="image/png" href="../images/icon.png">
     <title>HIP / Blog</title>
 </head>
@@ -46,20 +48,10 @@
     is then configured and run on all input images to produce both output and
     propagated error images.</p>
     
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <img src="../images/HIP_ex.png" alt=
-                    "Photometry cutouts for NGC4254 from DustPedia" width=
-                    "100%" title=
-                    "Photometry cutouts for NGC4254 from DustPedia">
-                    <p style="color:rgb(51,51,153);text-align:center">
-                    <i>Homogenization example with HIP</i></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="image-block">
+        <img src="../images/HIP_ex.png" alt="Photometry cutouts for NGC4254 from DustPedia" width="100%">
+        <p class="caption"><i>Homogenization example with HIP</i></p>
+    </div>
 
     <p>HIP pipelines and data sources are defined in a configuration file using
     YAML, a human-readable data serialization language. HIP configuration files
@@ -677,21 +669,12 @@
        </tbody>
     </table>
 
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <img src="../images/cutout_MIPS1.png" alt=
-                    "Cutout example" width=
-                    "100%" title="Cutout example">
-                    <p style="color:rgb(51,51,153);text-align:center">
-                    <i>Cutout example for MIPS1 image of NGC4254. The cutout
-                    region was defined to be 15x15 arcmins as shown in the
-                    example above.</i></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="image-block">
+        <img src="../images/cutout_MIPS1.png" alt="Cutout example" width="100%">
+        <p class="caption"><i>Cutout example for MIPS1 image of NGC4254. The cutout
+        region was defined to be 15x15 arcmins as shown in the
+        example above.</i></p>
+    </div>
     </div>
 
     <div id="hip.foregroundMask" class="sub-content-paragraph" style="display: none;">
@@ -740,21 +723,12 @@
        </tbody>
     </table>
 
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <img src="../images/foregroundMask_MIPS1.png" alt=
-                    "Cutout example" width=
-                    "100%" title="ForegroundMask example">
-                    <p style="color:rgb(51,51,153);text-align:center">
-                    <i>Foreground masking for MIPS1 image of NGC4254. The
-                    foreground masking was defined to be 15x15 arcmins with a
-                    maskFactor of 1 as seen in the example above.</i></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="image-block">
+        <img src="../images/foregroundMask_MIPS1.png" alt="ForegroundMask example" width="100%">
+        <p class="caption"><i>Foreground masking for MIPS1 image of NGC4254. The
+        foreground masking was defined to be 15x15 arcmins with a
+        maskFactor of 1 as seen in the example above.</i></p>
+    </div>
 
     <h4>More details on the choice of <i>maskFactor</i>:</h4>
     <p>The <i>maskFactor</i> scales the size of the masked regions around
@@ -836,20 +810,12 @@
        </tbody>
     </table>
 
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <img src="../images/skySubtract_MIPS1.png" alt=
-                    "Sky-subtract for MIPS1 image of NGC4254." width=
-                    "100%" title="skySubtract example"> <p
-                    style="color:rgb(51,51,153);text-align:center"> <i>Sky
-                    background interpolation for MIPS1 image of
-                    NGC4254.</i></p> 
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="image-block">
+        <img src="../images/skySubtract_MIPS1.png" alt="Sky-subtract for MIPS1 image of NGC4254." width="100%">
+        <p class="caption"><i>Sky
+        background interpolation for MIPS1 image of
+        NGC4254.</i></p>
+    </div>
 
     <h4><u>More details on the choice of <i>cellFactor</i>:</u></h4>
     <p>The background interpolation operation is done with the Background2D
@@ -866,17 +832,12 @@
     <table style="text-align:left; width:100%; border=4">                             
         <tbody>                                                                       
             <tr>                                                                      
-                <td>                                                                  
-                    <img src="../images/skySubtract_MIPS1_meshes.png" alt=            
-                    "Sky-subtract meshes for MIPS1 image of NGC4254." width=          
-                    "100%" title="SkySubtract meshes example"> <p                     
-                    style="color:rgb(51,51,153);text-align:center"> <i>Grid           
-                    structure corresponding to a cellFactor of 10 for MIPS1.          
-                    </i></p><br>                                                      
-                </td>                                                                 
-            </tr>                                                                     
-        </tbody>                                                                      
-    </table> 
+                    <div class="image-block">
+                        <img src="../images/skySubtract_MIPS1_meshes.png" alt="Sky-subtract meshes for MIPS1 image of NGC4254." width="100%">
+                        <p class="caption"><i>Grid
+                        structure corresponding to a cellFactor of 10 for MIPS1.
+                        </i></p>
+                    </div>
     </div>                                                                            
                                                                                       
     <div id="hip.degrade" class="sub-content-paragraph" style="display: none;">
@@ -923,21 +884,12 @@
        </tbody>                                                                   
     </table>                                                                      
 
-    <table style="text-align:left; width:100%; border=4">                         
-        <tbody>                                                                   
-            <tr>                                                                  
-                <td>                                                              
-                    <img src="../images/degrade_MIPS1.png" alt=                   
-                    "Degradation from MIPS1 to SPIRE3 for NGC4254." width=        
-                    "100%" title="Degrade example">                               
-                    <p style="color:rgb(51,51,153);text-align:center">            
-                    <i>Degradation from MIPS1 with a resolution of 6              
-                    arcseconds to SPIRE3 with resolution of 36 arcseconds         
-                    for NGC4254.</i></p>                                          
-                </td>                                                             
-            </tr>                                                                 
-        </tbody>                                                                  
-    </table>
+    <div class="image-block">
+        <img src="../images/degrade_MIPS1.png" alt="Degradation from MIPS1 to SPIRE3 for NGC4254." width="100%">
+        <p class="caption"><i>Degradation from MIPS1 with a resolution of 6
+        arcseconds to SPIRE3 with resolution of 36 arcseconds
+        for NGC4254.</i></p>
+    </div>
     </div>
 
     <div id="hip.regrid" class="sub-content-paragraph" style="display: none;">
@@ -973,22 +925,12 @@
        </tbody>
     </table>
 
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <img src="../images/regrid_MIPS1.png" alt=
-                    "Regridding PACS1 image with pixel size 3 arcseconds to
-                    SPIRE3 with pixel size 12 arcseconds for NGC4254." width=
-                    "100%" title="Regrid example">
-                    <p style="color:rgb(51,51,153);text-align:center">
-                    <i>Result of regridding MIPS1 with pixel size 1.3
-                    arcseconds to a pixel size of 12 arcseconds as of SPIRE3
-                    for NGC4254.</i></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="image-block">
+        <img src="../images/regrid_MIPS1.png" alt="Regridding PACS1 image with pixel size 3 arcseconds to SPIRE3 with pixel size 12 arcseconds for NGC4254." width="100%">
+        <p class="caption"><i>Result of regridding MIPS1 with pixel size 1.3
+        arcseconds to a pixel size of 12 arcseconds as of SPIRE3
+        for NGC4254.</i></p>
+    </div>
     </div>
 
     <div id="hip.integrate" class="sub-content-paragraph" style="display: none;">
@@ -1025,19 +967,11 @@
     </table>
 
     <!--TODO: Talk about where the output is of the integration-->
-    <table style="text-align:left; width:100%; border=4"> 
-        <tbody>
-            <tr>
-                <td>
-                    <img src="../images/integrate_MIPS1.png" alt= "Integration
-                    of MIPS1 for NGC4254." width="100%" title="Regrid example">
-                    <p style="color:rgb(51,51,153);text-align:center">
-                    <i>Elliptical aperture with sizeFactor of 1 to 
-                    perform aperture photometry on MIPS1 image of NGC4254.</i></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="image-block">
+        <img src="../images/integrate_MIPS1.png" alt="Integration of MIPS1 for NGC4254." width="100%">
+        <p class="caption"><i>Elliptical aperture with sizeFactor of 1 to
+        perform aperture photometry on MIPS1 image of NGC4254.</i></p>
+    </div>
     </div>
 
     <div id="core.subtract" class="sub-content-paragraph" style="display: none;">
