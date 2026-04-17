@@ -66,7 +66,7 @@
         <button class="toggle-btn" onclick="changeContent('example', event)">Examples</button>
     </div>
   
-    <div id="meta" class="content-paragraph" style="display: none;">
+    <div id="meta" class="content-paragraph" >
     <h4>Meta</h4>
     <p>The <i>meta</i> section is used to define meta-data. Elements of this
     section will be used for logging purposes. The <i>meta</i> section is
@@ -98,7 +98,7 @@
     </table>
     </div>
 
-    <div id="config" class="content-paragraph" style="display: none;">
+    <div id="config" class="content-paragraph" >
     <h4>Config</h4>
     <p>The <i>config</i> section is used to define the run mode. Modes define
     whether or not to propagate uncertainties, and if yes, how to do so. The
@@ -136,7 +136,7 @@
     </table>
     </div>
 
-    <div id="data" class="content-paragraph" style="display: none;">
+    <div id="data" class="content-paragraph" >
     <h4>Data</h4>
     <p>The <i>data</i> section is used to define the astronomical body and the
     bands used for the pipeline. The <i>data</i> section is defined with three
@@ -168,7 +168,7 @@
         <button class="toggle-btn"onclick="changeContent('bands', event)">Bands</button>
     </div><br>
 
-    <div id="geometry" class="sub-content-paragraph" style="display: none;">
+    <div id="geometry" class="sub-content-paragraph" >
     <h4>Geometry</h4>
     <p>The <i>geometry</i> field is by itself another section within the
     <i>data</i> section. The <i>geometry</i> section is defined by six fields:
@@ -240,7 +240,7 @@
     </table>
     </div>
 
-    <div id="bands" class="sub-content-paragraph" style="display: none;">
+    <div id="bands" class="sub-content-paragraph" >
     <h4>Bands</h4>
     <p>The <i>bands</i> field is by itself another section within the
     <i>data</i> section. The <i>bands</i> section is defined by six fields:
@@ -594,7 +594,7 @@
     </div>
     </div>
 
-    <div id="pipeline" class="content-paragraph" style="display: none;">
+    <div id="pipeline" class="content-paragraph" >
     <h4>Pipeline</h4>
     <p>The <i>pipeline</i> section is used to define the homogenization
     pipeline.  The <i>pipeline</i> section is defined with three fields:
@@ -630,7 +630,7 @@
         <button class="toggle-btn"onclick="changeContent('core.multiply', event)">Multiply</button>
     </div><br>
 
-    <div id="hip.cutout" class="sub-content-paragraph" style="display: none;">
+    <div id="hip.cutout" class="sub-content-paragraph" >
     <h4>hip.cutout</h4>
     <p>This step allows to perform a cutout the data centered at <i>ra</i>,
     <i>dec</i> as defined in <i>geometry</i>. This step is defined with three
@@ -677,7 +677,7 @@
     </div>
     </div>
 
-    <div id="hip.foregroundMask" class="sub-content-paragraph" style="display: none;">
+    <div id="hip.foregroundMask" class="sub-content-paragraph" >
     <h4>hip.foregroundMask</h4>
     <p>This step allows to mask foreground objects within a specific area
     centered at <i>ra</i>, <i>dec</i> as defined in <i>geometry</i>. This step
@@ -774,7 +774,7 @@
     </div>
     </div>
 
-    <div id="hip.skySubtract" class="sub-content-paragraph" style="display: none;">
+    <div id="hip.skySubtract" class="sub-content-paragraph" >
     <h4>hip.skySubtract</h4>
     <p>This step allows to estimate and subtract the background within an
     aperture as defined by <i>geometry</i>.  The background is estimated using
@@ -840,7 +840,7 @@
                     </div>
     </div>                                                                            
                                                                                       
-    <div id="hip.degrade" class="sub-content-paragraph" style="display: none;">
+    <div id="hip.degrade" class="sub-content-paragraph" >
     <h4>hip.degrade</h4>                                                 
     <p>This step allows to degrade an image to a target lower resolution. This
     step is defined by can be done either by providing a kernel to be
@@ -892,7 +892,7 @@
     </div>
     </div>
 
-    <div id="hip.regrid" class="sub-content-paragraph" style="display: none;">
+    <div id="hip.regrid" class="sub-content-paragraph" >
     <h4>hip.regrid</h4>
     <p>This step allows to reproject an image to a target WCS projection. This
     step can be defined with two fields: <i>band</i>, and <i>target</i>.</p>
@@ -933,7 +933,7 @@
     </div>
     </div>
 
-    <div id="hip.integrate" class="sub-content-paragraph" style="display: none;">
+    <div id="hip.integrate" class="sub-content-paragraph" >
     <h4>hip.integrate</h4>
     <p>This step allows to perform aperture photometry over an elliptical
     aperture defined by the semi-major axis of the galaxy. This step can be
@@ -974,7 +974,7 @@
     </div>
     </div>
 
-    <div id="core.subtract" class="sub-content-paragraph" style="display: none;">
+    <div id="core.subtract" class="sub-content-paragraph" >
     <h4>core.subtract</h4>
     <p>This step allows to subtract one result from another. This step can be
     defined with five fields: <i>band</i>, <i>target</i>, <i>resultOf</i>,
@@ -1026,7 +1026,7 @@
     </table>
     </div>
 
-    <div id="core.multiply" class="sub-content-paragraph" style="display: none;">
+    <div id="core.multiply" class="sub-content-paragraph" >
     <h4>core.multiply</h4>
     <p>This step allows to multiply one result by another. This step can be
     defined with four fields: <i>band</i>, <i>target</i>, <i>resultOf</i>, and
@@ -1079,7 +1079,7 @@
     </div>
     </div>
 
-    <div id="example" class="content-paragraph" style="display: none;">
+    <div id="example" class="content-paragraph" >
     <p>The following section presents two example configuration files.  The first
     specifies a homogenization pipeline for PACS1 and MIPS1 targeting SPIRE3
     for the galaxy NGC4254. The second demonstrates a homogenization setup for
@@ -1089,7 +1089,7 @@
         <button class="toggle-btn"onclick="changeContent('simple', event)">Simple</button>
         <button class="toggle-btn"onclick="changeContent('cosub', event)">CO subtraction</button>
     </div>
-    <div id="simple" class="sub-content-paragraph" style="display: none;">
+    <div id="simple" class="sub-content-paragraph" >
     <br>
     <table style="text-align:left; width:100%; border=4"> 
         <tbody>
@@ -1173,7 +1173,7 @@
     </table>
     </div>
 
-    <div id="cosub" class="sub-content-paragraph" style="display: none;">
+    <div id="cosub" class="sub-content-paragraph" >
     <br>
     <table style="text-align:left; width:100%; border=4"> 
         <tbody>
