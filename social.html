@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.70">
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <title>Social / jctdrs</title>
+</head>
+<body>
+    <h4>Social</h4>
+
+    <div class="gallery" id="gallery"></div>
+
+    <div class="view-full" id="viewFull">
+        <div id="groupImages"></div>
+        <p id="fullCaption"></p>
+    </div>
+
+    <hr>
+    <nav id="nav">
+        <a href="index.html" class="home-btn"><b>Home</b></a>
+    </nav>
+    <hr>
+
+    <script>
+    const groups = [
+        {
+            images: [],
+            caption: ""
+        },
+    ];
+
+    function getThumb(url) {
+        return url.replace('/1200', '/400');
+    }
+
+    function renderGallery() {
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = groups.map((g, i) => {
+            const isAlbum = g.images.length > 1;
+            return `<button class="gallery-item" onclick="openGroup(${i})">
+                <img src="${getThumb(g.images[0])}" alt="">
+                ${isAlbum ? '<span class="group-badge">+</span>' : ''}
+            </button>`;
+        }).join('');
+    }
+
+    function openGroup(index) {
+        const group = groups[index];
+        document.getElementById('groupImages').innerHTML =
+            group.images.map(src => `<img src="${src}" alt="">`).join('');
+        document.getElementById('fullCaption').textContent = group.caption;
+        document.getElementById('gallery').style.display = 'none';
+        document.getElementById('viewFull').style.display = 'block';
+        document.getElementById('nav').innerHTML =
+            '<a href="index.html" class="home-btn"><b>Home</b></a>' +
+            '<a href="social.html" class="home-btn"><b>Social</b></a>';
+        window.scrollTo(0, 0);
+        history.pushState({ index }, '');
+    }
+
+    function showGallery() {
+        document.getElementById('viewFull').style.display = 'none';
+        document.getElementById('gallery').style.display = 'grid';
+        document.getElementById('nav').innerHTML =
+            '<a href="index.html" class="home-btn"><b>Home</b></a>';
+        history.pushState({}, '');
+    }
+
+    window.onpopstate = function(e) {
+        if (e.state && e.state.index !== undefined) {
+            const group = groups[e.state.index];
+            document.getElementById('groupImages').innerHTML =
+                group.images.map(src => `<img src="${src}" alt="">`).join('');
+            document.getElementById('fullCaption').textContent = group.caption;
+            document.getElementById('gallery').style.display = 'none';
+            document.getElementById('viewFull').style.display = 'block';
+            document.getElementById('nav').innerHTML =
+                '<a href="index.html" class="home-btn"><b>Home</b></a>' +
+                '<a href="social.html" class="home-btn"><b>Social</b></a>';
+        } else {
+            document.getElementById('viewFull').style.display = 'none';
+            document.getElementById('gallery').style.display = 'grid';
+            document.getElementById('nav').innerHTML =
+                '<a href="index.html" class="home-btn"><b>Home</b></a>';
+        }
+    };
+
+    renderGallery();
+    </script>
+</body>
+</html>
