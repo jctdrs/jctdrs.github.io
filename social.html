@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.70">
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="social.css">
     <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <title>Social / jctdrs</title>
 </head>
@@ -59,17 +58,6 @@
         }).join('');
     }
 
-    function getViews(index) {
-        const v = JSON.parse(localStorage.getItem('s') || '{}');
-        return v[index] || 0;
-    }
-
-    function addView(index) {
-        const v = JSON.parse(localStorage.getItem('s') || '{}');
-        v[index] = (v[index] || 0) + 1;
-        localStorage.setItem('s', JSON.stringify(v));
-    }
-
     function openGroup(index) {
         const group = groups[index];
         document.getElementById('groupImages').innerHTML =
@@ -79,13 +67,17 @@
         document.getElementById('viewFull').style.display = 'block';
         document.getElementById('nav').innerHTML =
             '<a href="index.html" class="home-btn"><b>Home</b></a>' +
-            '<a href="javascript:showGallery()" class="home-btn"><b>Social</b></a>';
+            '<a href="social.html" class="home-btn"><b>Social</b></a>';
         window.scrollTo(0, 0);
         history.pushState({ index }, '');
     }
 
     function showGallery() {
-        history.back();
+        document.getElementById('viewFull').style.display = 'none';
+        document.getElementById('gallery').style.display = 'grid';
+        document.getElementById('nav').innerHTML =
+            '<a href="index.html" class="home-btn"><b>Home</b></a>';
+        history.pushState({}, '');
     }
 
     window.onpopstate = function(e) {
@@ -96,9 +88,14 @@
             document.getElementById('fullCaption').textContent = group.caption;
             document.getElementById('gallery').style.display = 'none';
             document.getElementById('viewFull').style.display = 'block';
+            document.getElementById('nav').innerHTML =
+                '<a href="index.html" class="home-btn"><b>Home</b></a>' +
+                '<a href="social.html" class="home-btn"><b>Social</b></a>';
         } else {
             document.getElementById('viewFull').style.display = 'none';
             document.getElementById('gallery').style.display = 'grid';
+            document.getElementById('nav').innerHTML =
+                '<a href="index.html" class="home-btn"><b>Home</b></a>';
         }
     };
 
