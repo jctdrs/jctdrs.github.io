@@ -59,11 +59,19 @@
         }).join('');
     }
 
+    function getViews(index) {
+        const v = JSON.parse(localStorage.getItem('s') || '{}');
+        return v[index] || 0;
+    }
+
+    function addView(index) {
+        const v = JSON.parse(localStorage.getItem('s') || '{}');
+        v[index] = (v[index] || 0) + 1;
+        localStorage.setItem('s', JSON.stringify(v));
+    }
+
     function openGroup(index) {
         const group = groups[index];
-        window.goatcounter && window.goatcounter.count({
-            path: `/social/group-${index}`
-        });
         document.getElementById('groupImages').innerHTML =
             group.images.map(src => `<img src="${src}" alt="">`).join('');
         document.getElementById('fullCaption').textContent = group.caption;
