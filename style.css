@@ -1,6 +1,12 @@
-html,
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-body {
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body {
   margin: 0 auto;
   padding: 20px;
   font-family: monospace;
