@@ -1,18 +1,18 @@
-html,
-
-body {
-  margin: 0 auto;
-  padding: 20px;
-  font-family: monospace;
-  text-align: justify;
-  font-size: 12pt;
-  color: rgba(0,0,0);
+html {
+  background-color: rgba(255,235,225);
   background-attachment: fixed;
   background-position: center;
-  background-color: rgba(255,235,225);
+}
+
+body {
+  margin: 1rem auto;
+  padding: 20px;
+  font-family: monospace;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: rgba(0,0,0);
+  text-align: justify;
   max-width: 80ch;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
 }
 
 img {
