@@ -327,7 +327,7 @@
        </tbody>
     </table>
 
-    <h4><u>More details on the HerBIE nomenclature:</u></h4>
+    <h4><u>Details on the HerBIE nomenclature:</u></h4>
     <p>The HerBIE nomenclature is a system of names for the most used bands
     within the IMEGIN collaboration. In case the <i>name</i> field is any of
     the following, then the <i>resolution</i> will be defined as follows.</p>
@@ -679,14 +679,23 @@
         region was defined to be 15x15 arcmins as shown in the
         example above.</i></p>
     </div>
+
+    <h4><u>Details on the diagnosis plots:</u></h4>
+    * CUTOUT_FRAME_{body}_{band}: the input image before the cutout, with the
+    body centre marked as a red dot and the cutout bounding box overlaid as a
+    red rectangle. <br><br> 
+    * CUTOUT_{body}_{band}: the resulting image after the cutout operation,
+    cropped to the <i>raTrim</i> × <i>decTrim</i> region centred on the source
+    coordinates.<br>
+
     </div>
 
     <div id="hip.foregroundMask" class="sub-content-paragraph" >
     <h4>hip.foregroundMask</h4>
-    <p>This step allows to mask foreground objects within a specific area
-    centered at <i>ra</i>, <i>dec</i> as defined in <i>geometry</i>. This step
-    is defined with four fields: <i>band</i>, <i>raTrim</i>, <i>decTrim</i>,
-    and <i>maskFactor</i>.</p> 
+    <p>This step allows to mask foreground objects from the GAIA catalog within
+    a specific area centered at <i>ra</i>, <i>dec</i> as defined in
+    <i>geometry</i>. This step is defined with four fields: <i>band</i>,
+    <i>raTrim</i>, <i>decTrim</i>, and <i>maskFactor</i>.</p> 
 
     band:<br>
     * <u>Validation</u>: Required.<br>
@@ -734,7 +743,7 @@
         maskFactor of 8 as seen in the example above.</i></p>
     </div>
 
-    <h4>More details on the choice of <i>maskFactor</i>:</h4>
+    <h4><u>Details on the choice of <i>maskFactor</i>:</u></h4>
     <p>The <i>maskFactor</i> scales the size of the masked regions around
     foreground sources. It multiplies the base radius corresponding to the
     object's magnitude as seen in the following table. This is useful to adjust
@@ -776,6 +785,18 @@
           </tbody>
         </table>
     </div>
+    <h4><u>Details on the diagnosis plots:</u></h4>
+    * FOREGROUNDMASK_MASK_{body}_{band}: the combined boolean mask where
+    foreground sources identified from the Gaia catalogue are masked with
+    circular apertures whose radii are scaled by <i>maskFactor</i>. White
+    pixels indicate masked regions; black pixels are unmasked.<br><br> 
+    * FOREGROUNDMASK_DATA_{body}_{band}: the data after foreground masking,
+    with three visual overlays: (1) a red dashed ellipse marking the galaxy's
+    elliptical aperture, defined by <i>semiMajorAxis</i>, <i>axialRatio</i>,
+    and <i>positionAngle</i>, with a translucent red fill labelled "Excluded
+    region"; (2) a red dashed rectangle marking the trim boundaries defined by
+    <i>raTrim</i> and <i>decTrim</i>; (3) semi-transparent red shading outside
+    the trim rectangle to indicate areas excluded from the analysis.<br>
     </div>
 
     <div id="hip.skySubtract" class="sub-content-paragraph" >
@@ -827,7 +848,7 @@
         NGC4254.</i></p>
     </div>
 
-    <h4><u>More details on the choice of <i>cellFactor</i>:</u></h4>
+    <h4><u>Details on the choice of <i>cellFactor</i>:</u></h4>
     <p>The background interpolation operation is done with the Background2D
     object from photutils. First, a low-resolution background map is estimated
     within boxes of a grid, and then interpolated to create the final
@@ -843,6 +864,20 @@
         <img src="../images/skySubtract_MIPS1_meshes.png" alt="Sky-subtract meshes for MIPS1 image of NGC4254." width="100%">
         <p class="caption"><i>Grid structure corresponding to a cellFactor of 10 for MIPS1.</i></p>
     </div>
+    <h4><u>Details on the diagnosis plots:</u></h4>
+    * SKYSUBTRACT_BKG_{body}_{band}: the interpolated background model
+    estimated by <i>Background2D</i> from <i>photutils</i>. It represents the
+    large-scale sky emission to be subtracted from the data. Invalid input
+    pixels are masked as NaN (shown as blank).<br><br> 
+    * SKYSUBTRACT_RMS_{body}_{band}: the RMS map of the background estimation
+    from <i>Background2D.background_rms</i>. It shows the per-cell uncertainty
+    of the background model, useful for identifying regions where the
+    background estimate is noisier.<br><br> 
+    * SKYSUBTRACT_MESHES_{body}_{band}: the data with the source region masked
+    out so that only background pixels remain, with the background mesh grid
+    overlaid. Red dots mark the centres of the grid boxes used by
+    <i>Background2D</i> for the low-resolution background estimation. The mesh
+    spacing is controlled by <i>cellFactor</i>.<br>
     </div>                                                                            
                                                                                       
     <div id="hip.degrade" class="sub-content-paragraph" >
@@ -895,6 +930,13 @@
         arcseconds to SPIRE3 with resolution of 36 arcseconds
         for NGC4254.</i></p>
     </div>
+    <h4><u>Details on the diagnosis plots:</u></h4>
+    * DEGRADE_{body}_{band}: the data after convolution to the target lower
+    resolution. The convolution is performed either with a user-supplied kernel
+    FITS file or with a Gaussian kernel constructed from the difference between
+    the initial and target FWHM.<br><br>
+    * DEGRADE_KERNEL_{body}_{band}: the convolution kernel employed for the
+    degradation.<br>
     </div>
 
     <div id="hip.regrid" class="sub-content-paragraph" >
@@ -937,6 +979,11 @@
         arcseconds to a pixel size of 12 arcseconds as of SPIRE3
         for NGC4254.</i></p>
     </div>
+    <h4><u>Details on the diagnosis plots:</u></h4>
+    * REGRID_{body}_{band}: the data after reprojection to the target world
+    coordinate system using <i>reproject_interp</i>. The pixel grid,
+    projection, and pixel scale now match those of the target FITS file
+    specified via the <i>target</i> parameter.<br>
     </div>
 
     <div id="hip.integrate" class="sub-content-paragraph" >
@@ -978,6 +1025,25 @@
         <p class="caption"><i>Elliptical aperture with sizeFactor of 1 to
         perform aperture photometry on MIPS1 image of NGC4254.</i></p>
     </div>
+    <h4><u>Details on the diagnosis plots:</u></h4>
+    * INTEGRATE_{body}_{band}: the data with three overlaid features: (1) sigma
+    contour levels at 1σ (orange), 3σ (yellow), and 5σ (green) computed from
+    3σ-clipped statistics on the <b>background pixels only</b> (2) the
+    elliptical photometry aperture (red dashed line), defined by the galaxy
+    geometry and scaled by <i>sizeFactor</i>; (3) the source centre marked with
+    a red dot. <br><br> 
+    * INTEGRATE_GROWTHCURVE_{body}_{band}: the data with a series of concentric
+    elliptical apertures at radii from 0.1 to 10.0 times the semi-major axis in
+    increments of 0.1. The source centre is marked with a red dot. This
+    visualises the full grid of apertures over which the photometry is
+    integrated to construct the growth curve.<br><br>
+    * INTEGRATE_PLOT_{body}_{band}: the cumulative flux (Jy) as a function of
+    aperture radius, shown in units of the semi-major axis on the bottom x-axis
+    and in pixels on the top x-axis. The primary y-axis (left) gives the
+    cumulative flux in Jy; the secondary y-axis (right) gives the normalised
+    cumulative flux as a percentage of the total flux enclosed by the largest
+    aperture (10× rma). A red dashed vertical line marks the <i>sizeFactor</i>
+    used for the final aperture photometry.<br>
     </div>
 
     <div id="core.subtract" class="sub-content-paragraph" >
