@@ -15,81 +15,84 @@
     <div class="gallery" id="gallery"></div>
 
     <div class="view-full" id="viewFull">
-        <div id="groupImages"></div>
-        <p id="fullCaption"></p>
+        <span class="view-full-close" id="viewFullClose">&times;</span>
+        <span class="view-full-nav view-full-prev" id="viewFullPrev">&#10094;</span>
+        <span class="view-full-nav view-full-next" id="viewFullNext">&#10095;</span>
+        <img id="viewFullImg" src="" alt="">
     </div>
 
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="3804bd6c-c9a2-489d-afc0-c93000c29db3"
+      data-page-id="social"
+      data-page-url="https://jctdrs.github.io/social.html"
+      data-page-title="Social / jctdrs"
+    ></div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
     <hr>
-    <nav id="nav">
+    <nav>
         <a href="index.html" class="home-btn"><b>Home</b></a>
     </nav>
     <hr>
 
     <script>
-    const groups = [
-        {
-            images: [],
-            caption: ""
-        },
-    ];
+    let images = [];
+    let current = -1;
 
-    function getThumb(url) {
-        return url.replace('w_1200', 'w_400');
-    }
+    fetch('data/social.json')
+        .then(r => r.json())
+        .then(data => {
+            images = data;
+            document.getElementById('gallery').innerHTML =
+                images.map((url, i) =>
+                    `<a class="gallery-item" href="#" onclick="openView(${i}); return false;">
+                        <img src="${url.replace('w_1200', 'w_400')}" alt="">
+                    </a>`
+                ).join('');
+        });
 
-    function renderGallery() {
-        const gallery = document.getElementById('gallery');
-        gallery.innerHTML = groups.map((g, i) => {
-            const isAlbum = g.images.length > 1;
-            return `<button class="gallery-item" onclick="openGroup(${i})">
-                <img src="${getThumb(g.images[0])}" alt="">
-                ${isAlbum ? '<span class="group-badge">+</span>' : ''}
-            </button>`;
-        }).join('');
-    }
-
-    function openGroup(index) {
-        const group = groups[index];
-        document.getElementById('groupImages').innerHTML =
-            group.images.map(src => `<img src="${src}" alt="">`).join('');
-        document.getElementById('fullCaption').textContent = group.caption;
+    function openView(i) {
+        current = i;
+        document.getElementById('viewFullImg').src = images[i];
         document.getElementById('gallery').style.display = 'none';
         document.getElementById('viewFull').style.display = 'block';
-        document.getElementById('nav').innerHTML =
-            '<a href="index.html" class="home-btn"><b>Home</b></a>' +
-            '<a href="social.html" class="home-btn"><b>Social</b></a>';
+        document.querySelector('nav').style.display = 'none';
         window.scrollTo(0, 0);
-        history.pushState({ index }, '');
+        history.pushState({ view: true }, '');
     }
 
-    function showGallery() {
+    function closeView() {
         document.getElementById('viewFull').style.display = 'none';
         document.getElementById('gallery').style.display = 'grid';
-        document.getElementById('nav').innerHTML =
-            '<a href="index.html" class="home-btn"><b>Home</b></a>';
+        document.querySelector('nav').style.display = 'flex';
         history.pushState({}, '');
     }
 
-    window.onpopstate = function(e) {
-        if (e.state && e.state.index !== undefined) {
-            const group = groups[e.state.index];
-            document.getElementById('groupImages').innerHTML =
-                group.images.map(src => `<img src="${src}" alt="">`).join('');
-            document.getElementById('fullCaption').textContent = group.caption;
-            document.getElementById('gallery').style.display = 'none';
-            document.getElementById('viewFull').style.display = 'block';
-            document.getElementById('nav').innerHTML =
-                '<a href="index.html" class="home-btn"><b>Home</b></a>' +
-                '<a href="social.html" class="home-btn"><b>Social</b></a>';
-        } else {
-            document.getElementById('viewFull').style.display = 'none';
-            document.getElementById('gallery').style.display = 'grid';
-            document.getElementById('nav').innerHTML =
-                '<a href="index.html" class="home-btn"><b>Home</b></a>';
-        }
+    function prevImage() {
+        if (current > 0) openView(current - 1);
+    }
+
+    function nextImage() {
+        if (current < images.length - 1) openView(current + 1);
+    }
+
+    document.getElementById('viewFullClose').onclick = closeView;
+    document.getElementById('viewFullPrev').onclick = prevImage;
+    document.getElementById('viewFullNext').onclick = nextImage;
+
+    document.addEventListener('keydown', e => {
+        if (current === -1) return;
+        if (e.key === 'Escape') closeView();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+
+    document.getElementById('viewFull').onclick = e => {
+        if (e.target === document.getElementById('viewFull')) closeView();
     };
 
-    renderGallery();
+    window.onpopstate = () => { if (current !== -1) closeView(); };
     </script>
 </body>
 </html>
