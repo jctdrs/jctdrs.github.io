@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Upload all photos in a directory to Cloudinary.
+"""Upload photos from an Ente export directory to Cloudinary.
 
 Outputs a flat list of image URLs in data/social.json.
 
 Usage:
-  python3 publish_social.py --dir ~/DCIM/Social/
+  python3 publish_social.py --dir ~/EnteExport/
 """
 
 import argparse, json, os, sys
