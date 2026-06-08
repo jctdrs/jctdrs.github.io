@@ -37,29 +37,29 @@
     <hr>
 
     <script>
-    let images = [];
-    let current = -1;
+    var images = [], current = -1;
 
-    fetch('data/social.json')
-        .then(r => r.json())
-        .then(data => {
-            images = data;
-            document.getElementById('gallery').innerHTML =
-                images.map((url, i) =>
-                    `<a class="gallery-item" href="#" onclick="openView(${i}); return false;">
-                        <img src="${url.replace('w_1200', 'w_400')}" alt="">
-                    </a>`
-                ).join('');
-        });
+    function t(u) { return u.replace('w_1200', 'w_400'); }
+
+    fetch('data/social.json').then(function(r) { return r.json(); }).then(function(data) {
+        images = data;
+        var html = '';
+        for (var i = 0; i < images.length; i++) {
+            html += '<a class="gallery-item" href="#" onclick="openView(' + i + '); return false;">' +
+                    '<img src="' + t(images[i]) + '" alt=""></a>';
+        }
+        document.getElementById('gallery').innerHTML = html;
+    });
 
     function openView(i) {
         current = i;
-        document.getElementById('viewFullImg').src = images[i];
+        document.getElementById('viewFullImg').src = t(images[i]);
         document.getElementById('gallery').style.display = 'none';
         document.getElementById('viewFull').style.display = 'block';
         document.querySelector('nav').style.display = 'none';
         window.scrollTo(0, 0);
         history.pushState({ view: true }, '');
+        if (i + 1 < images.length) { var a = new Image(); a.src = t(images[i + 1]); }
     }
 
     function closeView() {
@@ -69,30 +69,22 @@
         history.pushState({}, '');
     }
 
-    function prevImage() {
-        if (current > 0) openView(current - 1);
-    }
-
-    function nextImage() {
-        if (current < images.length - 1) openView(current + 1);
-    }
-
     document.getElementById('viewFullClose').onclick = closeView;
-    document.getElementById('viewFullPrev').onclick = prevImage;
-    document.getElementById('viewFullNext').onclick = nextImage;
+    document.getElementById('viewFullPrev').onclick = function() { if (current > 0) openView(current - 1); };
+    document.getElementById('viewFullNext').onclick = function() { if (current < images.length - 1) openView(current + 1); };
 
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', function(e) {
         if (current === -1) return;
         if (e.key === 'Escape') closeView();
-        if (e.key === 'ArrowLeft') prevImage();
-        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft' && current > 0) openView(current - 1);
+        if (e.key === 'ArrowRight' && current < images.length - 1) openView(current + 1);
     });
 
-    document.getElementById('viewFull').onclick = e => {
+    document.getElementById('viewFull').onclick = function(e) {
         if (e.target === document.getElementById('viewFull')) closeView();
     };
 
-    window.onpopstate = () => { if (current !== -1) closeView(); };
+    window.onpopstate = function() { if (current !== -1) closeView(); };
     </script>
 </body>
 </html>
