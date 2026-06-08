@@ -17,9 +17,10 @@
         <span class="view-full-close" id="viewFullClose">&times;</span>
         <span class="view-full-nav view-full-prev" id="viewFullPrev">&#10094;</span>
         <span class="view-full-nav view-full-next" id="viewFullNext">&#10095;</span>
+        <span class="view-full-counter" id="viewFullCounter"></span>
         <img id="viewFullImg" src="" alt="">
     </div>
-    <p>Leave a comment!</p><br>
+
     <div id="cusdis_thread"
       data-host="https://cusdis.com"
       data-app-id="3804bd6c-c9a2-489d-afc0-c93000c29db3"
@@ -36,7 +37,7 @@
     <hr>
 
     <script>
-    var images = [], current = -1;
+    var images = [], current = -1, startX = 0;
 
     function t(u) { return u.replace('w_1200', 'w_400'); }
 
@@ -53,6 +54,7 @@
     function openView(i) {
         current = i;
         document.getElementById('viewFullImg').src = t(images[i]);
+        document.getElementById('viewFullCounter').textContent = (i + 1) + ' / ' + images.length;
         document.getElementById('gallery').style.display = 'none';
         document.getElementById('viewFull').style.display = 'block';
         document.querySelector('nav').style.display = 'none';
@@ -77,6 +79,17 @@
         if (e.key === 'Escape') closeView();
         if (e.key === 'ArrowLeft' && current > 0) openView(current - 1);
         if (e.key === 'ArrowRight' && current < images.length - 1) openView(current + 1);
+    });
+
+    document.getElementById('viewFull').addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.getElementById('viewFull').addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) < 50) return;
+        if (dx > 0 && current > 0) openView(current - 1);
+        if (dx < 0 && current < images.length - 1) openView(current + 1);
     });
 
     document.getElementById('viewFull').onclick = function(e) {

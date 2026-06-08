@@ -162,6 +162,17 @@ nav {
 .view-full-nav:hover {
     background: rgba(255,255,255,0.1);
 }
+
+.view-full-counter {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #aaa;
+    font-size: 0.9rem;
+    z-index: 101;
+    pointer-events: none;
+}
 @media (max-width: 600px) {
     .gallery {
         gap: 8px;
