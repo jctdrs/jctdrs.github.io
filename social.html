@@ -40,28 +40,28 @@
     <script>
     var images = [], current = -1, startX = 0;
 
-    function t(u) { return u.replace('w_1200', 'w_400'); }
+    function t(u) { return (u || '').replace('w_1200', 'w_400'); }
 
     fetch('data/social.json').then(function(r) { return r.json(); }).then(function(data) {
         images = data;
         var html = '';
         for (var i = 0; i < images.length; i++) {
             html += '<a class="gallery-item" href="#" onclick="openView(' + i + '); return false;">' +
-                    '<img src="' + t(images[i]) + '" alt=""></a>';
+                    '<img src="' + t(images[i].url) + '" alt=""></a>';
         }
         document.getElementById('gallery').innerHTML = html;
     });
 
     function openView(i) {
         current = i;
-        document.getElementById('viewFullImg').src = t(images[i]);
+        document.getElementById('viewFullImg').src = t(images[i].url);
         document.getElementById('viewFullCounter').textContent = (i + 1) + ' / ' + images.length;
         document.getElementById('gallery').style.display = 'none';
         document.getElementById('viewFull').style.display = 'block';
         document.querySelector('nav').style.display = 'none';
         window.scrollTo(0, 0);
         history.pushState({ view: true }, '');
-        if (i + 1 < images.length) { var a = new Image(); a.src = t(images[i + 1]); }
+        if (i + 1 < images.length) { var a = new Image(); a.src = t(images[i + 1].url); }
     }
 
     function closeView() {
