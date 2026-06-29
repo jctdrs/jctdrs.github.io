@@ -55,9 +55,9 @@
         document.getElementById('pagination').innerHTML = html;
     }
 
-    function prevPage() { if (page > 0) { page--; renderPage(); } }
-    function nextPage() { if ((page + 1) * pageSize < images.length) { page++; renderPage(); } }
-    function goToPage(n) { page = n; renderPage(); }
+    function prevPage() { if (page > 0) { page--; renderPage(); window.scrollTo(0, 0); } }
+    function nextPage() { if ((page + 1) * pageSize < images.length) { page++; renderPage(); window.scrollTo(0, 0); } }
+    function goToPage(n) { page = n; renderPage(); window.scrollTo(0, 0); }
 
     fetch('data/social.json').then(function(r) { return r.json(); }).then(function(data) {
         images = data;
