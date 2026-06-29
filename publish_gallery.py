@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export Social album from Ente and upload photos to Cloudinary."""
+"""Export Gallery album from Ente and upload photos to Cloudinary."""
 
 import json, os, subprocess
 from pathlib import Path
@@ -11,15 +11,15 @@ import cloudinary.uploader
 load_dotenv()
 
 ROOT = Path(__file__).resolve().parent
-FOLDER = "Social"
+FOLDER = "Gallery"
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif", ".gif"}
 TRACKING = ROOT / "data" / ".uploads.json"
-OUTPUT = ROOT / "data" / "social.json"
-PHOTO_DIR = (Path.home() / "Pictures" / "Ente" / "Social").resolve()
+OUTPUT = ROOT / "data" / "gallery.json"
+PHOTO_DIR = (Path.home() / "Pictures" / "Ente" / "Gallery").resolve()
 
 def run_export():
-    print("Exporting Social album from Ente…")
-    subprocess.run(["ente-cli", "export", "--albums", "Social"], check=True)
+    print("Exporting Gallery album from Ente…")
+    subprocess.run(["ente-cli", "export", "--albums", "Gallery"], check=True)
 
 def load_tracking():
     return json.loads(TRACKING.read_text()) if TRACKING.exists() else {}

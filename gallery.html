@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="modern-normalize.css">
     <link rel="stylesheet" href="style.css">
     <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-    <title>Social / jctdrs</title>
+    <title>Gallery / jctdrs</title>
 </head>
 <body>
-    <h4>Social</h4>
+    <h4>Gallery</h4>
     <div class="gallery" id="gallery"></div>
     <div class="pagination" id="pagination"></div>
 
@@ -59,13 +59,14 @@
     function nextPage() { if ((page + 1) * pageSize < images.length) { page++; renderPage(); window.scrollTo(0, 0); } }
     function goToPage(n) { page = n; renderPage(); window.scrollTo(0, 0); }
 
-    fetch('data/social.json').then(function(r) { return r.json(); }).then(function(data) {
+    fetch('data/gallery.json').then(function(r) { return r.json(); }).then(function(data) {
         images = data;
         renderPage();
     });
 
     function openView(i) {
         current = i;
+        page = Math.floor(i / pageSize);
         document.getElementById('viewFullImg').src = t(images[i].url);
         document.getElementById('viewFullCounter').textContent = (i + 1) + ' / ' + images.length;
         document.getElementById('gallery').style.display = 'none';
@@ -83,6 +84,7 @@
         document.getElementById('pagination').style.display = 'flex';
         document.querySelector('nav').style.display = 'flex';
         history.pushState({}, '');
+        renderPage();
     }
 
     document.getElementById('viewFullClose').onclick = closeView;
