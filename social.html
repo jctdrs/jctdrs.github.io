@@ -12,6 +12,7 @@
 <body>
     <h4>Social</h4>
     <div class="gallery" id="gallery"></div>
+    <div class="pagination" id="pagination"></div>
 
     <div class="view-full" id="viewFull">
         <span class="view-full-close" id="viewFullClose">&times;</span>
@@ -20,17 +21,7 @@
         <span class="view-full-counter" id="viewFullCounter"></span>
         <img id="viewFullImg" src="" alt="">
     </div>
-    Leave a comment below!<br><br>
-
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="3804bd6c-c9a2-489d-afc0-c93000c29db3"
-      data-page-id="social"
-      data-page-url="https://jctdrs.github.io/social.html"
-      data-page-title="Social / jctdrs"
-    ></div>
-    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-
+    <br>
     <hr>
     <nav>
         <a href="index.html" class="home-btn"><b>Home</b></a>
@@ -38,18 +29,39 @@
     <hr>
 
     <script>
-    var images = [], current = -1, startX = 0;
+    var images = [], current = -1, startX = 0, page = 0, pageSize = 12;
 
     function t(u) { return (u || '').replace('w_1200', 'w_400'); }
 
-    fetch('data/social.json').then(function(r) { return r.json(); }).then(function(data) {
-        images = data;
+    function renderPage() {
+        var start = page * pageSize;
+        var end = Math.min(start + pageSize, images.length);
         var html = '';
-        for (var i = 0; i < images.length; i++) {
+        for (var i = start; i < end; i++) {
             html += '<a class="gallery-item" href="#" onclick="openView(' + i + '); return false;">' +
                     '<img src="' + t(images[i].url) + '" alt=""></a>';
         }
         document.getElementById('gallery').innerHTML = html;
+        renderPagination();
+    }
+
+    function renderPagination() {
+        var totalPages = Math.ceil(images.length / pageSize);
+        var html = '<button class="page-arrow" onclick="prevPage()" ' + (page === 0 ? 'disabled' : '') + '>&#10094;</button>';
+        for (var i = 0; i < totalPages; i++) {
+            html += '<button onclick="goToPage(' + i + ')" class="' + (i === page ? 'active' : '') + '">' + (i + 1) + '</button>';
+        }
+        html += '<button class="page-arrow" onclick="nextPage()" ' + (page >= totalPages - 1 ? 'disabled' : '') + '>&#10095;</button>';
+        document.getElementById('pagination').innerHTML = html;
+    }
+
+    function prevPage() { if (page > 0) { page--; renderPage(); } }
+    function nextPage() { if ((page + 1) * pageSize < images.length) { page++; renderPage(); } }
+    function goToPage(n) { page = n; renderPage(); }
+
+    fetch('data/social.json').then(function(r) { return r.json(); }).then(function(data) {
+        images = data;
+        renderPage();
     });
 
     function openView(i) {
@@ -57,6 +69,7 @@
         document.getElementById('viewFullImg').src = t(images[i].url);
         document.getElementById('viewFullCounter').textContent = (i + 1) + ' / ' + images.length;
         document.getElementById('gallery').style.display = 'none';
+        document.getElementById('pagination').style.display = 'none';
         document.getElementById('viewFull').style.display = 'block';
         document.querySelector('nav').style.display = 'none';
         window.scrollTo(0, 0);
@@ -67,6 +80,7 @@
     function closeView() {
         document.getElementById('viewFull').style.display = 'none';
         document.getElementById('gallery').style.display = 'grid';
+        document.getElementById('pagination').style.display = 'flex';
         document.querySelector('nav').style.display = 'flex';
         history.pushState({}, '');
     }
