@@ -692,10 +692,10 @@
 
     <div id="hip.foregroundMask" class="sub-content-paragraph" >
     <h4>hip.foregroundMask</h4>
-    <p>This step allows to mask foreground objects from the GAIA catalog within
-    a specific area centered at <i>ra</i>, <i>dec</i> as defined in
-    <i>geometry</i>. This step is defined with four fields: <i>band</i>,
-    <i>raTrim</i>, <i>decTrim</i>, and <i>maskFactor</i>.</p> 
+    <p>This step allows to mask foreground objects from the GAIA or 2MASS
+    catalog within a specific area centered at <i>ra</i>, <i>dec</i> as defined
+    in <i>geometry</i>. This step is defined with five fields: <i>band</i>,
+    <i>raTrim</i>, <i>decTrim</i>, <i>maskFactor</i>, and <i>catalog</i>.</p> 
 
     band:<br>
     * <u>Validation</u>: Required.<br>
@@ -717,6 +717,14 @@
     * <u>Type</u>: Float.<br> 
     * <u>Description</u>: Factor multiplier for mask radius.<br><br>
 
+    catalog:<br>
+    * <u>Validation</u>: Not required, defaults to "GAIA".<br>
+    * <u>Type</u>: Literal string ("GAIA", "2MASS").<br> 
+    * <u>Description</u>: Catalog from which to retrieve foreground sources.
+    "GAIA" queries the Gaia DR3 catalog (<i>I/350</i>) and uses the G-band
+    magnitude. "2MASS" queries the 2MASS Point Source Catalog (<i>II/246</i>)
+    and uses the J-band magnitude.<br><br>
+
     <table style="text-align:left; width:100%; border=4"> 
         <tbody>
             <tr>
@@ -730,6 +738,7 @@
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;raTrim: 5<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;decTrim: 5<br>
                         &#160;&#160;&#160;&#160;&#160;&#160;&#160;maskFactor: 8<br>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;catalog: GAIA<br>
                     </i>
                </td>
            </tr>
