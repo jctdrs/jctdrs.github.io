@@ -16,6 +16,14 @@
 #p1:checked ~ .pagination label[for="p1"] {background: #666; color: #fff; border-color: #666; }
 #p2:checked ~ .pagination label[for="p2"] {background: #666; color: #fff; border-color: #666; }
 #p3:checked ~ .pagination label[for="p3"] {background: #666; color: #fff; border-color: #666; }
+#p0:checked ~ .pagination .prev-boundary { display: inline-block; }
+#p0:checked ~ .pagination .next-0 { display: inline-block; }
+#p1:checked ~ .pagination .prev-1 { display: inline-block; }
+#p1:checked ~ .pagination .next-1 { display: inline-block; }
+#p2:checked ~ .pagination .prev-2 { display: inline-block; }
+#p2:checked ~ .pagination .next-2 { display: inline-block; }
+#p3:checked ~ .pagination .prev-3 { display: inline-block; }
+#p3:checked ~ .pagination .next-boundary { display: inline-block; }
     </style>
     <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <title>Gallery / jctdrs</title>
@@ -88,18 +96,23 @@
     </div>
 
     <div class="pagination">
-        <label for="p0" class="page-arrow">&#10094;</label>
+            <label class="page-arrow prev prev-boundary">&#10094;</label>
+            <label for="p0" class="page-arrow prev prev-1">&#10094;</label>
+            <label for="p1" class="page-arrow prev prev-2">&#10094;</label>
+            <label for="p2" class="page-arrow prev prev-3">&#10094;</label>
             <label for="p0" class="page-btn">1</label>
             <label for="p1" class="page-btn">2</label>
             <label for="p2" class="page-btn">3</label>
             <label for="p3" class="page-btn">4</label>
-        <label for="p3" class="page-arrow">&#10095;</label>
+            <label for="p1" class="page-arrow next next-0">&#10095;</label>
+            <label for="p2" class="page-arrow next next-1">&#10095;</label>
+            <label for="p3" class="page-arrow next next-2">&#10095;</label>
+            <label class="page-arrow next next-boundary">&#10095;</label>
     </div>
 
     <div class="view-full" id="img0">
         <a href="#page0" class="view-full-close">&times;</a>
         <a href="#img1" class="view-full-nav view-full-next">&#10095;</a>
-
         <span class="view-full-counter">1 / 45</span>
         <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782983461/Gallery/20260701_220336_ijx91a" alt="">
     </div>
@@ -407,7 +420,6 @@
     <div class="view-full" id="img44">
         <a href="#page3" class="view-full-close">&times;</a>
         <a href="#img43" class="view-full-nav view-full-prev">&#10094;</a>
-
         <span class="view-full-counter">45 / 45</span>
         <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747167/Gallery/20190907_124505_s5grje" alt="">
     </div>

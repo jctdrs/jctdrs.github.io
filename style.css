@@ -206,6 +206,10 @@ input[name="page"] { display: none; }
     border-radius: 4px;
 }
 
+.pagination .prev, .pagination .next {
+    display: none;
+}
+
 .pagination .page-arrow {
     font-size: 1.2rem;
     padding: 6px 12px;

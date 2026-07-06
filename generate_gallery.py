@@ -41,11 +41,28 @@ for i, item in enumerate(items):
         items_in_page = 0
         page_idx += 1
 
-# Pagination: left arrow, page buttons, right arrow
-pagination_labels = f'        <label for="p0" class="page-arrow">&#10094;</label>\n'
+# Arrow labels: per-page prev/next
+prev_arrows = ""
+next_arrows = ""
+arrow_rules = ""
+for pi in range(num_pages):
+    if pi == 0:
+        prev_arrows += f'            <label class="page-arrow prev prev-boundary">&#10094;</label>\n'
+        arrow_rules += f"#p{pi}:checked ~ .pagination .prev-boundary {{ display: inline-block; }}\n"
+    else:
+        prev_arrows += f'            <label for="p{pi - 1}" class="page-arrow prev prev-{pi}">&#10094;</label>\n'
+        arrow_rules += f"#p{pi}:checked ~ .pagination .prev-{pi} {{ display: inline-block; }}\n"
+    if pi == num_pages - 1:
+        next_arrows += f'            <label class="page-arrow next next-boundary">&#10095;</label>\n'
+        arrow_rules += f"#p{pi}:checked ~ .pagination .next-boundary {{ display: inline-block; }}\n"
+    else:
+        next_arrows += f'            <label for="p{pi + 1}" class="page-arrow next next-{pi}">&#10095;</label>\n'
+        arrow_rules += f"#p{pi}:checked ~ .pagination .next-{pi} {{ display: inline-block; }}\n"
+
+pagination_labels = prev_arrows
 for pi in range(num_pages):
     pagination_labels += f'            <label for="p{pi}" class="page-btn">{pi + 1}</label>\n'
-pagination_labels += f'        <label for="p{num_pages - 1}" class="page-arrow">&#10095;</label>'
+pagination_labels += next_arrows[:-1]  # remove trailing newline
 
 # Lightboxes
 lightboxes = ""
@@ -57,8 +74,6 @@ for i, item in enumerate(items):
         lightboxes += f'        <a href="#img{i - 1}" class="view-full-nav view-full-prev">&#10094;</a>\n'
     if i < total - 1:
         lightboxes += f'        <a href="#img{i + 1}" class="view-full-nav view-full-next">&#10095;</a>\n'
-    if i == 0 or i == total - 1:
-        lightboxes += '\n'
     lightboxes += f'        <span class="view-full-counter">{i + 1} / {total}</span>\n'
     lightboxes += f'        <img src="{htmlmod.escape(item["url"])}" alt="">\n'
     lightboxes += '    </div>\n'
@@ -73,7 +88,7 @@ html_out = f"""<!DOCTYPE html>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://res.cloudinary.com">
     <style>
-{page_rules}{pag_rules}    </style>
+{page_rules}{pag_rules}{arrow_rules}    </style>
     <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <title>Gallery / jctdrs</title>
 </head>
