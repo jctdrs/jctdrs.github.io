@@ -89,11 +89,12 @@ html_out = f"""<!DOCTYPE html>
     <link rel="preconnect" href="https://res.cloudinary.com">
     <style>
 {page_rules}{pag_rules}{arrow_rules}    </style>
+    <meta name="description" content="Photo gallery.">
     <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <title>Gallery / jctdrs</title>
 </head>
 <body>
-    <h4>Gallery</h4>
+    <h1>Gallery</h1>
 
 {radio_inputs}
     <div class="gallery">

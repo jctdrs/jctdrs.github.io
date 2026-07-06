@@ -81,6 +81,16 @@ p {
   margin-top: 2rem;
 }
 
+h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;

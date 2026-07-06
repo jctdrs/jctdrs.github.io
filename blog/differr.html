@@ -14,11 +14,11 @@
     <title>differr / Blog</title>
 </head>
 <body> 
-    <b>differr: error propagation through data pipelines</b><br>
+    <h1>differr: error propagation through data pipelines</h1>
     <i>How to propagate uncertainties through a chain of non-linear operations
     ?</i>
     <div>
-        <h4>Idea</h4>
+        <h2>Idea</h2>
         <p>Let \(\boldsymbol{x} \in \mathbb{R}^{n}\) be a random vector with
         mean \(\boldsymbol{\mu_{x}}\) and covariance matrix
         \(\boldsymbol{\Sigma_{x}} \) and let \(f: \mathbb{R}^{n} \rightarrow
@@ -93,7 +93,7 @@
             regridding.</i></p>
         </div>
   
-        <h4>Example</h4>
+        <h2>Example</h2>
         <p>Assuming the input covariance matrix, \(\Sigma_{\boldsymbol{x}}\),
         to have zero non-diagonal elements, then every pixel \((i,j)\) of the
         initial uncertainty map is equal to the total variance,
@@ -146,7 +146,7 @@
             PACS1->SPIRE3 </i></p>
         </div>
 
-        <h4>Implementation</h4>
+        <h2>Implementation</h2>
         <p>To calculate the Jacobian corresponding to a chain of non-linear
         operations, i.e.  convolution and regridding, rewrite software in JAX
         and use automatic differentiation.. Implementation details to come..
