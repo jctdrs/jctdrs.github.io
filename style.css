@@ -94,8 +94,10 @@ nav {
    color: grey;
 }
 
-.gallery {
-    display: grid;
+input[name="page"] { display: none; }
+
+.page {
+    display: none;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 10px 0;
@@ -118,6 +120,12 @@ nav {
     opacity: 0.7;
 }
 
+.gallery-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    pointer-events: none;
+}
+
 .view-full {
     display: none;
     position: fixed;
@@ -126,6 +134,8 @@ nav {
     z-index: 100;
     cursor: pointer;
 }
+
+.view-full:target { display: block; }
 
 .view-full img {
     position: absolute;
@@ -185,7 +195,7 @@ nav {
     flex-wrap: wrap;
 }
 
-.pagination button {
+.pagination label {
     background: none;
     border: 1px solid #999;
     color: #555;
@@ -201,25 +211,9 @@ nav {
     padding: 6px 12px;
 }
 
-.pagination button:hover {
+.pagination label:hover {
     background: #ddd;
     color: #222;
-}
-
-.pagination button.active {
-    background: #666;
-    color: #fff;
-    border-color: #666;
-}
-
-.pagination button:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-.pagination button:disabled:hover {
-    background: none;
-    color: #555;
 }
 
 @media (max-width: 600px) {
@@ -229,13 +223,13 @@ nav {
         box-sizing: border-box;
     }
 
-    .gallery {
+    .page {
         grid-template-columns: repeat(2, 1fr);
         gap: 4px;
         padding: 0;
     }
 
-    .pagination button {
+    .pagination label {
         padding: 10px 16px;
         font-size: 1.1rem;
     }

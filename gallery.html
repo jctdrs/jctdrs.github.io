@@ -6,114 +6,417 @@
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="modern-normalize.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    <style>
+#p0:checked ~ .gallery #page0 { display: grid; }
+#p1:checked ~ .gallery #page1 { display: grid; }
+#p2:checked ~ .gallery #page2 { display: grid; }
+#p3:checked ~ .gallery #page3 { display: grid; }
+#p0:checked ~ .pagination label[for="p0"] {background: #666; color: #fff; border-color: #666; }
+#p1:checked ~ .pagination label[for="p1"] {background: #666; color: #fff; border-color: #666; }
+#p2:checked ~ .pagination label[for="p2"] {background: #666; color: #fff; border-color: #666; }
+#p3:checked ~ .pagination label[for="p3"] {background: #666; color: #fff; border-color: #666; }
+    </style>
     <script data-goatcounter="https://jctdrs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <title>Gallery / jctdrs</title>
 </head>
 <body>
     <h4>Gallery</h4>
-    <div class="gallery" id="gallery"></div>
-    <div class="pagination" id="pagination"></div>
 
-    <div class="view-full" id="viewFull">
-        <span class="view-full-close" id="viewFullClose">&times;</span>
-        <span class="view-full-nav view-full-prev" id="viewFullPrev">&#10094;</span>
-        <span class="view-full-nav view-full-next" id="viewFullNext">&#10095;</span>
-        <span class="view-full-counter" id="viewFullCounter"></span>
-        <img id="viewFullImg" src="" alt="">
+    <input type="radio" name="page" id="p0" checked>
+    <input type="radio" name="page" id="p1">
+    <input type="radio" name="page" id="p2">
+    <input type="radio" name="page" id="p3">
+
+    <div class="gallery">
+        <div class="page" id="page0">
+            <a href="#img0" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782983461/Gallery/20260701_220336_ijx91a" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img1" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747040/Gallery/20260624_203917_bgtntc" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img2" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747043/Gallery/20260614_164126_nf3pi6" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img3" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747046/Gallery/20260607_130324_rtyuui" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img4" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747049/Gallery/20260607_123903_logren" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img5" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747052/Gallery/20260606_152941_qfjphv" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img6" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747056/Gallery/20260531_133839_t6pge0" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img7" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747062/Gallery/20260516_182129_0_fe83ym" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img8" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747066/Gallery/20260502_172024_il8bux" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img9" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747070/Gallery/20260424_230536_nxkrng" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img10" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747072/Gallery/20260225_144029_ydder8" alt="" decoding="async" fetchpriority="high"></a>
+            <a href="#img11" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747075/Gallery/20251214_132909_kkxhts" alt="" decoding="async" fetchpriority="high"></a>
+        </div>
+        <div class="page" id="page1">
+            <a href="#img12" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747078/Gallery/20251214_131738_uhnu8m" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img13" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747081/Gallery/20251121_194347_eniyrc" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img14" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747084/Gallery/20251112_182715_z6ugfp" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img15" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747086/Gallery/20251002_215639_ooq4b1" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img16" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1783000776/Gallery/20250826_170700_fmiefw" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img17" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747089/Gallery/20250824_121301_vabcrs" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img18" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747092/Gallery/20250704_110712_dc9jkt" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img19" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747094/Gallery/20250531_145311_vk5ury" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img20" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747097/Gallery/20250529_131046_vfjzvj" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img21" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747100/Gallery/20250424_174822_mnejr5" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img22" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747102/Gallery/20250417_205923_xifqo5" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img23" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747106/Gallery/20250408_192520_xpocjh" alt="" loading="lazy" decoding="async"></a>
+        </div>
+        <div class="page" id="page2">
+            <a href="#img24" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747111/Gallery/20250320_184221_ivk8pn" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img25" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747114/Gallery/20250303_140109_n8m4cs" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img26" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747117/Gallery/20250227_140425_bqygvi" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img27" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747121/Gallery/20241224_210009_xlsjwb" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img28" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747123/Gallery/20241209_215944_ccdfvc" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img29" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747125/Gallery/20241119_030858_mvaaix" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img30" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747129/Gallery/20241012_223925_u1ud8m" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img31" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747132/Gallery/20240929_152630_cl1jj2" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img32" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747134/Gallery/20240921_022837_r3ledr" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img33" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747135/Gallery/signal-2024-08-13-12-43-44-184_mklkz1" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img34" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747138/Gallery/20240523_212414_bndhzi" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img35" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747141/Gallery/20231228_222832_jjfje1" alt="" loading="lazy" decoding="async"></a>
+        </div>
+        <div class="page" id="page3">
+            <a href="#img36" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747145/Gallery/20230120_153928_vvcs1v" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img37" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747148/Gallery/20221216_222907_usuuzr" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img38" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747150/Gallery/20221024_194850_exwcsh" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img39" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747154/Gallery/20220730_004119_pf5gov" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img40" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747156/Gallery/20220623_185217_xiao1v" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img41" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747158/Gallery/-4j16ff_lliq12" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img42" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747159/Gallery/20210331_164017_tdqv38" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img43" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747161/Gallery/20201207_212342_tltrzr" alt="" loading="lazy" decoding="async"></a>
+            <a href="#img44" class="gallery-item"><img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_400,f_auto,q_auto/v1782747167/Gallery/20190907_124505_s5grje" alt="" loading="lazy" decoding="async"></a>
+            <div class="gallery-placeholder"></div>
+            <div class="gallery-placeholder"></div>
+            <div class="gallery-placeholder"></div>
+        </div>
     </div>
+
+    <div class="pagination">
+        <label for="p0" class="page-arrow">&#10094;</label>
+            <label for="p0" class="page-btn">1</label>
+            <label for="p1" class="page-btn">2</label>
+            <label for="p2" class="page-btn">3</label>
+            <label for="p3" class="page-btn">4</label>
+        <label for="p3" class="page-arrow">&#10095;</label>
+    </div>
+
+    <div class="view-full" id="img0">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img1" class="view-full-nav view-full-next">&#10095;</a>
+
+        <span class="view-full-counter">1 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782983461/Gallery/20260701_220336_ijx91a" alt="">
+    </div>
+    <div class="view-full" id="img1">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img0" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img2" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">2 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747040/Gallery/20260624_203917_bgtntc" alt="">
+    </div>
+    <div class="view-full" id="img2">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img1" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img3" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">3 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747043/Gallery/20260614_164126_nf3pi6" alt="">
+    </div>
+    <div class="view-full" id="img3">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img2" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img4" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">4 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747046/Gallery/20260607_130324_rtyuui" alt="">
+    </div>
+    <div class="view-full" id="img4">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img3" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img5" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">5 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747049/Gallery/20260607_123903_logren" alt="">
+    </div>
+    <div class="view-full" id="img5">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img4" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img6" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">6 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747052/Gallery/20260606_152941_qfjphv" alt="">
+    </div>
+    <div class="view-full" id="img6">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img5" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img7" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">7 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747056/Gallery/20260531_133839_t6pge0" alt="">
+    </div>
+    <div class="view-full" id="img7">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img6" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img8" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">8 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747062/Gallery/20260516_182129_0_fe83ym" alt="">
+    </div>
+    <div class="view-full" id="img8">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img7" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img9" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">9 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747066/Gallery/20260502_172024_il8bux" alt="">
+    </div>
+    <div class="view-full" id="img9">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img8" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img10" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">10 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747070/Gallery/20260424_230536_nxkrng" alt="">
+    </div>
+    <div class="view-full" id="img10">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img9" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img11" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">11 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747072/Gallery/20260225_144029_ydder8" alt="">
+    </div>
+    <div class="view-full" id="img11">
+        <a href="#page0" class="view-full-close">&times;</a>
+        <a href="#img10" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img12" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">12 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747075/Gallery/20251214_132909_kkxhts" alt="">
+    </div>
+    <div class="view-full" id="img12">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img11" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img13" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">13 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747078/Gallery/20251214_131738_uhnu8m" alt="">
+    </div>
+    <div class="view-full" id="img13">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img12" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img14" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">14 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747081/Gallery/20251121_194347_eniyrc" alt="">
+    </div>
+    <div class="view-full" id="img14">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img13" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img15" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">15 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747084/Gallery/20251112_182715_z6ugfp" alt="">
+    </div>
+    <div class="view-full" id="img15">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img14" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img16" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">16 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747086/Gallery/20251002_215639_ooq4b1" alt="">
+    </div>
+    <div class="view-full" id="img16">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img15" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img17" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">17 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1783000776/Gallery/20250826_170700_fmiefw" alt="">
+    </div>
+    <div class="view-full" id="img17">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img16" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img18" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">18 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747089/Gallery/20250824_121301_vabcrs" alt="">
+    </div>
+    <div class="view-full" id="img18">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img17" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img19" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">19 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747092/Gallery/20250704_110712_dc9jkt" alt="">
+    </div>
+    <div class="view-full" id="img19">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img18" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img20" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">20 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747094/Gallery/20250531_145311_vk5ury" alt="">
+    </div>
+    <div class="view-full" id="img20">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img19" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img21" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">21 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747097/Gallery/20250529_131046_vfjzvj" alt="">
+    </div>
+    <div class="view-full" id="img21">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img20" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img22" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">22 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747100/Gallery/20250424_174822_mnejr5" alt="">
+    </div>
+    <div class="view-full" id="img22">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img21" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img23" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">23 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747102/Gallery/20250417_205923_xifqo5" alt="">
+    </div>
+    <div class="view-full" id="img23">
+        <a href="#page1" class="view-full-close">&times;</a>
+        <a href="#img22" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img24" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">24 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747106/Gallery/20250408_192520_xpocjh" alt="">
+    </div>
+    <div class="view-full" id="img24">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img23" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img25" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">25 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747111/Gallery/20250320_184221_ivk8pn" alt="">
+    </div>
+    <div class="view-full" id="img25">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img24" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img26" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">26 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747114/Gallery/20250303_140109_n8m4cs" alt="">
+    </div>
+    <div class="view-full" id="img26">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img25" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img27" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">27 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747117/Gallery/20250227_140425_bqygvi" alt="">
+    </div>
+    <div class="view-full" id="img27">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img26" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img28" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">28 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747121/Gallery/20241224_210009_xlsjwb" alt="">
+    </div>
+    <div class="view-full" id="img28">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img27" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img29" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">29 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747123/Gallery/20241209_215944_ccdfvc" alt="">
+    </div>
+    <div class="view-full" id="img29">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img28" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img30" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">30 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747125/Gallery/20241119_030858_mvaaix" alt="">
+    </div>
+    <div class="view-full" id="img30">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img29" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img31" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">31 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747129/Gallery/20241012_223925_u1ud8m" alt="">
+    </div>
+    <div class="view-full" id="img31">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img30" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img32" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">32 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747132/Gallery/20240929_152630_cl1jj2" alt="">
+    </div>
+    <div class="view-full" id="img32">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img31" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img33" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">33 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747134/Gallery/20240921_022837_r3ledr" alt="">
+    </div>
+    <div class="view-full" id="img33">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img32" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img34" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">34 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747135/Gallery/signal-2024-08-13-12-43-44-184_mklkz1" alt="">
+    </div>
+    <div class="view-full" id="img34">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img33" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img35" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">35 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747138/Gallery/20240523_212414_bndhzi" alt="">
+    </div>
+    <div class="view-full" id="img35">
+        <a href="#page2" class="view-full-close">&times;</a>
+        <a href="#img34" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img36" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">36 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747141/Gallery/20231228_222832_jjfje1" alt="">
+    </div>
+    <div class="view-full" id="img36">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img35" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img37" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">37 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747145/Gallery/20230120_153928_vvcs1v" alt="">
+    </div>
+    <div class="view-full" id="img37">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img36" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img38" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">38 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747148/Gallery/20221216_222907_usuuzr" alt="">
+    </div>
+    <div class="view-full" id="img38">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img37" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img39" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">39 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747150/Gallery/20221024_194850_exwcsh" alt="">
+    </div>
+    <div class="view-full" id="img39">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img38" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img40" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">40 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747154/Gallery/20220730_004119_pf5gov" alt="">
+    </div>
+    <div class="view-full" id="img40">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img39" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img41" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">41 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747156/Gallery/20220623_185217_xiao1v" alt="">
+    </div>
+    <div class="view-full" id="img41">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img40" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img42" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">42 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747158/Gallery/-4j16ff_lliq12" alt="">
+    </div>
+    <div class="view-full" id="img42">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img41" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img43" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">43 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747159/Gallery/20210331_164017_tdqv38" alt="">
+    </div>
+    <div class="view-full" id="img43">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img42" class="view-full-nav view-full-prev">&#10094;</a>
+        <a href="#img44" class="view-full-nav view-full-next">&#10095;</a>
+        <span class="view-full-counter">44 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747161/Gallery/20201207_212342_tltrzr" alt="">
+    </div>
+    <div class="view-full" id="img44">
+        <a href="#page3" class="view-full-close">&times;</a>
+        <a href="#img43" class="view-full-nav view-full-prev">&#10094;</a>
+
+        <span class="view-full-counter">45 / 45</span>
+        <img src="https://res.cloudinary.com/dcsypb1xt/image/upload/w_2000,f_auto,q_auto/v1782747167/Gallery/20190907_124505_s5grje" alt="">
+    </div>
+
     <br>
     <hr>
     <nav>
         <a href="index.html" class="home-btn"><b>Home</b></a>
     </nav>
     <hr>
-
-    <script>
-    var images = [], current = -1, startX = 0, page = 0, pageSize = 12;
-
-    function t(u) { return (u || '').replace('w_1200', 'w_400'); }
-
-    function renderPage() {
-        var start = page * pageSize;
-        var end = Math.min(start + pageSize, images.length);
-        var html = '';
-        for (var i = start; i < end; i++) {
-            html += '<a class="gallery-item" href="#" onclick="openView(' + i + '); return false;">' +
-                    '<img src="' + t(images[i].url) + '" alt=""></a>';
-        }
-        document.getElementById('gallery').innerHTML = html;
-        renderPagination();
-    }
-
-    function renderPagination() {
-        var totalPages = Math.ceil(images.length / pageSize);
-        var html = '<button class="page-arrow" onclick="prevPage()" ' + (page === 0 ? 'disabled' : '') + '>&#10094;</button>';
-        for (var i = 0; i < totalPages; i++) {
-            html += '<button onclick="goToPage(' + i + ')" class="' + (i === page ? 'active' : '') + '">' + (i + 1) + '</button>';
-        }
-        html += '<button class="page-arrow" onclick="nextPage()" ' + (page >= totalPages - 1 ? 'disabled' : '') + '>&#10095;</button>';
-        document.getElementById('pagination').innerHTML = html;
-    }
-
-    function prevPage() { if (page > 0) { page--; renderPage(); window.scrollTo(0, 0); } }
-    function nextPage() { if ((page + 1) * pageSize < images.length) { page++; renderPage(); window.scrollTo(0, 0); } }
-    function goToPage(n) { page = n; renderPage(); window.scrollTo(0, 0); }
-
-    fetch('data/gallery.json').then(function(r) { return r.json(); }).then(function(data) {
-        images = data;
-        renderPage();
-    });
-
-    function openView(i) {
-        current = i;
-        page = Math.floor(i / pageSize);
-        document.getElementById('viewFullImg').src = t(images[i].url);
-        document.getElementById('viewFullCounter').textContent = (i + 1) + ' / ' + images.length;
-        document.getElementById('gallery').style.display = 'none';
-        document.getElementById('pagination').style.display = 'none';
-        document.getElementById('viewFull').style.display = 'block';
-        document.querySelector('nav').style.display = 'none';
-        window.scrollTo(0, 0);
-        history.pushState({ view: true }, '');
-        if (i + 1 < images.length) { var a = new Image(); a.src = t(images[i + 1].url); }
-    }
-
-    function closeView() {
-        document.getElementById('viewFull').style.display = 'none';
-        document.getElementById('gallery').style.display = 'grid';
-        document.getElementById('pagination').style.display = 'flex';
-        document.querySelector('nav').style.display = 'flex';
-        history.pushState({}, '');
-        renderPage();
-    }
-
-    document.getElementById('viewFullClose').onclick = closeView;
-    document.getElementById('viewFullPrev').onclick = function() { if (current > 0) openView(current - 1); };
-    document.getElementById('viewFullNext').onclick = function() { if (current < images.length - 1) openView(current + 1); };
-
-    document.addEventListener('keydown', function(e) {
-        if (current === -1) return;
-        if (e.key === 'Escape') closeView();
-        if (e.key === 'ArrowLeft' && current > 0) openView(current - 1);
-        if (e.key === 'ArrowRight' && current < images.length - 1) openView(current + 1);
-    });
-
-    document.getElementById('viewFull').addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-    });
-
-    document.getElementById('viewFull').addEventListener('touchend', function(e) {
-        var dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) < 50) return;
-        if (dx > 0 && current > 0) openView(current - 1);
-        if (dx < 0 && current < images.length - 1) openView(current + 1);
-    });
-
-    document.getElementById('viewFull').onclick = function(e) {
-        if (e.target === document.getElementById('viewFull')) closeView();
-    };
-
-    window.onpopstate = function() { if (current !== -1) closeView(); };
-    </script>
 </body>
 </html>
