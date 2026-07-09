@@ -5,7 +5,7 @@ with open("data/gallery.json") as f:
     items = json.load(f)
 
 total = len(items)
-per_page = 12
+per_page = 15
 num_pages = math.ceil(total / per_page)
 
 def thumb_url(url):
