@@ -21,7 +21,8 @@
             Software at the <a target="_blank" rel="noopener
             noreferrer"
             href="https://iram-institute.org/observatories/30-meter-telescope/">
-            IRAM 30-m telescope</a>.
+            IRAM 30-m telescope</a><br>
+            email: <a id="email" href="#"></a><br>
         </aside>
     </header>
     <div>
@@ -33,5 +34,11 @@
         <a href="gallery.html" class="home-btn"><b>Gallery</b></a>
     </nav>
     <hr>
+    <script>
+        const a = document.getElementById('email');
+        const u = 'jean.tedros', d = 'proton.me';
+        a.href = 'mailto:' + u + '@' + d;
+        a.textContent = u + '@' + d;
+    </script>
 </body>
 </html>
