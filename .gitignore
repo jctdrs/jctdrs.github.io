@@ -1,4 +1,4 @@
 scripts/
 blog/drafts/
-data/.uploads.json
+data/.uploads*.json
 .env

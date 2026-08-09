@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Export Gallery album from Ente and upload photos to Cloudinary."""
+"""Export an Ente album and upload photos to Cloudinary.
 
-import json, os, subprocess
+Usage: publish_gallery.py [ALBUM] [--skip-export]
+   ALBUM defaults to "Gallery"; --skip-export reuses local files without calling ente-cli.
+"""
+
+import json, os, subprocess, sys
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -10,19 +14,34 @@ import cloudinary.uploader
 
 load_dotenv()
 
+args = [a for a in sys.argv[1:] if not a.startswith("--")]
+SKIP_EXPORT = "--skip-export" in sys.argv
+ALBUM = args[0] if args else "Gallery"
+SLUG = ALBUM.lower()
+
 ROOT = Path(__file__).resolve().parent
-FOLDER = "Gallery"
+FOLDER = ALBUM
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif", ".gif"}
-TRACKING = ROOT / "data" / ".uploads.json"
-OUTPUT = ROOT / "data" / "gallery.json"
-PHOTO_DIR = (Path.home() / "Pictures" / "Ente" / "Gallery").resolve()
+TRACKING = ROOT / "data" / (".uploads.json" if SLUG == "gallery" else f".uploads-{SLUG}.json")
+OUTPUT = ROOT / "data" / f"{SLUG}.json"
+PHOTO_DIR = (Path.home() / "Pictures" / "Ente" / ALBUM).resolve()
 
 def run_export():
-    print("Exporting Gallery album from Ente…")
-    subprocess.run(["ente-cli", "export", "--albums", "Gallery"], check=True)
+    print(f"Exporting {ALBUM} album from Ente…")
+    subprocess.run(["ente-cli", "export", "--albums", ALBUM], check=True)
 
 def load_tracking():
     return json.loads(TRACKING.read_text()) if TRACKING.exists() else {}
+
+def exif_date(path):
+    try:
+        from PIL import Image
+        dt = Image.open(path).getexif().get(36867) or Image.open(path).getexif().get(36868) or Image.open(path).getexif().get(306)
+        if dt:
+            return dt.replace(":", "-", 2).replace(" ", "T")
+    except Exception:
+        pass
+    return ""
 
 def sorted_photos(directory):
     meta_dir = directory / ".meta"
@@ -31,9 +50,12 @@ def sorted_photos(directory):
         if not path.is_file() or path.suffix.lower() not in IMAGE_EXTS:
             continue
         meta = meta_dir / f"{path.name}.json"
-        taken_at = json.loads(meta.read_text()).get("creationTime", "") if meta.exists() else ""
+        if meta.exists():
+            taken_at = json.loads(meta.read_text()).get("creationTime", "")
+        else:
+            taken_at = exif_date(path)
         photos.append((path, taken_at))
-    photos.sort(key=lambda x: x[1], reverse=True)
+    photos.sort(key=lambda x: (x[1], x[0].name), reverse=True)
     return photos
 
 def upload(path):
@@ -52,7 +74,8 @@ def save_tracking(t):
     TRACKING.write_text(json.dumps(t, indent=2))
 
 def main():
-    run_export()
+    if not SKIP_EXPORT:
+        run_export()
 
     tracking = load_tracking()
     entries = []
