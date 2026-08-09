@@ -122,14 +122,14 @@ input[name="page"] { display: none; }
 
 .gallery-count {
     position: absolute;
-    left: 8px;
-    bottom: 12px;
+    left: 0.4em;
+    bottom: 0.5em;
     background: rgba(0,0,0,0.55);
     color: #fff;
-    font-size: 0.75rem;
+    font-size: clamp(0.55rem, 2vw, 0.8rem);
     line-height: 1;
-    padding: 2px 6px;
-    border-radius: 3px;
+    padding: 0.18em 0.4em;
+    border-radius: 0.25em;
     pointer-events: none;
     z-index: 1;
 }
