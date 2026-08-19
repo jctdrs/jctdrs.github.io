@@ -1,5 +1,5 @@
 PYTHON := ./venv/bin/python
-ALBUMS ?= Gallery,Granada,Astro
+ALBUMS ?= Astro
 
 .PHONY: update export publish generate
 
