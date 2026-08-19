@@ -37,6 +37,19 @@ aside {
   text-align: left;
 }
 
+aside dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1ch;
+  margin: 0;
+}
+
+aside dd {
+  margin: 0;
+  margin-inline-start: 0;
+  text-align: left;
+}
+
 .flag-img {
   float: right;
   width: 6ch;
