@@ -262,8 +262,12 @@ input[name="page"] { display: none; }
 @media (max-width: 600px) {
     body {
         margin: 0;
-        padding: 8px;
+        padding: 12px;
         box-sizing: border-box;
+    }
+
+    nav {
+        gap: 1.25rem;
     }
 
     .page {
@@ -279,6 +283,17 @@ input[name="page"] { display: none; }
 
     .pagination .page-arrow {
         padding: 10px 14px;
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        text-align: left;
+    }
+
+    .page {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
     }
 }
 

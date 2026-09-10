@@ -74,3 +74,15 @@ table code {
     font-family: monospace;
     white-space: pre;
 }
+
+@media (max-width: 600px) {
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .navbar button {
+        padding: 0.5rem 0.75rem;
+    }
+}
