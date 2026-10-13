@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../images/icon.png">
+    <link rel="icon" type="image/png" href="../icon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script id="MathJax-script" async src=
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://res.cloudinary.com">
     <script data-goatcounter="https://jctdrs.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <link rel="stylesheet" href="../modern-normalize.css">
@@ -39,7 +40,9 @@
         and the cooling rate, \(\tau_{cool}\), the average cooling time.</p>
  
         <div class="image-block">
-            <img src="../images/BPASS_ISRF.png" alt="BPASS models" width="100%">
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791902513/BPASS_ISRF_hnslgm.png"
+        width="100%" fetchpriority="high" decoding="async"> 
             <p class="caption"><i>Spectral energy distributions of the interstellar radiation
                 field (ISRF) as provided by the BPASS model for a stellar
                 metallicty of Z = 0.004 dex, age range 1 Myr \( \leq\tau\leq\)
@@ -62,22 +65,28 @@
         different sizes and different temperatures.</p> 
 
         <div class="image-block">
-            <img src="../images/change_U.png" alt="BPASS models" width="100%">
-            <p class="caption"><i>An increase in the intensity, U, of the insterstellar radiation
-            field brings about a shift of the emission peak of big grains
-            closer to the mid-infrared range, consequently resulting in higher
-            equilibrium temperatures, \(T_{eq}\).</i></p>
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791902542/change_U_k70m38.png"
+        width="100%" fetchpriority="high" decoding="async"> 
+        <p class="caption"><i>An increase in the intensity, U, of the insterstellar radiation
+        field brings about a shift of the emission peak of big grains
+        closer to the mid-infrared range, consequently resulting in higher
+        equilibrium temperatures, \(T_{eq}\).</i></p>
         </div>
         <div class="image-block">
-            <img src="../images/change_age.png" alt="BPASS models" width="100%">
-            <p class="caption"><i>Older stellar population predominantly contain low-mass stars.
-            Emission from massive stars (O-B) peak in the UV.  Emission from
-            low-mass stars peak in the NIR.</i></p>
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791902533/change_age_jk29cd.png"
+        width="100%" fetchpriority="high" decoding="async"> 
+        <p class="caption"><i>Older stellar population predominantly contain low-mass stars.
+        Emission from massive stars (O-B) peak in the UV.  Emission from
+        low-mass stars peak in the NIR.</i></p>
         </div>
         <div class="image-block">
-            <img src="../images/change_amin.png" alt="BPASS models" width="100%">
-            <p class="caption"><i>Increasing the minimal size of grains lowers the small-grain
-            component of dust emission.</i></p>
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791902533/change_amin_zwzzqn.png"
+        width="100%" fetchpriority="high" decoding="async"> 
+        <p class="caption"><i>Increasing the minimal size of grains lowers the small-grain
+        component of dust emission.</i></p>
         </div>
 
         <h2>Implementation</h2>

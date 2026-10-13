@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../images/icon.png">
+    <link rel="icon" type="image/png" href="../icon.png">
     <script id="MathJax-script" async src=
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://res.cloudinary.com">
     <script data-goatcounter="https://jctdrs.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <link rel="stylesheet" href="../modern-normalize.css">
@@ -71,8 +72,12 @@
         \(\boldsymbol{y}\).</p>
 
         <div class="image-block">
-            <img src="../images/NGC4254_PACS1_SPIRE1.png" alt="Result of degrading and re-gridding NGC4254" width="100%">
-            <img src="../images/propagated_NGC4254.png" alt="Result of propagating the uncertainty NGC4254" width="100%">
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791901236/NGC4254_PACS1_SPIRE1_kfbq9h.png"
+        width="100%" fetchpriority="high" decoding="async"> 
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791901236/propagated_NGC4254_b3grxm.png"
+        width="100%" fetchpriority="high" decoding="async"> 
             <p class="caption">
             <span style="color:rgb(173,25,43)">Top left:</span> the
             original image, \(\boldsymbol{x}\), of NGC4254 as seen
@@ -120,7 +125,10 @@
         taking into account cross-correlations between pixels.</p>
         
         <div class="image-block">
-            <img src="../images/jacobian_NGC4254.png" alt="Jacobian of degrading and re-gridding NGC4254" width="100%">
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791901236/jacobian_NGC4254_faprxr.png"
+        width="100%" alt="Jacobian of degrading and re-gridding NGC4254"
+        fetchpriority="high" decoding="async"> 
             <p class="caption"><i>Visualization of the Jacobian,
             \(J_{h}(\boldsymbol{x})\) for a convolution. Each row
             corresponds to one output pixel and contains the kernel
@@ -140,7 +148,10 @@
         the <i>differr</i> method.</p>
 
         <div class="image-block">
-            <img src="../images/MC_err.png" alt="Result of propagated error after MC" width="100%">
+        <img
+        src="https://res.cloudinary.com/dcsypb1xt/image/upload/v1791901236/MC_err_aoxypm.png"
+        width="100%" alt="Result of propagated error after MC"
+        fetchpriority="high" decoding="async"> 
             <p class="caption"><i>
             Uncertainty map given by the differr method, MC loop
             with 1000 iterations, and their difference for NGC4254
