@@ -18,14 +18,14 @@
 
 .image-block .caption {
     color: rgb(51,51,153);
-    text-align: center;
+    text-align: justify;
     font-style: italic;
     margin: 0.5rem 0;
 }
 
 .caption {
     color: rgb(51,51,153);
-    text-align: center;
+    text-align: justify;
     font-style: italic;
     margin: 0.5rem 0;
 }
